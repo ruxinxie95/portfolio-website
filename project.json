@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Timber Installation Project",
+        "category": "Architectural Design",
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "images/timber_installation/cover.jpg",
+        "images": [
+            "images/timber_installation/image1.jpg",
+            "images/timber_installation/image2.jpg",
+            "images/timber_installation/image3.jpg"
+        ],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"]
+    },
+    {
+        "title": "Parametric Pavilion",
+        "category": "Computational Design",
+        "description": "A pavilion designed using parametric design techniques and fabricated with digital tools.",
+        "cover_image": "images/parametric_pavilion/cover.jpeg",
+        "images": [
+            "images/parametric_pavilion/image1.jpg",
+            "images/parametric_pavilion/image2.jpg",
+            "images/parametric_pavilion/image3.jpg"
+        ],
+        "tags": ["Parametric Design", "Digital Fabrication", "Grasshopper"]
+    },
+    {
+        "title": "Digital Fabrication Workshop",
+        "category": "Fabrication",
+        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
+        "cover_image": "images/fabrication_workshop/cover.jpg",
+        "images": [
+            "images/fabrication_workshop/image1.jpg",
+            "images/fabrication_workshop/image2.jpg"
+        ],
+        "tags": ["Fabrication", "Workshop", "Robotics"]
+    }
+]
