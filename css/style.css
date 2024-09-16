@@ -11,7 +11,6 @@ body {
     color: #333;
 }
 
-/* Header styling */
 header nav ul {
     list-style-type: none;
     display: flex;
@@ -33,95 +32,23 @@ header nav ul li a:hover {
     color: #555;
 }
 
-/* Categories navigation */
-.categories {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.categories ul {
-    list-style: none;
-    padding: 0;
-}
-
-.categories ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-.categories ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    background-color: #f4f4f4;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.categories ul li a:hover {
-    background-color: #eaeaea;
-    color: #000;
-}
-
-/* Project grid styling */
 #projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    align-items: stretch;
+    column-count: 4; /* Four columns */
+    column-gap: 10px; /* Spacing between columns */
 }
 
 .project {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    color: white;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 20px;
-    min-height: 200px;
+    break-inside: avoid; /* Prevents breaking the project into multiple columns */
+    margin-bottom: 10px; /* Spacing between items in the same column */
 }
 
-.project h3 {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    text-align: center;
-    padding: 10px;
+.project img {
+    width: 100%; /* Full width of the column */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
 }
 
-/* Gallery view for project details */
-#project-gallery {
-    padding: 20px;
-}
 
-#gallery-images {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-#gallery-images img {
-    width: 100%;
-    height: auto;
-}
-
-#back-to-projects {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#back-to-projects:hover {
-    background-color: #555;
-}
-
-/* Footer styling */
 footer {
     text-align: center;
     padding: 20px;
@@ -139,7 +66,7 @@ footer {
         margin-bottom: 10px;
     }
 
-    .project {
-        min-height: 150px;
+    #projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* Adapt to two images per row on smaller screens */
     }
 }
