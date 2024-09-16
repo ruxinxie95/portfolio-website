@@ -56,4 +56,15 @@
         ],
         "tags": ["Fabrication", "Workshop", "Robotics"]
     }
+    {
+        "title": "Digital Fabrication Workshop4",
+        "category": "Fabrication",
+        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
+        "cover_image": "images/buildfest/cover.jpg",
+        "images": [
+            "images/fabrication_workshop/image1.jpg",
+            "images/fabrication_workshop/image2.jpg"
+        ],
+        "tags": ["Fabrication", "Workshop", "Robotics"]
+    }
 ]
