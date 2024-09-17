@@ -91,11 +91,4 @@
         "description": "Designed an interactive exhibition booth that integrates digital fabrication and user engagement.",
         "cover_image": "images/exhibition_booth/cover.jpg",
         "images": [
-            "images/exhibition_booth/image1.jpg",
-            "images/exhibition_booth/image2.jpg",
-            "images/exhibition_booth/image3.jpg"
-        ],
-        "tags": ["Exhibition Design", "Interactive", "User Engagement"],
-        "highlight": false
-    }
-]
+            "images/exhibition_booth/image1.jpg

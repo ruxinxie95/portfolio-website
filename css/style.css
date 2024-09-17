@@ -80,12 +80,12 @@ nav ul li a:hover {
 
 /* Grid Sizer (for Masonry) */
 .grid-sizer {
-    width: 200px; /* Define the base column width */
+    width: 20%; /* 5 columns */
 }
 
 /* Project Item */
 .project {
-    width: 200px; /* Base width for Masonry */
+    width: 20%; /* Base width for Masonry */
     margin-bottom: 10px; /* Space between items vertically */
     position: relative;
     cursor: pointer;
@@ -99,7 +99,7 @@ nav ul li a:hover {
 
 /* Highlighted Project */
 .project.highlight {
-    width: 400px; /* Span 2 columns */
+    width: 40%; /* Span 2 columns */
 }
 
 /* Project Image */
@@ -163,44 +163,46 @@ nav ul li a:hover {
 /* For screens wider than 1600px */
 @media (min-width: 1601px) {
     .project {
-        width: 220px;
+        width: 20%; /* Maintain 5 columns */
     }
 
     .project.highlight {
-        width: 440px;
+        width: 40%; /* Span 2 columns */
     }
 }
 
 /* For screens up to 1600px */
 @media (max-width: 1600px) {
-    .project {
-        width: 180px;
-    }
-
+    .grid-sizer,
+    .project,
     .project.highlight {
-        width: 360px;
+        width: 20%;
     }
 }
 
 /* For screens up to 1200px */
 @media (max-width: 1200px) {
-    .project {
-        width: 160px;
+    .grid-sizer,
+    .project,
+    .project.highlight {
+        width: 25%; /* 4 columns */
     }
 
     .project.highlight {
-        width: 320px;
+        width: 50%; /* Span 2 columns */
     }
 }
 
 /* For screens up to 992px */
 @media (max-width: 992px) {
-    .project {
-        width: 150px;
+    .grid-sizer,
+    .project,
+    .project.highlight {
+        width: 33.333%; /* 3 columns */
     }
 
     .project.highlight {
-        width: 300px;
+        width: 66.666%; /* Span 2 columns */
     }
 }
 
@@ -217,23 +219,27 @@ nav ul li a:hover {
         margin: 5px;
     }
 
-    .project {
-        width: 140px;
+    .grid-sizer,
+    .project,
+    .project.highlight {
+        width: 50%; /* 2 columns */
     }
 
     .project.highlight {
-        width: 280px;
+        width: 100%; /* Span 2 columns */
     }
 }
 
 /* For screens up to 576px */
 @media (max-width: 576px) {
-    .project {
-        width: 100%; /* Full width on very small screens */
+    .grid-sizer,
+    .project,
+    .project.highlight {
+        width: 100%; /* 1 column */
     }
 
     .project.highlight {
-        width: 100%; /* Full width on very small screens */
+        width: 100%; /* Full width */
     }
 }
 
