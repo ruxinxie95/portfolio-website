@@ -1,10 +1,44 @@
 /* css/style.css */
 
-/* General Styles */
-body {
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
     font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    line-height: 1.6;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #dddddd;
 }
 
 /* Projects Section */
@@ -27,6 +61,7 @@ body {
     margin: 5px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
 }
 
 .filter-btn.active,
@@ -43,6 +78,11 @@ body {
     /* Masonry.js handles the layout, so no need for display properties here */
 }
 
+/* Grid Sizer (for Masonry) */
+.grid-sizer {
+    width: 200px; /* Define the base column width */
+}
+
 /* Project Item */
 .project {
     width: 200px; /* Base width for Masonry */
@@ -54,8 +94,10 @@ body {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.6s forwards;
+    border-radius: 8px;
 }
 
+/* Highlighted Project */
 .project.highlight {
     width: 400px; /* Span 2 columns */
 }
@@ -66,6 +108,7 @@ body {
     height: auto; /* Maintain aspect ratio */
     object-fit: contain; /* Ensure full image visibility */
     display: block;
+    border-radius: 8px;
 }
 
 /* Project Info Overlay */
@@ -84,12 +127,14 @@ body {
     text-align: center;
     opacity: 0; /* Hidden by default */
     visibility: hidden; /* Hidden by default */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+    border-radius: 8px;
 }
 
 .project:hover .project-info {
     opacity: 1; /* Visible on hover */
     visibility: visible; /* Visible on hover */
+    background-color: rgba(128, 128, 128, 0.9); /* Darker grey on hover */
 }
 
 /* Project Info Text */
@@ -103,9 +148,14 @@ body {
     font-size: 1em;
 }
 
+/* Remove box-shadow on hover for cleaner overlay */
+.project:hover {
+    box-shadow: none;
+}
+
 /* Highlighted Project Shadow */
 .project.highlight:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
 }
 
 /* Responsive Design */
@@ -157,7 +207,9 @@ body {
 /* For screens up to 768px */
 @media (max-width: 768px) {
     .filter-bar {
+        display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     .filter-btn {
@@ -246,6 +298,7 @@ img.lazy.loaded {
 .modal-content .modal-images img {
     width: 100%;
     margin-bottom: 10px;
+    border-radius: 4px;
 }
 
 .modal-content .tags {
@@ -259,4 +312,5 @@ img.lazy.loaded {
     padding: 5px 10px;
     margin: 5px;
     border-radius: 4px;
+    font-size: 0.9em;
 }

@@ -89,10 +89,17 @@ $(document).ready(function() {
         imagesLoaded(projectGrid, function() {
             projectGrid.masonry({
                 itemSelector: '.project',
-                columnWidth: '.project',
+                columnWidth: '.grid-sizer', // Use the grid-sizer for column width
                 percentPosition: true,
                 gutter: 10 // Adjust gutter as needed
             });
+        });
+
+        // Click event to open modal
+        $('.project').on('click', function() {
+            let index = $(this).index() - 1; // Adjust index because grid-sizer is first
+            let project = data[index];
+            openModal(project);
         });
     });
 

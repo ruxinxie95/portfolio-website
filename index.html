@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Portfolio</title>
-    <!-- Existing CSS Links -->
+    <title>Ruxin's Portfolio</title>
+    <!-- Link to Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Existing Body Content -->
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="press.html">Press</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
     <!-- Projects Section -->
     <section id="projects">
@@ -20,6 +29,8 @@
             <button class="filter-btn" data-filter="Exhibition">Exhibition</button>
         </div>
         <div id="projects-grid">
+            <!-- Grid Sizer (for Masonry) -->
+            <div class="grid-sizer"></div>
             <!-- Projects will be dynamically loaded here -->
         </div>
     </section>
@@ -41,7 +52,7 @@
     <!-- imagesLoaded.js Library -->
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     
-    <!-- jQuery Library (if not already included) -->
+    <!-- jQuery Library (Ensure this is included before main.js) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <!-- Custom JavaScript -->

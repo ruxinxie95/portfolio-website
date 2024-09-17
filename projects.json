@@ -9,7 +9,8 @@
             "images/timber_installation/image2.jpg",
             "images/timber_installation/image3.jpg"
         ],
-        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"]
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
+        "highlight": false
     },
     {
         "title": "Parametric Pavilion",
@@ -21,7 +22,8 @@
             "images/parametric_pavilion/image2.jpg",
             "images/parametric_pavilion/image3.jpg"
         ],
-        "tags": ["Parametric Design", "Digital Fabrication", "Grasshopper"]
+        "tags": ["Parametric Design", "Digital Fabrication", "Grasshopper"],
+        "highlight": false
     },
     {
         "title": "Digital Fabrication Workshop",
@@ -32,7 +34,8 @@
             "images/fabrication_workshop/image1.jpg",
             "images/fabrication_workshop/image2.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"]
+        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "highlight": false
     },
     {
         "title": "Digital Fabrication Workshop2",
@@ -43,7 +46,8 @@
             "images/fabrication_workshop2/image1.jpg",
             "images/fabrication_workshop2/image2.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"]
+        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "highlight": false
     },
     {
         "title": "Digital Fabrication Workshop3",
@@ -54,7 +58,8 @@
             "images/fabrication_workshop3/image1.jpg",
             "images/fabrication_workshop3/image2.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"]
+        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "highlight": false
     },
     {
         "title": "Digital Fabrication Workshop4",
@@ -65,7 +70,8 @@
             "images/buildfest/image1.jpg",
             "images/buildfest/image2.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"]
+        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "highlight": false
     },
     {
         "title": "Apple",
@@ -89,6 +95,7 @@
             "images/exhibition_booth/image2.jpg",
             "images/exhibition_booth/image3.jpg"
         ],
-        "tags": ["Exhibition Design", "Interactive", "User Engagement"]
+        "tags": ["Exhibition Design", "Interactive", "User Engagement"],
+        "highlight": false
     }
 ]
