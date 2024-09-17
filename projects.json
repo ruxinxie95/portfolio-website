@@ -40,8 +40,8 @@
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/fabrication_workshop2/cover.jpg",
         "images": [
-            "images/fabrication_workshop/image1.jpg",
-            "images/fabrication_workshop/image2.jpg"
+            "images/fabrication_workshop2/image1.jpg",
+            "images/fabrication_workshop2/image2.jpg"
         ],
         "tags": ["Fabrication", "Workshop", "Robotics"]
     },
@@ -51,8 +51,8 @@
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/fabrication_workshop3/cover.jpg",
         "images": [
-            "images/fabrication_workshop/image1.jpg",
-            "images/fabrication_workshop/image2.jpg"
+            "images/fabrication_workshop3/image1.jpg",
+            "images/fabrication_workshop3/image2.jpg"
         ],
         "tags": ["Fabrication", "Workshop", "Robotics"]
     },
@@ -62,8 +62,8 @@
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/buildfest/cover.jpg",
         "images": [
-            "images/fabrication_workshop/image1.jpg",
-            "images/fabrication_workshop/image2.jpg"
+            "images/buildfest/image1.jpg",
+            "images/buildfest/image2.jpg"
         ],
         "tags": ["Fabrication", "Workshop", "Robotics"]
     },
@@ -73,9 +73,10 @@
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/bermuda/cover.jpg",
         "images": [
-            "images/fabrication_workshop/image1.jpg",
-            "images/fabrication_workshop/image2.jpg"
+            "images/bermuda/image1.jpg",
+            "images/bermuda/image2.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"]
+        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "highlight": true
     }
 ]

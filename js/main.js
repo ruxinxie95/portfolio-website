@@ -1,12 +1,107 @@
 $(document).ready(function() {
+    // Load Projects
     $.getJSON('projects.json', function(data) {
         let projectGrid = $('#projects-grid');
         $.each(data, function(index, project) {
+            let projectClass = project.highlight ? 'project highlight animate__animated animate__fadeInUp' : 'project animate__animated animate__fadeInUp';
             projectGrid.append(`
-                <div class="project">
-                    <img src="${project.cover_image}" alt="${project.title}" />
+                <div class="${projectClass}" data-index="${index}">
+                    <img data-src="${project.cover_image}" alt="${project.title}" class="lazy" />
+                    <div class="project-info">
+                        <h3>${project.title}</h3>
+                        <p>${project.category}</p>
+                    </div>
                 </div>
             `);
         });
+
+        // Initialize Lazy Loading
+        initLazyLoading();
+
+        // Click event to open modal
+        $('.project').on('click', function() {
+            let index = $(this).data('index');
+            let project = data[index];
+            openModal(project);
+        });
     });
+
+    // Set Active Navigation Link
+    const currentPage = window.location.pathname.split("/").pop();
+    $('.nav-link').each(function() {
+        const linkPage = $(this).attr('href');
+        if (linkPage === currentPage) {
+            $(this).addClass('active');
+        }
+    });
+
+    // Smooth Scrolling for Internal Links
+    $('a[href^="#"]').on('click', function(event) {
+        event.preventDefault();
+        const target = this.hash;
+        const $target = $(target);
+        $('html, body').animate({
+            scrollTop: $target.offset().top - 60 // Adjust offset for sticky header
+        }, 500);
+    });
+
+    // Function to Open Modal
+    function openModal(project) {
+        $('.modal-content h2').text(project.title);
+        $('.modal-description').text(project.description);
+        $('.modal-images').html(project.images.map(img => `<img src="${img}" alt="${project.title} Image">`).join(''));
+        $('.tags').html(project.tags.map(tag => `<span class="tag">${tag}</span>`).join(''));
+        $('.modal').fadeIn();
+
+        // Focus Management
+        $('.close').focus();
+
+        // Close Modal on Close Button Click
+        $('.close').on('click', closeModal);
+
+        // Close Modal on Escape Key
+        $(document).on('keydown.modal', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close Modal When Clicking Outside Content
+        $('.modal').on('click', function(event) {
+            if ($(event.target).hasClass('modal')) {
+                closeModal();
+            }
+        });
+    }
+
+    // Function to Close Modal
+    function closeModal() {
+        $('.modal').fadeOut(function() {
+            $('.modal-content h2').text('');
+            $('.modal-description').text('');
+            $('.modal-images').html('');
+            $('.tags').html('');
+            $('.close').off('click');
+            $(document).off('keydown.modal');
+        });
+    }
+
+    // Function to Initialize Lazy Loading
+    function initLazyLoading() {
+        const lazyImages = document.querySelectorAll('img.lazy');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.onload = () => img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
 });

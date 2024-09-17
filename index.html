@@ -3,29 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Ruxin Xie | Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css for Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ruxin Xie",
+      "jobTitle": "Research Associate",
+      "url": "https://yourdomain.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/ruxinxie",
+        "https://github.com/ruxinxie",
+        "https://twitter.com/ruxinxie"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Princeton University"
+      }
+    }
+    </script>
+    
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="Ruxin Xie's Portfolio showcasing innovative architectural designs, parametric projects, and material technology advancements.">
+    <meta name="keywords" content="Architecture, Portfolio, Parametric Design, Material Technology, Sustainable Design">
+    <meta property="og:title" content="Ruxin Xie's Portfolio">
+    <meta property="og:description" content="Explore innovative architectural designs and projects by Ruxin Xie.">
+    <meta property="og:image" content="images/cover-og.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <style>
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="javascript:void(0);" id="project-link">Studio</a></li>
-                <li><a href="javascript:void(0);" id="project-link">Projects</a></li>
-                <li><a href="about.html">Press & News</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html" class="nav-link active">Studio</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#timeline" class="nav-link">Timeline</a></li>
+                <li><a href="press.html" class="nav-link">Press & News</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
         </nav>
     </header>
+    
     <main>
-        <section id="projects-grid">
-            <!-- Projects will be dynamically loaded here -->
+        <!-- Projects Section -->
+        <section id="projects">
+            <h1 class="section-title">Projects</h1>
+            <section id="projects-grid">
+                <!-- Projects will be dynamically loaded here -->
+            </section>
+        </section>
+        
+        <!-- Vertical Timeline Section -->
+        <section id="timeline">
+            <h1 class="section-title">Timeline</h1>
+            <div class="timeline-container">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon"></div>
+                        <div class="timeline-content">
+                            <h3>2024 - Reclaimed Timber Project</h3>
+                            <p>Designed and fabricated a sustainable timber structure for BuildFest 2024, focusing on material innovation and parametric design.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"></div>
+                        <div class="timeline-content">
+                            <h3>2023 - Parametric Pavilion</h3>
+                            <p>Developed a pavilion using parametric design techniques and digital fabrication tools, enhancing computational design skills.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"></div>
+                        <div class="timeline-content">
+                            <h3>2022 - Digital Fabrication Workshop</h3>
+                            <p>Conducted a workshop focused on advanced digital fabrication techniques, emphasizing robotics and sustainable practices.</p>
+                        </div>
+                    </div>
+                    <!-- Add more timeline items as needed -->
+                </div>
+            </div>
         </section>
     </main>
+    
     <footer>
         <p>&copy; 2024 Ruxin Xie | <a href="mailto:ruxinx.design@gmail.com">Contact Me</a></p>
     </footer>
+    
+    <!-- Modal Template -->
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display: none;">
+        <div class="modal-content">
+            <button class="close" aria-label="Close">&times;</button>
+            <h2 id="modal-title"></h2>
+            <p class="modal-description"></p>
+            <div class="modal-images"></div>
+            <div class="tags"></div>
+        </div>
+    </div>
+    
+    <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
 </body>
 </html>
