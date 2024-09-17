@@ -97,15 +97,14 @@ nav ul li {
 
 .project {
     position: relative;
-    width: calc(25% - 10px); /* 4 columns */
+    width: calc(25% - 10px);
     margin-bottom: 20px;
     cursor: pointer;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s forwards;
+    /* Other styles */
 }
+
 
 .project.highlight {
     width: calc(50% - 10px); /* Double width for 4 columns */
@@ -135,12 +134,17 @@ nav ul li {
     background: rgba(255, 255, 255, 0.9);
     padding: 10px;
     text-align: center;
-    transition: background 0.3s;
+    opacity: 0; /* Hide by default */
+    visibility: hidden; /* Hide by default */
+    transition: opacity 0.3s ease, visibility 0.3s ease, background 0.3s;
 }
 
 .project:hover .project-info {
+    opacity: 1; /* Show on hover */
+    visibility: visible; /* Show on hover */
     background: rgba(255, 255, 255, 1);
 }
+
 
 .project-info h3 {
     font-size: 1.1em;

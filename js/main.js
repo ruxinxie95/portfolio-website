@@ -3,22 +3,22 @@ $(document).ready(function() {
     $.getJSON('projects.json', function(data) {
         let projectGrid = $('#projects-grid');
         $.each(data, function(index, project) {
-            // Ensure categories is an array
-            let categories = Array.isArray(project.categories) ? project.categories : [project.categories];
-            // Join categories for data attribute
-            let categoriesData = categories.join(' ');
-            
-            let projectClass = project.highlight ? 'project highlight animate__animated animate__fadeInUp' : 'project animate__animated animate__fadeInUp';
+            let projectClass = project.highlight ? 'project highlight' : 'project';
+            // Join multiple categories with a space for data-categories attribute
+            let categories = project.categories.join(' ');
+            // Join categories with a comma for display
+            let displayCategories = project.categories.join(', ');
             projectGrid.append(`
-                <div class="${projectClass}" data-categories="${categoriesData}">
+                <div class="${projectClass}" data-categories="${categories}">
                     <img data-src="${project.cover_image}" alt="${project.title}" class="lazy" />
                     <div class="project-info">
                         <h3>${project.title}</h3>
-                        <p>${project.category}</p>
+                        <p>${displayCategories}</p>
                     </div>
                 </div>
             `);
         });
+        
 
         // Initialize Lazy Loading
         initLazyLoading();
