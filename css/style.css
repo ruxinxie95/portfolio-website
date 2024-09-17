@@ -87,28 +87,33 @@ nav ul li {
 
 /* Projects Grid */
 #projects-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    grid-auto-rows: auto; /* Automatically adjust row height based on content */
+    gap: 10px; /* Adjust gap as needed */
     margin: 20px auto;
     max-width: 1200px;
     padding: 0 20px;
 }
 
+
 .project {
     position: relative;
-    width: calc(25% - 10px);
-    margin-bottom: 20px;
+    /* width: calc(25% - 10px); */ /* Remove this line */
     cursor: pointer;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
-    /* Other styles */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
 }
+
 
 
 .project.highlight {
-    width: calc(50% - 10px); /* Double width for 4 columns */
+    grid-column: span 2; /* Span across 2 columns */
 }
+
 
 .project:hover {
     transform: scale(1.05);
@@ -117,10 +122,11 @@ nav ul li {
 
 .project img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire grid cell without distortion */
     display: block;
-    transition: transform 0.3s;
 }
+
 
 .project:hover img {
     transform: scale(1.1);
@@ -155,6 +161,8 @@ nav ul li {
 .project-info p {
     font-size: 0.9em;
     color: #555;
+    color: #333; /* Dark text for better contrast */
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7); /* Optional: Adds a slight shadow for contrast */
 }
 
 /* Modal Styling */
@@ -330,12 +338,13 @@ footer a:hover {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .project {
-        width: calc(25% - 10px); /* 4 columns remain */
+    #projects-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        gap: 8px; /* Optional: Adjust gap for compactness */
     }
 
     .project.highlight {
-        width: calc(50% - 10px); /* Double width for 4 columns */
+        grid-column: span 1; /* Highlighted projects now span 1 column */
     }
 }
 
@@ -358,12 +367,14 @@ footer a:hover {
         margin: 5px;
     }
 
+    /* Adjust projects grid for smaller screens */
     #projects-grid {
-        justify-content: space-around;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        gap: 6px; /* Optional: Adjust gap for compactness */
     }
 
-    .project, .project.highlight {
-        width: calc(50% - 10px);
+    .project.highlight {
+        grid-column: span 2; /* Highlighted projects span 2 columns */
     }
 
     /* Timeline adjustments for mobile */
