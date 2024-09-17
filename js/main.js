@@ -3,9 +3,14 @@ $(document).ready(function() {
     $.getJSON('projects.json', function(data) {
         let projectGrid = $('#projects-grid');
         $.each(data, function(index, project) {
+            // Ensure categories is an array
+            let categories = Array.isArray(project.categories) ? project.categories : [project.categories];
+            // Join categories for data attribute
+            let categoriesData = categories.join(' ');
+            
             let projectClass = project.highlight ? 'project highlight animate__animated animate__fadeInUp' : 'project animate__animated animate__fadeInUp';
             projectGrid.append(`
-                <div class="${projectClass}" data-index="${index}">
+                <div class="${projectClass}" data-categories="${categoriesData}">
                     <img data-src="${project.cover_image}" alt="${project.title}" class="lazy" />
                     <div class="project-info">
                         <h3>${project.title}</h3>
@@ -20,7 +25,10 @@ $(document).ready(function() {
 
         // Click event to open modal
         $('.project').on('click', function() {
-            let index = $(this).data('index');
+            let categories = $(this).data('categories').split(' ');
+            // Find the project in data based on title or another unique identifier
+            // Here, we'll use the index based on the DOM order
+            let index = $(this).index();
             let project = data[index];
             openModal(project);
         });
@@ -50,7 +58,7 @@ $(document).ready(function() {
         $('.modal-content h2').text(project.title);
         $('.modal-description').text(project.description);
         $('.modal-images').html(project.images.map(img => `<img src="${img}" alt="${project.title} Image">`).join(''));
-        $('.tags').html(project.tags.map(tag => `<span class="tag">${tag}</span>`).join(''));
+        $('.tags').html(project.tags.map(tag => `<span class="tag">${tag}</span>`).join(' '));
         $('.modal').fadeIn();
 
         // Focus Management
@@ -104,4 +112,34 @@ $(document).ready(function() {
             imageObserver.observe(img);
         });
     }
+
+    // Function to Initialize Filtering
+    function initFiltering() {
+        $('.filter-btn').on('click', function() {
+            // Remove active class from all buttons
+            $('.filter-btn').removeClass('active');
+            // Add active class to the clicked button
+            $(this).addClass('active');
+            // Get the filter category
+            const filter = $(this).data('filter');
+
+            if (filter === "all") {
+                $('.project').show();
+            } else {
+                $('.project').each(function() {
+                    const projectCategories = $(this).data('categories').split(' ');
+                    if (projectCategories.includes(filter)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    }
+
+    // Initialize Filtering after projects are loaded
+    $.getJSON('projects.json', function(data) {
+        initFiltering();
+    });
 });

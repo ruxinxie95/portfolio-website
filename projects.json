@@ -1,7 +1,7 @@
 [
     {
         "title": "Timber Installation Project",
-        "category": "Architectural Design",
+        "categories": ["Architecture"],
         "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
         "cover_image": "images/timber_installation/cover.jpg",
         "images": [
@@ -13,7 +13,7 @@
     },
     {
         "title": "Parametric Pavilion",
-        "category": "Computational Design",
+        "categories": ["Computational Design"],
         "description": "A pavilion designed using parametric design techniques and fabricated with digital tools.",
         "cover_image": "images/parametric_pavilion/cover.jpeg",
         "images": [
@@ -25,7 +25,7 @@
     },
     {
         "title": "Digital Fabrication Workshop",
-        "category": "Fabrication",
+        "categories": ["Digital Fabrication"],
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/fabrication_workshop/cover.jpg",
         "images": [
@@ -36,7 +36,7 @@
     },
     {
         "title": "Digital Fabrication Workshop2",
-        "category": "Fabrication",
+        "categories": ["Digital Fabrication"],
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/fabrication_workshop2/cover.jpg",
         "images": [
@@ -47,7 +47,7 @@
     },
     {
         "title": "Digital Fabrication Workshop3",
-        "category": "Fabrication",
+        "categories": ["Digital Fabrication"],
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/fabrication_workshop3/cover.jpg",
         "images": [
@@ -58,7 +58,7 @@
     },
     {
         "title": "Digital Fabrication Workshop4",
-        "category": "Fabrication",
+        "categories": ["Digital Fabrication"],
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/buildfest/cover.jpg",
         "images": [
@@ -69,7 +69,7 @@
     },
     {
         "title": "Apple",
-        "category": "Fabrication",
+        "categories": ["Digital Fabrication"],
         "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
         "cover_image": "images/bermuda/cover.jpg",
         "images": [
@@ -78,5 +78,17 @@
         ],
         "tags": ["Fabrication", "Workshop", "Robotics"],
         "highlight": true
+    },
+    {
+        "title": "Exhibition Booth Design",
+        "categories": ["Digital Fabrication", "Exhibition"],
+        "description": "Designed an interactive exhibition booth that integrates digital fabrication and user engagement.",
+        "cover_image": "images/exhibition_booth/cover.jpg",
+        "images": [
+            "images/exhibition_booth/image1.jpg",
+            "images/exhibition_booth/image2.jpg",
+            "images/exhibition_booth/image3.jpg"
+        ],
+        "tags": ["Exhibition Design", "Interactive", "User Engagement"]
     }
 ]
