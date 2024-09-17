@@ -24,6 +24,62 @@
         "tags": ["Parametric Design", "Digital Fabrication", "Grasshopper"]
     },
     {
+        "title": "Digital Fabrication Workshop",
+        "categories": ["Digital Fabrication"],
+        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
+        "cover_image": "images/fabrication_workshop/cover.jpg",
+        "images": [
+            "images/fabrication_workshop/image1.jpg",
+            "images/fabrication_workshop/image2.jpg"
+        ],
+        "tags": ["Fabrication", "Workshop", "Robotics"]
+    },
+    {
+        "title": "Digital Fabrication Workshop2",
+        "categories": ["Digital Fabrication"],
+        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
+        "cover_image": "images/fabrication_workshop2/cover.jpg",
+        "images": [
+            "images/fabrication_workshop2/image1.jpg",
+            "images/fabrication_workshop2/image2.jpg"
+        ],
+        "tags": ["Fabrication", "Workshop", "Robotics"]
+    },
+    {
+        "title": "Digital Fabrication Workshop3",
+        "categories": ["Digital Fabrication"],
+        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
+        "cover_image": "images/fabrication_workshop3/cover.jpg",
+        "images": [
+            "images/fabrication_workshop3/image1.jpg",
+            "images/fabrication_workshop3/image2.jpg"
+        ],
+        "tags": ["Fabrication", "Workshop", "Robotics"]
+    },
+    {
+        "title": "Digital Fabrication Workshop4",
+        "categories": ["Digital Fabrication"],
+        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
+        "cover_image": "images/buildfest/cover.jpg",
+        "images": [
+            "images/buildfest/image1.jpg",
+            "images/buildfest/image2.jpg"
+        ],
+        "tags": ["Fabrication", "Workshop", "Robotics"]
+    },
+    {
+        "title": "Apple",
+        "categories": ["Digital Fabrication"],
+        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
+        "cover_image": "images/bermuda/cover.jpg",
+        "images": [
+            "images/bermuda/image1.jpg",
+            "images/bermuda/image2.jpg"
+        ],
+        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "highlight": true
+    },
+    {
         "title": "Exhibition Booth Design",
         "categories": ["Digital Fabrication", "Exhibition"],
         "description": "Designed an interactive exhibition booth that integrates digital fabrication and user engagement.",
@@ -35,5 +91,4 @@
         ],
         "tags": ["Exhibition Design", "Interactive", "User Engagement"]
     }
-    // ... Add other projects similarly
 ]
