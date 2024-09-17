@@ -1,119 +1,39 @@
+// js/main.js
+
 $(document).ready(function() {
-    // Load Projects
-    $.getJSON('projects.json', function(data) {
-        let projectGrid = $('#projects-grid');
-        $.each(data, function(index, project) {
-            let projectClass = project.highlight ? 'project highlight' : 'project';
-            // Join multiple categories with a space for data-categories attribute
-            let categories = project.categories.join(' ');
-            // Join categories with a comma for display
-            let displayCategories = project.categories.join(', ');
-            projectGrid.append(`
-                <div class="${projectClass}" data-categories="${categories}">
-                    <img data-src="${project.cover_image}" alt="${project.title}" class="lazy" />
-                    <div class="project-info">
-                        <h3>${project.title}</h3>
-                        <p>${displayCategories}</p>
-                    </div>
-                </div>
-            `);
-        });
-        
-
-        // Initialize Lazy Loading
-        initLazyLoading();
-
-        // Click event to open modal
-        $('.project').on('click', function() {
-            let categories = $(this).data('categories').split(' ');
-            // Find the project in data based on title or another unique identifier
-            // Here, we'll use the index based on the DOM order
-            let index = $(this).index();
-            let project = data[index];
-            openModal(project);
-        });
-    });
-
-    // Set Active Navigation Link
-    const currentPage = window.location.pathname.split("/").pop();
-    $('.nav-link').each(function() {
-        const linkPage = $(this).attr('href');
-        if (linkPage === currentPage) {
-            $(this).addClass('active');
-        }
-    });
-
-    // Smooth Scrolling for Internal Links
-    $('a[href^="#"]').on('click', function(event) {
-        event.preventDefault();
-        const target = this.hash;
-        const $target = $(target);
-        $('html, body').animate({
-            scrollTop: $target.offset().top - 60 // Adjust offset for sticky header
-        }, 500);
-    });
-
-    // Function to Open Modal
-    function openModal(project) {
-        $('.modal-content h2').text(project.title);
-        $('.modal-description').text(project.description);
-        $('.modal-images').html(project.images.map(img => `<img src="${img}" alt="${project.title} Image">`).join(''));
-        $('.tags').html(project.tags.map(tag => `<span class="tag">${tag}</span>`).join(' '));
-        $('.modal').fadeIn();
-
-        // Focus Management
-        $('.close').focus();
-
-        // Close Modal on Close Button Click
-        $('.close').on('click', closeModal);
-
-        // Close Modal on Escape Key
-        $(document).on('keydown.modal', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Close Modal When Clicking Outside Content
-        $('.modal').on('click', function(event) {
-            if ($(event.target).hasClass('modal')) {
-                closeModal();
-            }
-        });
-    }
-
-    // Function to Close Modal
-    function closeModal() {
-        $('.modal').fadeOut(function() {
-            $('.modal-content h2').text('');
-            $('.modal-description').text('');
-            $('.modal-images').html('');
-            $('.tags').html('');
-            $('.close').off('click');
-            $(document).off('keydown.modal');
-        });
-    }
-
-    // Function to Initialize Lazy Loading
+    // Function to initialize lazy loading
     function initLazyLoading() {
-        const lazyImages = document.querySelectorAll('img.lazy');
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.onload = () => img.classList.add('loaded');
-                    observer.unobserve(img);
-                }
+        const lazyImages = $('.lazy');
+        lazyImages.each(function() {
+            const img = $(this);
+            const src = img.attr('data-src');
+            img.attr('src', src).on('load', function() {
+                img.addClass('loaded');
             });
         });
+    }
 
-        lazyImages.forEach(img => {
-            imageObserver.observe(img);
+    // Function to open modal with project details
+    function openModal(project) {
+        $('.modal').fadeIn();
+        $('.modal-content h2').text(project.title);
+        $('.modal-content .modal-description').text(project.description);
+        $('.modal-content .modal-images').empty();
+        project.images.forEach(function(image) {
+            $('.modal-content .modal-images').append(`<img src="${image}" alt="${project.title}" />`);
+        });
+        $('.modal-content .tags').empty();
+        project.tags.forEach(function(tag) {
+            $('.modal-content .tags').append(`<span class="tag">${tag}</span>`);
         });
     }
 
-    // Function to Initialize Filtering
+    // Function to close modal
+    function closeModal() {
+        $('.modal').fadeOut();
+    }
+
+    // Function to initialize filtering
     function initFiltering() {
         $('.filter-btn').on('click', function() {
             // Remove active class from all buttons
@@ -122,7 +42,7 @@ $(document).ready(function() {
             $(this).addClass('active');
             // Get the filter category
             const filter = $(this).data('filter');
-
+            
             if (filter === "all") {
                 $('.project').show();
             } else {
@@ -135,11 +55,63 @@ $(document).ready(function() {
                     }
                 });
             }
+
+            // Relayout Masonry after filtering
+            $('#projects-grid').masonry('layout');
         });
     }
 
-    // Initialize Filtering after projects are loaded
+    // Load Projects from projects.json
     $.getJSON('projects.json', function(data) {
+        let projectGrid = $('#projects-grid');
+        $.each(data, function(index, project) {
+            let projectClass = project.highlight ? 'project highlight' : 'project';
+            let categories = project.categories.join(' ');
+            let displayCategories = project.categories.join(', ');
+            projectGrid.append(`
+                <div class="${projectClass}" data-categories="${categories}">
+                    <img data-src="${project.cover_image}" alt="${project.title}" class="lazy" />
+                    <div class="project-info">
+                        <h3>${project.title}</h3>
+                        <p>${displayCategories}</p>
+                    </div>
+                </div>
+            `);
+        });
+
+        // Initialize Lazy Loading
+        initLazyLoading();
+
+        // Initialize Filtering
         initFiltering();
+
+        // Initialize Masonry after all images have loaded
+        imagesLoaded(projectGrid, function() {
+            projectGrid.masonry({
+                itemSelector: '.project',
+                columnWidth: '.project',
+                percentPosition: true,
+                gutter: 10 // Adjust gutter as needed
+            });
+        });
+    });
+
+    // Close modal on close button click
+    $('.modal .close').on('click', function() {
+        closeModal();
+    });
+
+    // Close modal when clicking outside the modal content
+    $(window).on('click', function(event) {
+        if ($(event.target).hasClass('modal')) {
+            closeModal();
+        }
+    });
+
+    // Close modal on pressing the Escape key
+    $(document).on('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
     });
 });
