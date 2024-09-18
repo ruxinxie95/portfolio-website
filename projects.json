@@ -84,11 +84,5 @@
         ],
         "tags": ["Fabrication", "Workshop", "Robotics"],
         "highlight": true
-    },
-    {
-        "title": "Exhibition Booth Design",
-        "categories": ["Digital Fabrication", "Exhibition"],
-        "description": "Designed an interactive exhibition booth that integrates digital fabrication and user engagement.",
-        "cover_image": "images/exhibition_booth/cover.jpg",
-        "images": [
-            "images/exhibition_booth/image1.jpg
+    }
+]

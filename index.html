@@ -1,61 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruxin's Portfolio</title>
-    <!-- Link to Custom CSS -->
+    <title>Projects - Your Website</title>
+    <!-- Link to CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Isotope -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <!-- Include imagesLoaded -->
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="press.html">Press</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="Architecture">Architecture</button>
-            <button class="filter-btn" data-filter="Computational Design">Computational Design</button>
-            <button class="filter-btn" data-filter="Digital Fabrication">Digital Fabrication</button>
-            <button class="filter-btn" data-filter="Exhibition">Exhibition</button>
+    <!-- Header Section -->
+    <header id="masthead" class="site-header" role="banner">
+        <div class="site-branding">
+            <h1 class="site-title">
+                <a href="https://yourwebsite.com/" rel="home">Ruxin Xie</a>
+            </h1>
+            <p class="site-description">Your practice description goes here.</p>
+            
+            <!-- <nav id="site-navigation" class="main-navigation" role="navigation"> -->
+                <!-- <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu &#x2193;</button>
+                <ul id="primary-menu" class="menu">
+                    <li class="menu-item"><a href="#">Studio</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="#">Profile</a></li>
+                            <li class="menu-item"><a href="#">Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item current-menu-item"><a href="#">Projects</a></li>
+                    <li class="menu-item"><a href="#">Press & News</a></li>
+                    <li class="menu-item"><a href="#">Contact</a></li>
+                </ul>
+                <ul class="term-list">
+                    <li class="All">All</li>
+                    <li class="architecture">Architecture</li>
+                    <li class="computational-design">Computational Design</li>
+                    <li class="digital-fabrication">Digital Fabrication</li>
+                    <li class="exhibition">Exhibition</li>
+                    <li class="list-trigger">List</li>
+                </ul> -->
+            <!-- </nav> -->
         </div>
-        <div id="projects-grid">
-            <!-- Grid Sizer (for Masonry) -->
-            <div class="grid-sizer"></div>
-            <!-- Projects will be dynamically loaded here -->
-        </div>
-    </section>
+    </header>
 
-    <!-- Modal Structure -->
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display: none;">
-        <div class="modal-content">
-            <button class="close" aria-label="Close">&times;</button>
-            <h2 id="modal-title"></h2>
-            <p class="modal-description"></p>
-            <div class="modal-images"></div>
-            <div class="tags"></div>
+    <!-- Content Area -->
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main grid" role="main">
+                <!-- Project Articles will be dynamically inserted here -->
+            </main>
         </div>
     </div>
 
-    <!-- Masonry.js Library -->
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    
-    <!-- imagesLoaded.js Library -->
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-    
-    <!-- jQuery Library (Ensure this is included before main.js) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- Custom JavaScript -->
-    <script src="js/main.js"></script>
+    <!-- Footer Section -->
+    <footer id="colophon" class="site-footer" role="contentinfo">
+        <div class="site-info">
+            <!-- Footer content -->
+        </div>
+    </footer>
+
+    <!-- Modal Structure -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+            <div class="modal-images"></div>
+        </div>
+    </div>
+
+    <!-- Link to JavaScript -->
+    <script src="js/scripts.js"></script>
 </body>
 </html>

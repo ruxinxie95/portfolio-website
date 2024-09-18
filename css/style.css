@@ -1,322 +1,248 @@
-/* css/style.css */
-
-/* Reset and Base Styles */
-* {
+/* Ensure padding and borders are included in element's total width and height */
+*, *::before, *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
+/* Reset and basic styles */
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #333333;
-    line-height: 1.6;
 }
 
-/* Navigation Bar */
-nav {
-    background-color: #333;
+header {
+    background-color: #fff;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.site-branding {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-title a {
+    font-size: 1em; /* Adjust as needed */
+    font-weight:normal;
+    color: #333;
+    text-decoration: none;
+}
+
+.site-title a:hover {
+    color: #555;
+}
+
+.site-description {
+    margin-top: 10px;
+    color: #666;
+}
+
+.main-navigation {
+    margin-top: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-item {
+    margin: 0 15px;
+    position: relative;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
     padding: 10px 0;
 }
 
-nav ul {
+.menu-item:hover .sub-menu {
+    display: block;
+}
+
+.term-list {
     list-style: none;
+    padding: 10px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1em;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #dddddd;
-}
-
-/* Projects Section */
-#projects {
-    padding: 40px 20px;
-    background-color: #f9f9f9;
-}
-
-/* Filter Bar */
-.filter-bar {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.filter-btn {
-    background-color: #fff;
-    border: 2px solid #333;
-    color: #333;
-    padding: 10px 20px;
-    margin: 5px;
+.term-list li {
+    margin: 5px 10px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 5px 10px;
+    background-color: #f5f5f5;
     border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-.filter-btn.active,
-.filter-btn:hover {
-    background-color: #333;
-    color: #fff;
+.term-list li:hover {
+    background-color: #ddd;
 }
 
-/* Projects Grid */
-#projects-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 10px;
-    /* Masonry.js handles the layout, so no need for display properties here */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    padding: 0; /* Ensure no padding to prevent overflow */
+    width: 100%; /* Full width */
 }
 
-/* Grid Sizer (for Masonry) */
-.grid-sizer {
-    width: 20%; /* 5 columns */
-}
-
-/* Project Item */
 .project {
-    width: 20%; /* Base width for Masonry */
-    margin-bottom: 10px; /* Space between items vertically */
-    position: relative;
-    cursor: pointer;
+    width: 19%; /* For 5 columns */
+    margin: 0.1%; /* Margin on each side */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     overflow: hidden;
-    transition: box-shadow 0.3s;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s forwards;
-    border-radius: 8px;
+    transition: transform 0.3s;
 }
 
-/* Highlighted Project */
 .project.highlight {
-    width: 40%; /* Span 2 columns */
+    width: 39%; /* Spans 2 columns */
+    margin: 0.5%;
+    border: 2px solid #ff0; /* Optional: Highlight border */
 }
 
-/* Project Image */
+.project:hover {
+    transform: scale(1.05);
+}
+
 .project img {
     width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    object-fit: contain; /* Ensure full image visibility */
-    display: block;
-    border-radius: 8px;
-}
-
-/* Project Info Overlay */
-.project-info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(128, 128, 128, 0.7); /* Grey overlay with transparency */
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0; /* Hidden by default */
-    visibility: hidden; /* Hidden by default */
-    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
-    border-radius: 8px;
-}
-
-.project:hover .project-info {
-    opacity: 1; /* Visible on hover */
-    visibility: visible; /* Visible on hover */
-    background-color: rgba(128, 128, 128, 0.9); /* Darker grey on hover */
-}
-
-/* Project Info Text */
-.project-info h3 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
-.project-info p {
-    margin: 10px 0 0 0;
-    font-size: 1em;
-}
-
-/* Remove box-shadow on hover for cleaner overlay */
-.project:hover {
-    box-shadow: none;
-}
-
-/* Highlighted Project Shadow */
-.project.highlight:hover {
-    box-shadow: none;
-}
-
-/* Responsive Design */
-
-/* For screens wider than 1600px */
-@media (min-width: 1601px) {
-    .project {
-        width: 20%; /* Maintain 5 columns */
-    }
-
-    .project.highlight {
-        width: 40%; /* Span 2 columns */
-    }
-}
-
-/* For screens up to 1600px */
-@media (max-width: 1600px) {
-    .grid-sizer,
-    .project,
-    .project.highlight {
-        width: 20%;
-    }
-}
-
-/* For screens up to 1200px */
-@media (max-width: 1200px) {
-    .grid-sizer,
-    .project,
-    .project.highlight {
-        width: 25%; /* 4 columns */
-    }
-
-    .project.highlight {
-        width: 50%; /* Span 2 columns */
-    }
-}
-
-/* For screens up to 992px */
-@media (max-width: 992px) {
-    .grid-sizer,
-    .project,
-    .project.highlight {
-        width: 33.333%; /* 3 columns */
-    }
-
-    .project.highlight {
-        width: 66.666%; /* Span 2 columns */
-    }
-}
-
-/* For screens up to 768px */
-@media (max-width: 768px) {
-    .filter-bar {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .filter-btn {
-        flex: 1 1 45%;
-        margin: 5px;
-    }
-
-    .grid-sizer,
-    .project,
-    .project.highlight {
-        width: 50%; /* 2 columns */
-    }
-
-    .project.highlight {
-        width: 100%; /* Span 2 columns */
-    }
-}
-
-/* For screens up to 576px */
-@media (max-width: 576px) {
-    .grid-sizer,
-    .project,
-    .project.highlight {
-        width: 100%; /* 1 column */
-    }
-
-    .project.highlight {
-        width: 100%; /* Full width */
-    }
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-/* Lazy Loading Placeholder */
-img.lazy {
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-img.lazy.loaded {
-    opacity: 1;
+    height: auto;
 }
 
 /* Modal Styles */
 .modal {
-    position: fixed;
-    top: 0;
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    padding-top: 60px; 
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.8); 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: block;
+    opacity: 1;
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: #fefefe;
+    margin: auto;
     padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
     max-width: 800px;
-    width: 90%;
-    max-height: 90%;
-    overflow-y: auto;
     position: relative;
-    border-radius: 8px;
 }
 
-.modal-content .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 2em;
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-.modal-content .modal-images img {
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-images {
+    margin-top: 20px;
+}
+
+.modal-image {
     width: 100%;
+    height: auto;
     margin-bottom: 10px;
-    border-radius: 4px;
 }
 
-.modal-content .tags {
-    margin-top: 10px;
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .project {
+        width: 23%; /* ~4 columns on larger tablets */
+        margin: 0.7%;
+    }
+
+    .project.highlight {
+        width: 46%; /* Spans 2 columns in 4-column layout */
+    }
 }
 
-.modal-content .tags .tag {
-    display: inline-block;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    margin: 5px;
-    border-radius: 4px;
-    font-size: 0.9em;
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 1.2em;
+        margin: 10px auto;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+    }
+
+    .menu.active {
+        display: flex;
+    }
+
+    .menu-item {
+        margin: 10px 0;
+    }
+
+    .project {
+        width: 46%; /* Approximately 2 columns on tablets */
+        margin: 2%;
+    }
+
+    .project.highlight {
+        width: 96%; /* Spans 2 columns in 2-column layout, effectively full width */
+    }
+
+    .hidden-xs {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .project {
+        width: 96%; /* 1 column on mobile */
+        margin: 2%;
+    }
+
+    .project.highlight {
+        width: 96%; /* Already full width */
+    }
 }
