@@ -1,21 +1,15 @@
 $(document).ready(function() {
-    // Menu Toggle
-    $('.menu-toggle').on('click', function() {
-        $('#primary-menu').toggleClass('active');
-    });
-
     // Load JSON data and initialize projects
     $.getJSON('projects.json', function(data) {
         var $grid = $('.grid');
+        var categories = [];
 
         // Function to create project article HTML
         function createProjectArticle(project, index) {
-            // Generate category classes for filtering
             var categoryClasses = project.categories.map(function(cat) {
                 return cat.toLowerCase().replace(/\s+/g, '-');
             }).join(' ');
-        
-            // Create the article element with a link to the individual project page
+
             var article = `
                 <article class="project ${categoryClasses}">
                     <a href="projects/project${index + 1}/project${index + 1}.html" class="project-link">
@@ -30,46 +24,46 @@ $(document).ready(function() {
         $.each(data, function(index, project) {
             var articleHTML = createProjectArticle(project, index);
             $grid.append(articleHTML);
+
+            // Collect unique categories for filter buttons
+            project.categories.forEach(function(category) {
+                if (!categories.includes(category)) {
+                    categories.push(category);
+                }
+            });
         });
 
-        // Initialize Isotope after all images have been loaded
-        $grid.imagesLoaded().progress(function() {
+        // Create filter buttons dynamically
+        categories.forEach(function(category) {
+            var categoryClass = category.toLowerCase().replace(/\s+/g, '-');
+            var button = `<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`;
+            $('.filters').append(button);
+        });
+
+        // Ensure all images are loaded before initializing Isotope
+        $grid.imagesLoaded().done(function() {
+            // Initialize Isotope without transition on layout change
             $grid.isotope({
                 itemSelector: '.project',
                 layoutMode: 'masonry',
                 percentPosition: true,
                 masonry: {
-                    columnWidth: '.project',
-                    gutter: 0
+                    horizontalOrder: true,
+                    columnWidth: '.project'
                 }
             });
         });
 
-        // Filter items on click
-        $('.term-list li').on('click', function() {
-            var filterValue = $(this).attr('class');
-            if(filterValue === 'list-trigger') {
-                $('body').toggleClass('simply');
-                if($('body').hasClass('simply')) {
-                    $grid.isotope('destroy');
-                } else {
-                    $grid.isotope({
-                        itemSelector: '.project',
-                        layoutMode: 'masonry',
-                        percentPosition: true,
-                        masonry: {
-                            columnWidth: '.project',
-                            gutter: 0
-                        }
-                    });
-                }
-            } else {
-                if(filterValue === 'All') {
-                    $grid.isotope({ filter: '*' });
-                } else {
-                    $grid.isotope({ filter: '.' + filterValue });
-                }
-            }
+        // Filter items on button click
+        $('.filters').on('click', 'button', function() {
+            var filterValue = $(this).attr('data-filter');
+            
+            // Apply the filter and force a layout reflow after the filter
+            $grid.isotope({ filter: filterValue }).isotope('layout');
+
+            // Highlight the active button
+            $('.filter-button').removeClass('active');
+            $(this).addClass('active');
         });
     });
 });

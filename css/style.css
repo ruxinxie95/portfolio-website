@@ -56,9 +56,6 @@ header {
     color: #333;
 }
 
-/* Lightbox Gallery Styles (Remove if fully project-specific) */
-/* If lightbox-gallery is used globally, keep it here; otherwise, move to project-style.css */
-
 /* Footer Section */
 .site-footer {
     padding: 20px;
@@ -71,24 +68,23 @@ header {
 .grid {
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
-    padding: 0;
-    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding: 0 0px;
+    max-width: 900px; /* Make it more responsive */
 }
+
 
 .project {
-    width: 19%;
-    margin: 0.4%;
+    width: calc((100% / 5) - 10px); /* Adjust -20px to whatever margin you wish to use */
+    margin: 5px; /* Adjust based on desired spacing */
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: opacity 0.4s ease;
 }
 
-.project:hover {
-    transform: scale(1.05);
-}
+
 
 .project img {
     width: 100%;
@@ -96,63 +92,74 @@ header {
 }
 
 .project.highlight {
-    width: 39%;
-    margin: 0.5%;
     border: 2px solid #ff0; /* Highlight border */
 }
 
-/* Modal Styles */
-/* If modal is used globally, keep it here; otherwise, move to project-style.css */
+/* Filter Buttons */
+.filters {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.filter-button {
+    padding: 10px;
+    background: none;
+    border: none;
+    color: #333;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 1em;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.filter-button:hover, .filter-button.active {
+    color: #555;
+}
+
+.filter-button.active::after {
+    content: '';
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    bottom: 50%;
+    height: 2px;
+    background-color: #333;
+    width: calc(100% + 10px);
+}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
     .project {
-        width: 23%;
-        margin: 0.7%;
-    }
-
-    .project.highlight {
-        width: 46%;
+        width: calc(33.333% - 20px); /* Three items per row */
     }
 }
 
 @media (max-width: 768px) {
-    .menu {
-        flex-direction: column;
-        display: none;
-    }
-
-    .menu-toggle {
-        display: block;
-        cursor: pointer;
-        font-size: 1.2em;
-        margin: 10px auto;
-        padding: 10px;
-        background-color: #f5f5f5;
-        border-radius: 4px;
-    }
-
-    .menu.active {
-        display: flex;
-    }
-
     .project {
-        width: 46%;
-        margin: 2%;
-    }
-
-    .project.highlight {
-        width: 96%;
+        width: calc(50% - 20px); /* Two items per row */
     }
 }
 
 @media (max-width: 480px) {
     .project {
-        width: 96%;
-        margin: 2%;
+        width: calc(100% - 20px); /* One item per row */
     }
+}
+@media (min-width: 768px) {
+    .grid {
+        max-width: 95%; /* Adjust based on your design needs */
+    }
+}
 
-    .project.highlight {
-        width: 96%;
+@media (min-width: 1024px) {
+    .grid {
+        max-width: 90%; /* This can be tweaked */
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid {
+        max-width: 85%; /* Or any percentage that fits your design */
     }
 }

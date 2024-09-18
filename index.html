@@ -24,6 +24,12 @@
         </div>
     </header>
 
+    <!-- Filter Buttons -->
+    <div class="filters">
+        <button data-filter="*" class="filter-button active">All</button>
+        <!-- Buttons will be dynamically inserted here -->
+    </div>
+
     <!-- Content Area -->
     <div id="content" class="site-content">
         <div id="primary" class="content-area">
@@ -36,11 +42,15 @@
     <!-- Footer Section -->
     <footer id="colophon" class="site-footer" role="contentinfo">
         <div class="site-info">
-            <!-- Footer content -->
+            &copy; <span id="current-year"></span> Ruxin Xie. All rights reserved.
         </div>
     </footer>
 
     <!-- Link to JavaScript -->
     <script src="js/scripts.js"></script>
+    <script>
+        // Optional: Update the footer with the current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
