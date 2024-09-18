@@ -56,58 +56,8 @@ header {
     color: #333;
 }
 
-/* Slideshow Styles */
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 33.33%; /* 1/3 of screen width padding */
-}
-
-.slick-prev,
-.slick-next {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    z-index: 10;
-}
-
-.slick-prev:before,
-.slick-next:before {
-    color: white;
-}
-
-.slick-dots {
-    bottom: -30px;
-}
-
-.slick-dots li button:before {
-    color: #000;
-}
-
-/* Lightbox Gallery Styles */
-.lightbox-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.lightbox-gallery img {
-    width: 100%;
-    height: auto;
-    max-width: 800px;
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-.lightbox-gallery a {
-    display: block;
-    width: 32%; /* 3-column layout */
-    text-align: center;
-}
+/* Lightbox Gallery Styles (Remove if fully project-specific) */
+/* If lightbox-gallery is used globally, keep it here; otherwise, move to project-style.css */
 
 /* Footer Section */
 .site-footer {
@@ -152,59 +102,7 @@ header {
 }
 
 /* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    padding-top: 60px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.modal.show {
-    display: block;
-    opacity: 1;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 800px;
-    position: relative;
-}
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-}
-
-.modal-images {
-    margin-top: 20px;
-}
-
-.modal-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
+/* If modal is used globally, keep it here; otherwise, move to project-style.css */
 
 /* Responsive Design */
 @media (max-width: 1024px) {

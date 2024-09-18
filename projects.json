@@ -3,7 +3,7 @@
         "title": "Timber Installation Project",
         "categories": ["Architecture"],
         "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
-        "cover_image": "images/timber_installation/cover.jpg",
+        "cover_image": "projects/project1/images/cover.jpg",
         "images": [
             "images/timber_installation/image1.jpg",
             "images/timber_installation/image2.jpg",

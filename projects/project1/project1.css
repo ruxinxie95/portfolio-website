@@ -1,0 +1,69 @@
+/* project1.css */
+
+/* Slideshow container should take a reasonable width */
+.slideshow-container {
+    max-width: 1200px; /* Set a max-width to prevent overflow */
+    margin: 0 auto;    /* Center the slideshow */
+    padding: 20px;     /* Add some padding */
+}
+
+/* Ensure images are responsive and do not exceed the container's size */
+.slideshow img {
+    width: 100%;       /* Make the image take up the full width of the container */
+    max-width: 800px;  /* Limit the maximum width */
+    height: auto;      /* Maintain the aspect ratio */
+    display: block;
+    margin: 0 auto;    /* Center the image */
+}
+
+/* Center arrows in slick carousel */
+.slick-prev, .slick-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: white;
+}
+
+.slick-dots {
+    bottom: -30px;
+}
+
+.slick-dots li button:before {
+    color: #000;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .slideshow-container {
+        max-width: 90%;   /* Shrink the container on smaller screens */
+    }
+
+    .slideshow img {
+        max-width: 600px; /* Reduce the image size for tablets */
+    }
+
+    .slick-prev, .slick-next {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slideshow-container {
+        max-width: 95%;
+    }
+
+    .slideshow img {
+        max-width: 100%;
+    }
+
+    .slick-prev, .slick-next {
+        width: 25px;
+        height: 25px;
+    }
+}
