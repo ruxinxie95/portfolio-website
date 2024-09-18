@@ -13,13 +13,13 @@ body {
 /* Header Section */
 header {
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
     text-align: center;
 }
 
 .site-title a {
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: normal;
     color: #333;
     text-decoration: none;
@@ -32,28 +32,6 @@ header {
 .site-description {
     margin-top: 10px;
     color: #666;
-}
-
-/* Menu Styles */
-.main-navigation {
-    margin-top: 20px;
-}
-
-.menu {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.menu-item {
-    margin: 0 15px;
-    position: relative;
-}
-
-.menu-item a {
-    text-decoration: none;
-    color: #333;
 }
 
 /* Footer Section */
