@@ -1,5 +1,3 @@
-/* project1.js */
-
 $(document).ready(function(){
     // Initialize the slideshow without auto-sliding
     $('.slideshow').slick({
@@ -7,9 +5,8 @@ $(document).ready(function(){
         dots: true,
         autoplay: false,
         infinite: false,
-        centerMode: true,
-        centerPadding: '33.33%',  // Start 1/3 from the right, end 1/3 from the left
-        slidesToShow: 1
+        slidesToShow: 1,        // Show 1 slide at a time
+        adaptiveHeight: true    // Automatically adjust height to image content
     });
 
     // Lightbox trigger when clicking on the image in the slideshow

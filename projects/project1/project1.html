@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
+    <title>Timber Installation Project - Ruxin Xie</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timber Installation Project - Ruxin Xie</title>
     <!-- Link to Global CSS -->
     <link rel="stylesheet" href="../../css/style.css">
     <!-- Link to General Project-Specific CSS -->
@@ -15,14 +15,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
 </head>
 <body>
-    <header id="masthead" class="site-header" role="banner">
-        <div class="site-branding">
-            <h1 class="site-title">
-                <a href="../../index.html" rel="home">Ruxin Xie</a>
-            </h1>
-            <p class="site-description">Your practice description goes here.</p>
-        </div>
-    </header>
+    <!-- Load Header and Footer via template -->
+    <div id="template-placeholder"></div>
 
     <div id="content" class="site-content">
         <div id="primary" class="content-area">
@@ -54,17 +48,32 @@
         </div>
     </div>
 
-    <footer id="colophon" class="site-footer" role="contentinfo">
-        <div class="site-info">
-            <!-- Footer content -->
-        </div>
-    </footer>
+    <!-- Placeholder for Footer and Scripts -->
+    <div id="template-footer-placeholder"></div>
 
-    <!-- Add jQuery, Slick Carousel, and Lightbox2 JavaScript -->
+    <!-- Add jQuery and Slick Carousel JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-    <!-- Link to General Project-Specific JS -->
-    <script src="../../js/project.js"></script>
+
+    <!-- Dynamically load the template with head, header, footer, and scripts -->
+    <script>
+        $(function(){
+            // Load the template
+            $("#template-placeholder").load("../../template.html", function() {
+                // Use a slight delay to ensure content is fully loaded
+                setTimeout(function() {
+                    // Initialize the slideshow after the template is loaded
+                    $('.slideshow').slick({
+                        arrows: true,
+                        dots: true,
+                        autoplay: false,
+                        infinite: false,
+                        slidesToShow: 1,
+                        adaptiveHeight: true
+                    });
+                }, 500);  // 500ms delay to ensure everything loads properly
+            });
+        });
+    </script>
 </body>
 </html>
