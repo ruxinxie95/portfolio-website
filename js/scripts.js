@@ -66,4 +66,35 @@ $(document).ready(function() {
             $(this).addClass('active');
         });
     });
+
+    // ---- Updated "Stop me" Button Functionality ----
+    let clickCount = 0;
+    const stopButton = $('#stop-button');
+    const messageElement = $('#message');
+    const rotatingX = $('.rotating-x');
+
+    stopButton.on('click', function() {
+        clickCount++;
+
+        if (clickCount <= 2) {
+            // First and second clicks
+            messageElement.text("You can't.");
+            if (clickCount === 2) {
+                stopButton.text("Stop me again");
+            }
+        } else if (clickCount < 5) {
+            // Third and fourth clicks
+            messageElement.text("Really?");
+        } else if (clickCount === 5) {
+            // Fifth click
+            messageElement.html(`
+                Let's talk: 
+                <a href="mailto:ruxinx.design@gmail.com">ruxinx.design@gmail.com</a><br>
+                Phone: 7348828500 (preferred)
+            `);
+            stopButton.prop('disabled', true); // Disable the button after 5 clicks
+            rotatingX.css('animation-play-state', 'paused'); // Stop the spinning X
+        }
+    });
+    // ---- End of "Stop me" Button Functionality ----
 });
