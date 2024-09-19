@@ -6,8 +6,6 @@
     <title>Timber Installation Project - Ruxin Xie</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/project-style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 </head>
 <body>
     <!-- Header section remains fixed and includes the description -->
@@ -29,23 +27,23 @@
                 <p>This timber structure was designed and fabricated with a focus on sustainable practices.</p>
             </div>
             <div class="project-images">
-                <div class="slideshow">
-                    <div>
-                        <img src="images/image1.jpg" alt="Timber Installation Image 1">
-                    </div>
-                    <div>
-                        <img src="images/image2.jpg" alt="Timber Installation Image 2">
-                    </div>
-                    <div>
-                        <img src="images/image3.jpg" alt="Timber Installation Image 3">
-                    </div>
-                </div>
+                <img src="images/image1.jpg" alt="Timber Installation Image 1" class="lightbox-trigger">
+                <img src="images/image2.jpg" alt="Timber Installation Image 2" class="lightbox-trigger">
+                <img src="images/image3.jpg" alt="Timber Installation Image 3" class="lightbox-trigger">
+                <!-- Add more images as needed -->
             </div>
         </div>
     </div>
 
+    <!-- Lightbox Structure -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="">
+        <a class="lightbox-prev">&#10094;</a> <!-- Previous Button -->
+        <a class="lightbox-next">&#10095;</a> <!-- Next Button -->
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <script src="../../js/projects.js"></script>
+    <script src="../../js/scripts.js"></script> <!-- Ensure scripts.js is included -->
 </body>
 </html>

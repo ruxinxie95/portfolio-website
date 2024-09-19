@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Projects - Ruxin Xie</title>
-        
-        <!-- Favicon Links -->
-        <!-- Optional Fallback Static Favicon -->
-        <!-- <link rel="icon" type="image/png" href="icons/favicon-static.png"> -->
-        
-        <!-- Dynamic Favicon -->
-        <link id="dynamic-favicon" rel="icon" type="image/png" href="icons/favicon1.png">
-        
-        <!-- Link to CSS -->
-        <link rel="stylesheet" href="css/style.css">
-        
-        <!-- Include jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- Include Isotope -->
-        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-        <!-- Include imagesLoaded -->
-        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-    </head>
-    
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Ruxin Xie</title>
+
+    <!-- Dynamic Favicon -->
+    <link id="dynamic-favicon" rel="icon" type="image/png" href="icons/favicon1.png">
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Isotope -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <!-- Include imagesLoaded -->
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+</head>
+
 <body>
     <!-- Header Section -->
     <header id="masthead" class="site-header" role="banner">
@@ -31,8 +26,9 @@
             <h1 class="site-title">
                 <a href="index.html" rel="home" class="bling-text">Ruxin <span class="rotating-x">X</span>ie</a>
             </h1>
+
             <!-- "Stop me" Button and Message Container -->
-            <div class="stop-me-section" style="text-align: center; margin-top: 20px;">
+            <div class="stop-me-section">
                 <button id="stop-button">Stop me</button>
                 <p id="message"></p> <!-- Message container -->
             </div>
@@ -43,7 +39,6 @@
     <!-- Filter Buttons -->
     <div class="filters">
         <button data-filter="*" class="filter-button active">All</button>
-        <!-- Buttons will be dynamically inserted here -->
     </div>
 
     <!-- Content Area -->
@@ -58,14 +53,14 @@
     <!-- Footer Section -->
     <footer id="colophon" class="site-footer" role="contentinfo">
         <div class="site-info">
-            &copy; <span id="current-year"></span> Ruxin Xie. All rights reserved.
+            &copy; <span id="current-year"></span> Ruxin Xie. 
         </div>
     </footer>
 
     <!-- Link to JavaScript -->
     <script src="js/scripts.js"></script>
     <script>
-        // Optional: Update the footer with the current year
+        // Update the footer with the current year
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
