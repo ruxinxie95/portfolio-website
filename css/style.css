@@ -166,17 +166,21 @@ header {
     }
 }
 
+/* Bling Text and Rotating X */
 .bling-text {
-    font-size: 2em; /* Adjust size based on your design */
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 2em; /* Adjust size as needed */
     font-weight: bold;
-    color: #333; /* Default color */
+    color: #d30707; /* Default color */
 }
 
 .bling-text .rotating-x {
     display: inline-block;
     animation: rotateX 2s linear infinite; /* Spins continuously in one direction */
-    color: #000000; /* Optional: Different color for emphasis */
+    color: #f20000; /* Optional: Different color for emphasis */
+    font-family: inherit; /* Inherit font from parent (.bling-text) */
 }
+
 
 /* Filter Buttons Styles */
 .filters {

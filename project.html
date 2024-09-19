@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - Ruxin Xie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project-style.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Isotope -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <!-- Include imagesLoaded -->
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="masthead" class="site-header" role="banner">
+        <div class="site-branding">
+            <h1 class="site-title">
+                <a href="index.html" rel="home">Ruxin Xie</a>
+            </h1>
+            <p class="site-description">Research Associate at Princeton University</p>
+        </div>
+    </header>
+
+    <!-- Content Area for Project -->
+    <div id="page" class="transition-fade">
+        <div class="project-content">
+            <div class="project-info">
+                <button id="close-project" class="close-project">&times;</button>
+                <h2 id="project-title">Loading...</h2>
+                <p id="project-description">Please wait while the project details are loaded.</p>
+            </div>
+            <div class="project-images" id="project-images">
+                <!-- Images will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Structure -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="">
+        <a class="lightbox-prev">&#10094;</a> <!-- Previous Button -->
+        <a class="lightbox-next">&#10095;</a> <!-- Next Button -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer id="colophon" class="site-footer" role="contentinfo">
+        <div class="site-info">
+            &copy; <span id="current-year"></span> Ruxin Xie. 
+        </div>
+    </footer>
+
+    <!-- Link to JavaScript -->
+    <script src="js/scripts.js"></script>
+    <script>
+        // Update the footer with the current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Project-Specific Script -->
+    <script>
+        $(document).ready(function() {
+            // Function to get query parameters
+            function getQueryParam(param) {
+                let urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            let projectId = getQueryParam('id'); // URL format: project.html?id=1
+
+            if (!projectId) {
+                $('#project-title').text('Project Not Found');
+                $('#project-description').text('No project ID provided.');
+                return;
+            }
+
+            // Fetch projects.json
+            $.getJSON('projects.json', function(data) {
+                // Find the project with the matching id
+                let project = data.find(p => p.id == projectId);
+
+                if (!project) {
+                    $('#project-title').text('Project Not Found');
+                    $('#project-description').text('The requested project does not exist.');
+                    return;
+                }
+
+                // Populate the project details
+                $('#project-title').text(project.title);
+                $('#project-description').text(project.description);
+
+                // Populate images
+                let imagesContainer = $('#project-images');
+                imagesContainer.empty(); // Clear any existing content
+
+                project.images.forEach(function(imagePath, index) {
+                    let imgElement = `
+                        <img src="${imagePath}" alt="${project.title} Image ${index + 1}" class="lightbox-trigger">
+                    `;
+                    imagesContainer.append(imgElement);
+                });
+
+                // Reinitialize lightbox for newly added images
+                initializeLightbox();
+
+            }).fail(function() {
+                $('#project-title').text('Error');
+                $('#project-description').text('Failed to load project data.');
+            });
+
+            // Close Project Button Functionality
+            $('#close-project').on('click', function() {
+                window.location.href = 'index.html';
+            });
+
+            // Function to initialize lightbox (ensure it's called after images are loaded)
+            function initializeLightbox() {
+                // Get all lightbox-trigger images
+                const images = $('.lightbox-trigger');
+                const lightbox = $('#lightbox');
+                const lightboxImg = $('#lightbox-img');
+                const lightboxClose = $('.lightbox-close');
+                const lightboxPrev = $('.lightbox-prev');
+                const lightboxNext = $('.lightbox-next');
+                let currentIndex = -1; // To track the current image
+
+                // Function to open lightbox at a specific index
+                function openLightbox(index) {
+                    const img = images.eq(index);
+                    lightboxImg.attr('src', img.attr('src'));
+                    lightboxImg.attr('alt', img.attr('alt'));
+                    $('body').addClass('no-scroll');
+                    lightbox.addClass('active').hide().fadeIn(300);
+                    currentIndex = index;
+                }
+
+                // Click event to open lightbox
+                images.on('click', function() {
+                    const index = images.index(this);
+                    openLightbox(index);
+                });
+
+                // Function to close lightbox
+                function closeLightbox() {
+                    $('body').removeClass('no-scroll');
+                    lightbox.fadeOut(300, function() {
+                        lightbox.removeClass('active');
+                    });
+                    currentIndex = -1;
+                }
+
+                // Click event to close lightbox
+                lightboxClose.on('click', closeLightbox);
+
+                // Click outside the image to close lightbox
+                lightbox.on('click', function(e) {
+                    if ($(e.target).is('#lightbox-img') || $(e.target).is('.lightbox-content')) {
+                        return;
+                    }
+                    closeLightbox();
+                });
+
+                // Press 'Esc' key to close lightbox
+                $(document).on('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    }
+                });
+
+                // Navigate to previous image
+                lightboxPrev.on('click', function(e) {
+                    e.stopPropagation(); // Prevent triggering the lightbox click event
+                    if (currentIndex > 0) {
+                        openLightbox(currentIndex - 1);
+                    } else {
+                        openLightbox(images.length - 1); // Loop to last image
+                    }
+                });
+
+                // Navigate to next image
+                lightboxNext.on('click', function(e) {
+                    e.stopPropagation();
+                    if (currentIndex < images.length - 1) {
+                        openLightbox(currentIndex + 1);
+                    } else {
+                        openLightbox(0); // Loop to first image
+                    }
+                });
+
+                // Optional: Swipe gestures for touch devices
+                // Note: jQuery doesn't have built-in swipe events. You might need a plugin like jQuery Mobile or Hammer.js for this functionality.
+            }
+        });
+    </script>
+</body>
+</html>

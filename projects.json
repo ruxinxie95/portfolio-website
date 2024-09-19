@@ -1,88 +1,74 @@
 [
     {
+        "id": "1",
         "title": "Timber Installation Project",
-        "categories": ["Architecture"],
+        "categories": ["Architecture", "Robotics"],
         "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
         "cover_image": "projects/project1/images/cover.jpg",
         "images": [
-            "images/timber_installation/image1.jpg",
-            "images/timber_installation/image2.jpg",
-            "images/timber_installation/image3.jpg"
+            "projects/project1/images/image1.jpg",
+            "projects/project1/images/image2.jpg",
+            "projects/project1/images/image3.jpg"
         ],
         "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
         "highlight": false
     },
     {
-        "title": "Parametric Pavilion",
-        "categories": ["Computational Design"],
-        "description": "A pavilion designed using parametric design techniques and fabricated with digital tools.",
-        "cover_image": "images/parametric_pavilion/cover.jpeg",
+        "id": "2",
+        "title": "Timber Installation Project2",
+        "categories": ["Digital Fabrication", "Installation"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project2/images/cover.jpg",
         "images": [
-            "images/parametric_pavilion/image1.jpg",
-            "images/parametric_pavilion/image2.jpg",
-            "images/parametric_pavilion/image3.jpg"
+            "projects/project2/images/image1.jpg",
+            "projects/project2/images/image2.jpg",
+            "projects/project2/images/image3.jpg"
         ],
-        "tags": ["Parametric Design", "Digital Fabrication", "Grasshopper"],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
         "highlight": false
     },
     {
-        "title": "Digital Fabrication Workshop",
+        "id": "3",
+        "title": "Timber Installation Project3",
         "categories": ["Digital Fabrication"],
-        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
-        "cover_image": "images/fabrication_workshop/cover.jpg",
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project3/images/cover.jpg",
         "images": [
-            "images/fabrication_workshop/image1.jpg",
-            "images/fabrication_workshop/image2.jpg"
+            "projects/project3/images/image1.jpg",
+            "projects/project3/images/image2.jpg",
+            "projects/project3/images/image3.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
         "highlight": false
     },
     {
-        "title": "Digital Fabrication Workshop2",
-        "categories": ["Digital Fabrication"],
-        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
-        "cover_image": "images/fabrication_workshop2/cover.jpg",
+        "id": "4",
+        "title": "Timber Installation Project3",
+        "categories": ["Installation"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project4/images/cover.jpg",
         "images": [
-            "images/fabrication_workshop2/image1.jpg",
-            "images/fabrication_workshop2/image2.jpg"
+            "projects/project4/images/image1.jpg",
+            "projects/project4/images/image2.jpg",
+            "projects/project4/images/image3.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
         "highlight": false
     },
     {
-        "title": "Digital Fabrication Workshop3",
-        "categories": ["Digital Fabrication"],
-        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
-        "cover_image": "images/fabrication_workshop3/cover.jpg",
+        "id": "5",
+        "title": "Timber Installation Project3",
+        "categories": ["Installation"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project4/images/cover.jpg",
         "images": [
-            "images/fabrication_workshop3/image1.jpg",
-            "images/fabrication_workshop3/image2.jpg"
+            "projects/project4/images/image1.jpg",
+            "projects/project4/images/image2.jpg",
+            "projects/project4/images/image3.jpg"
         ],
-        "tags": ["Fabrication", "Workshop", "Robotics"],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
         "highlight": false
-    },
-    {
-        "title": "Digital Fabrication Workshop4",
-        "categories": ["Digital Fabrication"],
-        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
-        "cover_image": "images/buildfest/cover.jpg",
-        "images": [
-            "images/buildfest/image1.jpg",
-            "images/buildfest/image2.jpg"
-        ],
-        "tags": ["Fabrication", "Workshop", "Robotics"],
-        "highlight": false
-    },
-    {
-        "title": "Apple",
-        "categories": ["Digital Fabrication"],
-        "description": "A hands-on workshop focused on advanced digital fabrication techniques.",
-        "cover_image": "images/bermuda/cover.jpg",
-        "images": [
-            "images/bermuda/image1.jpg",
-            "images/bermuda/image2.jpg"
-        ],
-        "tags": ["Fabrication", "Workshop", "Robotics"],
-        "highlight": true
     }
+    
+
 ]
