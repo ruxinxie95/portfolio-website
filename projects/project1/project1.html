@@ -1,79 +1,51 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-    <title>Timber Installation Project - Ruxin Xie</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link to Global CSS -->
+    <title>Timber Installation Project - Ruxin Xie</title>
     <link rel="stylesheet" href="../../css/style.css">
-    <!-- Link to General Project-Specific CSS -->
     <link rel="stylesheet" href="../../css/project-style.css">
-    <!-- Add Slick Carousel CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-    <!-- Add Lightbox CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 </head>
 <body>
-    <!-- Load Header and Footer via template -->
-    <div id="template-placeholder"></div>
+    <!-- Header section remains fixed and includes the description -->
+    <header id="masthead" class="site-header" role="banner">
+        <div class="site-branding">
+            <h1 class="site-title">
+                <a href="../../index.html" rel="home">Ruxin Xie</a>
+            </h1>
+            <p class="site-description">Research Associate at Princeton University</p>
+        </div>
+    </header>
 
-    <div id="content" class="site-content">
-        <div id="primary" class="content-area">
-            <main id="main" class="site-main">
-                <h1>Timber Installation Project</h1>
-                <p>A timber structure designed and fabricated with a focus on sustainable practices.</p>
-
-                <!-- Slideshow container -->
-                <div class="slideshow-container">
-                    <div class="slideshow">
-                        <div>
-                            <a href="images/image1.jpg" data-lightbox="project-gallery" data-title="Timber Installation - Image 1">
-                                <img src="images/image1.jpg" alt="Timber Installation Image 1">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="images/image2.jpg" data-lightbox="project-gallery" data-title="Timber Installation - Image 2">
-                                <img src="images/image2.jpg" alt="Timber Installation Image 2">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="images/image3.jpg" data-lightbox="project-gallery" data-title="Timber Installation - Image 3">
-                                <img src="images/image3.jpg" alt="Timber Installation Image 3">
-                            </a>
-                        </div>
+    <!-- Content area for project -->
+    <div id="page" class="transition-fade">
+        <div class="project-content">
+            <div class="project-info">
+                <button id="close-project" class="close-project">&times;</button>
+                <h2>Timber Installation Project</h2>
+                <p>This timber structure was designed and fabricated with a focus on sustainable practices.</p>
+            </div>
+            <div class="project-images">
+                <div class="slideshow">
+                    <div>
+                        <img src="images/image1.jpg" alt="Timber Installation Image 1">
+                    </div>
+                    <div>
+                        <img src="images/image2.jpg" alt="Timber Installation Image 2">
+                    </div>
+                    <div>
+                        <img src="images/image3.jpg" alt="Timber Installation Image 3">
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 
-    <!-- Placeholder for Footer and Scripts -->
-    <div id="template-footer-placeholder"></div>
-
-    <!-- Add jQuery and Slick Carousel JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-    <!-- Dynamically load the template with head, header, footer, and scripts -->
-    <script>
-        $(function(){
-            // Load the template
-            $("#template-placeholder").load("../../template.html", function() {
-                // Use a slight delay to ensure content is fully loaded
-                setTimeout(function() {
-                    // Initialize the slideshow after the template is loaded
-                    $('.slideshow').slick({
-                        arrows: true,
-                        dots: true,
-                        autoplay: false,
-                        infinite: false,
-                        slidesToShow: 1,
-                        adaptiveHeight: true
-                    });
-                }, 500);  // 500ms delay to ensure everything loads properly
-            });
-        });
-    </script>
+    <script src="../../js/projects.js"></script>
 </body>
 </html>

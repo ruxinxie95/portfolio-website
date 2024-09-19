@@ -1,82 +1,85 @@
-/* Slideshow container should take a reasonable width */
-.slideshow-container {
-    max-width: 1000px; /* Reduce the max-width to prevent overflow */
-    margin: 0 auto;    /* Center the slideshow */
-    padding: 20px;     /* Add some padding */
+/* Ensure header and description are fixed */
+.site-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
 }
 
-/* Ensure images are responsive and do not exceed the container's size */
+.site-description {
+    margin-top: 10px;
+    color: #666;
+}
+
+/* Project Content */
+.project-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 100px; /* Adjust for the fixed header */
+    padding: 20px;
+}
+
+.project-info {
+    width: 45%; /* Set the description area width */
+    position: relative;
+}
+
+.project-images {
+    width: 50%;
+    margin-left: 20px;
+}
+
+.project-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.5s ease;
+}
+
+/* Close button */
+.close-project {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Slideshow styling */
+.slideshow {
+    width: 100%;
+}
+
 .slideshow img {
-    width: 100%;       /* Make the image take up the full width of the container */
-    max-width: 800px;  /* Adjust maximum width for desktop */
-    height: auto;      /* Maintain the aspect ratio */
-    display: block;
-    margin: 0 auto;    /* Center the image */
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
-/* Center arrows in slick carousel */
-.slick-prev, .slick-next {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    z-index: 10;
+/* Zoom effect when opening a project */
+.transition-fade {
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-.slick-prev:before, .slick-next:before {
-    color: white;
+.transition-fade.zoomed {
+    transform: scale(1.05);
+    opacity: 1;
 }
 
-.slick-dots {
-    bottom: -30px;
-}
-
-.slick-dots li button:before {
-    color: #000;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .slideshow-container {
-        max-width: 85%;   /* Shrink the container on smaller screens */
-    }
-
-    .slideshow img {
-        max-width: 600px; /* Reduce the image size for tablets */
-    }
-
-    .slick-prev, .slick-next {
-        width: 30px;
-        height: 30px;
-    }
-}
-
+/* Responsive design */
 @media (max-width: 768px) {
-    .slideshow-container {
-        max-width: 95%;
+    .project-content {
+        flex-direction: column;
+        margin-top: 150px;
     }
 
-    .slideshow img {
-        max-width: 100%;  /* Let the image fit to the container on small screens */
-    }
-
-    .slick-prev, .slick-next {
-        width: 25px;
-        height: 25px;
-    }
-}
-
-@media (max-width: 480px) {
-    .slideshow-container {
-        max-width: 100%;   /* Ensure slideshow takes up full width on small devices */
-    }
-
-    .slideshow img {
-        max-width: 100%;   /* Image fully responsive for mobile */
-    }
-
-    .slick-prev, .slick-next {
-        width: 20px;
-        height: 20px;
+    .project-info, .project-images {
+        width: 100%;
     }
 }
