@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    // -----------------------------
+    // 1. Initialize Projects and Filters
+    // -----------------------------
+    
     // Load JSON data and initialize projects
     $.getJSON('projects.json', function(data) {
         var $grid = $('.grid');
@@ -42,7 +46,7 @@ $(document).ready(function() {
 
         // Ensure all images are loaded before initializing Isotope
         $grid.imagesLoaded().done(function() {
-            // Initialize Isotope without transition on layout change
+            // Initialize Isotope with masonry layout
             $grid.isotope({
                 itemSelector: '.project',
                 layoutMode: 'masonry',
@@ -67,7 +71,10 @@ $(document).ready(function() {
         });
     });
 
-    // ---- Updated "Stop me" Button Functionality ----
+    // -----------------------------
+    // 2. "Stop me" Button Functionality
+    // -----------------------------
+
     let clickCount = 0;
     const stopButton = $('#stop-button');
     const messageElement = $('#message');
@@ -76,25 +83,77 @@ $(document).ready(function() {
     stopButton.on('click', function() {
         clickCount++;
 
+        // Function to trigger the flash effect
+        function triggerFlash() {
+            messageElement.addClass('flash');
+            // Remove the class after the animation ends to allow re-triggering
+            messageElement.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function() {
+                messageElement.removeClass('flash');
+                // Unbind the event to prevent multiple triggers
+                messageElement.off('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd');
+            });
+        }
+
         if (clickCount <= 2) {
             // First and second clicks
-            messageElement.text("You can't.");
+            messageElement.text("No, you can't.");
+            triggerFlash();
             if (clickCount === 2) {
                 stopButton.text("Stop me again");
             }
         } else if (clickCount < 5) {
             // Third and fourth clicks
             messageElement.text("Really?");
+            triggerFlash();
         } else if (clickCount === 5) {
             // Fifth click
             messageElement.html(`
-                Let's talk: 
+                Let's talk! 
                 <a href="mailto:ruxinx.design@gmail.com">ruxinx.design@gmail.com</a><br>
-                Phone: 7348828500 (preferred)
+                Phone: 7348828500
             `);
+            triggerFlash();
             stopButton.prop('disabled', true); // Disable the button after 5 clicks
             rotatingX.css('animation-play-state', 'paused'); // Stop the spinning X
         }
     });
-    // ---- End of "Stop me" Button Functionality ----
+
+    // -----------------------------
+    // 3. Favicon Animation Functionality
+    // -----------------------------
+
+    // Array of favicon frame URLs
+    const faviconFrames = [
+        'icons/favicon1.png',
+        'icons/favicon2.png',
+        'icons/favicon3.png'
+    ];
+
+    let currentFaviconFrame = 0; // Tracks the current frame index
+    const totalFaviconFrames = faviconFrames.length;
+    const faviconFrameInterval = 200; // Time between frames in milliseconds (adjust for speed)
+
+    // Function to update the favicon
+    function updateFavicon() {
+        const favicon = document.getElementById('dynamic-favicon');
+        if (favicon) {
+            favicon.href = faviconFrames[currentFaviconFrame];
+            currentFaviconFrame = (currentFaviconFrame + 1) % totalFaviconFrames;
+        }
+    }
+
+    // Start the favicon animation when the page loads
+    const faviconTimer = setInterval(updateFavicon, faviconFrameInterval);
+
+    // Optional: Stop favicon animation when "Stop me" button is clicked and reaches the fifth click
+    // Already handled in the "Stop me" button functionality above by stopping the rotating X
+    // If you also want to stop the favicon animation, uncomment the following lines:
+
+    /*
+    stopButton.on('click', function() {
+        if (clickCount === 5) {
+            clearInterval(faviconTimer); // Stop the favicon animation
+        }
+    });
+    */
 });

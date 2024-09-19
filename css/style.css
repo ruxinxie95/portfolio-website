@@ -50,13 +50,16 @@ header {
     align-items: flex-start;
     margin: 0 auto;
     padding: 0 0px;
-    max-width: 900px; /* Make it more responsive */
+    max-width: 900px;
+    /* Make it more responsive */
 }
 
 
 .project {
-    width: calc((100% / 5) - 10px); /* Adjust -20px to whatever margin you wish to use */
-    margin: 5px; /* Adjust based on desired spacing */
+    width: calc((100% / 5) - 10px);
+    /* Adjust -20px to whatever margin you wish to use */
+    margin: 5px;
+    /* Adjust based on desired spacing */
     background-color: #fff;
     overflow: hidden;
     transition: opacity 0.4s ease;
@@ -70,10 +73,112 @@ header {
 }
 
 .project.highlight {
-    border: 2px solid #ff0; /* Highlight border */
+    border: 2px solid #ff0;
+    /* Highlight border */
 }
 
 /* Filter Buttons */
+.filters {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.filter-button {
+    padding: 10px;
+    background: none;
+    border: none;
+    color: #333;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 1em;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.filter-button:hover,
+.filter-button.active {
+    color: #555;
+}
+
+.filter-button.active::after {
+    content: '';
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    bottom: 50%;
+    height: 2px;
+    background-color: #333;
+    width: calc(100% + 10px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .project {
+        width: calc(33.333% - 20px);
+        /* Three items per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .project {
+        width: calc(50% - 20px);
+        /* Two items per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .project {
+        width: calc(100% - 20px);
+        /* One item per row */
+    }
+}
+
+@media (min-width: 768px) {
+    .grid {
+        max-width: 95%;
+        /* Adjust based on your design needs */
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        max-width: 90%;
+        /* This can be tweaked */
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid {
+        max-width: 85%;
+        /* Or any percentage that fits your design */
+    }
+}
+
+/* Existing Global Styles... */
+
+/* Bling Text and Rotating X */
+@keyframes rotateX {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.bling-text {
+    font-size: 2em; /* Adjust size based on your design */
+    font-weight: bold;
+    color: #333; /* Default color */
+}
+
+.bling-text .rotating-x {
+    display: inline-block;
+    animation: rotateX 2s linear infinite; /* Spins continuously in one direction */
+    color: #000000; /* Optional: Different color for emphasis */
+}
+
+/* Filter Buttons Styles */
 .filters {
     text-align: center;
     margin-bottom: 10px;
@@ -106,90 +211,49 @@ header {
     width: calc(100% + 10px);
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .project {
-        width: calc(33.333% - 20px); /* Three items per row */
-    }
+/* ---- Updated "Stop me" Button Styles ---- */
+.stop-me-section {
+    text-align: center;
+    margin-top: 20px;
 }
-
-@media (max-width: 768px) {
-    .project {
-        width: calc(50% - 20px); /* Two items per row */
-    }
-}
-
-@media (max-width: 480px) {
-    .project {
-        width: calc(100% - 20px); /* One item per row */
-    }
-}
-@media (min-width: 768px) {
-    .grid {
-        max-width: 95%; /* Adjust based on your design needs */
-    }
-}
-
-@media (min-width: 1024px) {
-    .grid {
-        max-width: 90%; /* This can be tweaked */
-    }
-}
-
-@media (min-width: 1200px) {
-    .grid {
-        max-width: 85%; /* Or any percentage that fits your design */
-    }
-}
-/* Existing Global Styles... */
-
-/* Bling Text and Rotating X */
-@keyframes rotateX {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.bling-text {
-    font-size: 2em; /* Adjust size based on your design */
-    font-weight: bold;
-    color: #333; /* Default color */
-}
-
-.bling-text .rotating-x {
-    display: inline-block;
-    animation: rotateX 2s linear infinite; /* Spins continuously in one direction */
-    color: #ff00ff; /* Optional: Different color for emphasis */
-}
-
-/* Updated Button Styles */
 #stop-button {
-    padding: 10px 30px;
+    padding: 10px 15px;
     font-size: 1em;
-    margin-top: 0px;
     cursor: pointer;
-    background-color: #ffffff; /* Simplified color */
-    color: white;
-    border: none;
+    background: none;
+    border: 2px solid #333;
     border-radius: 5px;
-    transition: background-color 0.3s, transform 0.1s;
+    color: #333;
+    margin-top: 10px;
+    position: relative;
+    transition: box-shadow 0.3s, transform 0.1s;
+    font-family: inherit;
 }
 
 #stop-button:hover {
-    background-color: #b9b9b9; /* Simplified hover color */
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.7);
 }
 
 #stop-button:active {
     transform: scale(0.95); /* Subtle pressing effect */
 }
 
+
+/* Flash Effect for Message */
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.flash {
+    animation: flash 0.5s;
+}
+
 #message {
     font-size: 1em;
-    margin-top: 10px;
-    color: #7e7e7e;
+    margin-top: 5px;
+    color: #333;
 }
 
 /* Existing Styles... */
