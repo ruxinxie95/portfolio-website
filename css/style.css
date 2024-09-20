@@ -55,7 +55,6 @@ header {
 }
 
 .coordinates-link:hover {
-    text-decoration: underline; /* Show underline on hover */
     color: #555;
 }
 
@@ -177,7 +176,6 @@ header {
 
 .dark-mode .coordinates-link:hover {
     color: #bbb;
-    text-decoration: underline;
 }
 
 /* ------------------- Responsive Design ------------------- */
@@ -219,7 +217,7 @@ header {
 
 /* ------------------- Bling Text and Rotating X ------------------- */
 .bling-text {
-    font-family: 'Courier', monospace;
+    font-family: Courier, monospace;
     font-size: 2em;
     font-weight: bold;
     color: #d30707;
@@ -242,7 +240,8 @@ header {
 }
 
 /* ------------------- Button Styles ------------------- */
-#stop-button {
+/* Removed all button-like styles for #stop-button */
+/* #stop-button {
     padding: 10px 15px;
     font-size: 1em;
     cursor: pointer;
@@ -261,7 +260,7 @@ header {
 
 #stop-button:active {
     transform: scale(0.95);
-}
+} */
 
 /* ------------------- Button Disappearance Effect ------------------- */
 @keyframes blingDisappear {
@@ -354,7 +353,51 @@ a:not(.project-link):hover::after {
     width: 100%; /* Expands the line to cover the entire width of the text */
 }
 
-/* Optional: Change link color on hover for better visibility */
-a:not(.project-link):hover {
-    color: #555; /* Adjust to desired hover color */
+/* ------------------- Animated Strikethrough for "Stop me" Link ------------------- */
+
+#stop-button {
+    position: relative; /* Establishes positioning context for the pseudo-element */
+    color: inherit; /* Ensures the link inherits text color */
+    text-decoration: none; /* Removes underline */
+    cursor: pointer; /* Indicates interactivity */
+}
+
+#stop-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%; /* Centers the strikethrough vertically */
+    width: 0;
+    height: 2px; /* Thickness of the strikethrough line */
+    background-color: currentColor; /* Matches the line color to the text color */
+    transition: width 0.3s ease-in-out; /* Smooth expansion of the line */
+    transform: translateY(-50%); /* Centers the line vertically */
+}
+
+#stop-button:hover::after {
+    width: 100%; /* Expands the line to cover the entire width of the text */
+}
+
+/* ------------------- Animated Strikethrough for Filter Buttons ------------------- */
+
+.filter-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%; /* Centers the strikethrough vertically */
+    width: 0;
+    height: 2px; /* Thickness of the strikethrough line */
+    background-color: currentColor; /* Matches the line color to the text color */
+    transition: width 0.3s ease-in-out; /* Smooth expansion of the line */
+    transform: translateY(-50%); /* Centers the line vertically */
+}
+
+.filter-button:hover::after,
+.filter-button.active::after {
+    width: 100%; /* Expands the line to cover the entire width of the text */
+}
+
+/* Add this to your existing CSS */
+#stop-button {
+    margin: 100px; /* Adjust the value (e.g., 20px) as needed */
 }

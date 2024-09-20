@@ -51,12 +51,17 @@ $(document).ready(function() {
             });
         });
 
-        // Filter items on button click
-        $('.filters').on('click', 'button', function() {
+        // Filter items on button click with strikethrough effect
+        $('.filters').on('click', '.filter-button', function() {
             var filterValue = $(this).attr('data-filter');
             $grid.isotope({ filter: filterValue });
             $('.filter-button').removeClass('active');
             $(this).addClass('active');
+            
+            // Trigger flash effect for strikethrough
+            $(this).addClass('flash').one('animationend', function() {
+                $(this).removeClass('flash');
+            });
         });
     });
 
@@ -117,7 +122,7 @@ $(document).ready(function() {
         }
     });
 
-    // "Stop me" Button Functionality
+    // "Stop me" Link Functionality
     let clickCount = 0;
     const stopButton = $('#stop-button');
     const messageElement = $('#message');
@@ -129,7 +134,8 @@ $(document).ready(function() {
         });
     }
 
-    stopButton.on('click', function() {
+    stopButton.on('click', function(event) {
+        event.preventDefault(); // Prevent default <a> behavior
         clickCount++;
 
         if (clickCount <= 2) {
@@ -140,12 +146,12 @@ $(document).ready(function() {
             messageElement.text("Really?");
             triggerFlash();
         } else if (clickCount === 5) {
-            // Remove the "Stop me" button immediately
+            // Remove the "Stop me" link immediately
             stopButton.remove();
 
             // Update the messageElement with the final message
             messageElement.html(`
-                ruxinx.design@gmail.com | 734-882-8500 | 
+                ruxinx.design@gmail.com | 734088208500 | 
                 <a href="your-cv-link" target="_blank" aria-label="View CV">CV</a> | 
                 <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" aria-label="Visit LinkedIn Profile">LinkedIn</a>
             `);
