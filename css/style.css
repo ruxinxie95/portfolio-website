@@ -1,4 +1,4 @@
-/* Global Reset and Basic Styles */
+/* ------------------- Global Reset and Basic Styles ------------------- */
 *,
 *::before,
 *::after {
@@ -7,12 +7,12 @@
 
 body {
     margin: 0;
-    font-family: Courier, monospace; /* Consolidated font preference */
+    font-family: Courier, monospace;
+    padding: 0;
     transition: background-color 0.5s, color 0.5s; /* Smooth transition for dark mode */
-    padding: 0; /* Ensure no space is around the body */
 }
 
-/* Header Section */
+/* ------------------- Header Styles ------------------- */
 header {
     background-color: #fff;
     padding: 10px;
@@ -37,60 +37,47 @@ header {
     color: #666;
 }
 
-/* Footer Section */
+/* ------------------- Footer Styles ------------------- */
 .site-footer {
     padding: 20px;
     text-align: center;
     background-color: #ffffff;
-    border-top: 0px solid #ddd;
-    transition: background-color 0.5s, color 0.5s;
+    transition: background-color 0.5s, color 0.5s; /* Smooth transition for dark mode */
 }
 
-/* Style for the clickable coordinates link */
+/* Clickable Coordinates Link */
 .coordinates-link {
-    color: #333; /* Default text color */
+    color: #333;
     text-decoration: none;
-    transition: color 0.3s, text-decoration 0.3s;
     font-family: 'Courier New', Courier, monospace;
     font-size: 1em;
+    transition: color 0.3s, text-decoration 0.3s;
 }
 
 .coordinates-link:hover {
     text-decoration: underline; /* Show underline on hover */
-    color: #555; /* Lighter color on hover */
+    color: #555;
 }
 
-/* Project Grid Styles */
+/* ------------------- Project Grid and Item Styles ------------------- */
 .grid {
-    background-color: inherit; /* Inherits the body's background color */
+    background-color: inherit;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    /* max-width: 2000px; */
     max-width: 100vw;
     width: 100%;
-    /* padding: 0 5px;  */
-}
-
-/* Dark mode styles for the grid */
-.dark-mode .grid {
-    background-color: #1e1e1e; /* Matches the dark mode body background color */
 }
 
 .project {
-    background-color: inherit; /* Inherits from the grid or body */
+    background-color: #fff;
     width: calc((100% / 3) - 10px); /* Adjust as needed */
     margin: 5px;
-    background-color: #fff;
     overflow: hidden;
     transition: opacity 0.4s ease;
 }
 
-/* Dark mode project container */
-.dark-mode .project {
-    background-color: #1e1e1e; /* Matches the dark background in dark mode */
-}
 .project img {
     width: 100%;
     height: auto;
@@ -101,7 +88,7 @@ header {
     border: 2px solid #ff0; /* Highlight border */
 }
 
-/* Filter Buttons */
+/* ------------------- Filter Buttons Styles ------------------- */
 .filters {
     text-align: center;
     margin-bottom: 10px;
@@ -131,16 +118,69 @@ header {
     right: -5px;
     bottom: 50%;
     height: 1px;
-    background-color: #333; /* Strike-through line color in light mode */
+    background-color: #333;
     width: calc(100% + 10px);
 }
-/* Dark mode styles for filter button strike-through */
-.dark-mode .filter-button.active::after {
-    background-color: #f0f0f0; /* Light color for the line in dark mode */
+
+/* ------------------- Dark Mode Styles ------------------- */
+.dark-mode {
+    background-color: #000; /* Pure black background */
+    color: #f0f0f0;
 }
 
+.dark-mode .grid,
+.dark-mode .project {
+    background-color: #000;
+}
 
-/* Responsive Design */
+.dark-mode .site-title a,
+.dark-mode .site-description,
+.dark-mode .filter-button,
+.dark-mode .social-icons .icon {
+    color: #f0f0f0;
+}
+
+.dark-mode .filter-button:hover,
+.dark-mode .filter-button.active,
+.dark-mode .social-icons .icon:hover {
+    color: #bbb;
+}
+
+.dark-mode #stop-button {
+    border-color: #f0f0f0;
+    color: #f0f0f0;
+}
+
+.dark-mode #stop-button:hover {
+    box-shadow: 0 0 10px rgba(240, 240, 240, 0.7);
+}
+
+.dark-mode .dark-mode-toggle {
+    color: #f0f0f0;
+}
+
+/* Header and Footer in Dark Mode */
+.dark-mode header,
+.dark-mode .site-footer {
+    background-color: #000;
+    border-bottom-color: #444;
+    color: #f0f0f0;
+}
+
+.dark-mode header .site-title a:hover {
+    color: #bbb;
+}
+
+.dark-mode .coordinates-link {
+    color: #f0f0f0;
+}
+
+.dark-mode .coordinates-link:hover {
+    color: #bbb;
+    text-decoration: underline;
+}
+
+/* ------------------- Responsive Design ------------------- */
 @media (max-width: 1024px) {
     .project {
         width: calc(33.333% - 20px);
@@ -177,7 +217,7 @@ header {
     }
 }
 
-/* Bling Text and Rotating X */
+/* ------------------- Bling Text and Rotating X ------------------- */
 .bling-text {
     font-family: 'Courier', monospace;
     font-size: 2em;
@@ -201,7 +241,7 @@ header {
     }
 }
 
-/* Button Styles */
+/* ------------------- Button Styles ------------------- */
 #stop-button {
     padding: 10px 15px;
     font-size: 1em;
@@ -223,46 +263,18 @@ header {
     transform: scale(0.95);
 }
 
-/* Message Flash Effect */
-@keyframes flash {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-.flash {
-    animation: flash 0.5s;
-}
-
-#message {
-    font-size: 1em;
-    color: rgb(163, 48, 48);
-    margin-top: 15px;
-    position: relative;
-}
-
-/* Button Disappearance Effect */
+/* ------------------- Button Disappearance Effect ------------------- */
 @keyframes blingDisappear {
     0% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.5; transform: scale(1.2); }
     100% { opacity: 0; transform: scale(0); }
 }
 
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-.fade-in {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-}
-
-/* Social Icons */
+/* ------------------- Social Icons ------------------- */
 .social-icons {
     display: inline-flex;
     justify-content: center;
-    margin-top: 10px; /* Add space above the icons */
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -278,75 +290,12 @@ header {
     color: #555;
 }
 
-/* Dark Mode Styles */
-.dark-mode {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
+/* ------------------- Animations ------------------- */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
-.dark-mode .site-title a,
-.dark-mode .site-description,
-.dark-mode .filter-button,
-.dark-mode .social-icons .icon {
-    color: #f0f0f0;
-}
-
-.dark-mode .filter-button:hover,
-.dark-mode .filter-button.active,
-.dark-mode .social-icons .icon:hover {
-    color: #bbb;
-}
-
-.dark-mode #stop-button {
-    border-color: #f0f0f0;
-    color: #f0f0f0;
-}
-
-.dark-mode #stop-button:hover {
-    box-shadow: 0 0 10px rgba(240, 240, 240, 0.7);
-}
-
-.dark-mode-toggle {
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5em;
-    color: #333;
-}
-
-.dark-mode .dark-mode-toggle {
-    color: #f0f0f0;
-}
-
-/* Dark mode styles for the header and footer */
-.dark-mode header,
-.dark-mode .site-footer {
-    background-color: #1e1e1e;
-    border-bottom-color: #444;
-    color: #f0f0f0;
-}
-
-.dark-mode header .site-title a:hover {
-    color: #bbb;
-}
-
-/* Dark mode styles for the coordinates link */
-.dark-mode .coordinates-link {
-    color: #f0f0f0; /* Light color for dark mode */
-}
-
-.dark-mode .coordinates-link:hover {
-    color: #bbb; /* Slightly lighter color when hovered in dark mode */
-    text-decoration: underline; /* Keep the underline effect on hover */
-}
-
-
-body, header, .site-footer, .filter-button, .social-icons .icon, #stop-button, #message {
-    transition: background-color 0.5s, color 0.5s;
-}
-
-/* Keyframes for fade-in with slide-up effect */
 @keyframes fadeInSlideUp {
     from {
         opacity: 0;
@@ -361,11 +310,14 @@ body, header, .site-footer, .filter-button, .social-icons .icon, #stop-button, #
 /* Initial hidden state for images */
 .img-hidden {
     opacity: 0;
-    transform: translateY(20px); /* Initially start slightly below */
+    transform: translateY(20px);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-/* Class to add to images when they're ready to fade in and slide up */
 .fade-in {
-    animation: fadeInSlideUp 1s ease-out forwards; /* 1s duration */
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+
+.flash {
+    animation: flash 0.5s;
 }
