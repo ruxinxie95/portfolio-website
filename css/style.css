@@ -65,11 +65,11 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    max-width: 900px;
+    max-width: 2000px;
 }
 
 .project {
-    width: calc((100% / 4) - 10px); /* Adjust as needed */
+    width: calc((100% / 3) - 10px); /* Adjust as needed */
     margin: 5px;
     background-color: #fff;
     overflow: hidden;
@@ -329,4 +329,20 @@ header {
 
 body, header, .site-footer, .filter-button, .social-icons .icon, #stop-button, #message {
     transition: background-color 0.5s, color 0.5s;
+}
+/* Initial hidden state for images */
+.img-hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Class to add to images when they're ready to fade in */
+.fade-in {
+    animation: fadeIn 1s ease-out 0.2s forwards; /* 1s duration, 1s delay */
 }
