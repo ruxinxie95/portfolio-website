@@ -55,23 +55,7 @@ $(document).ready(function() {
             $(this).addClass('active');
         });
     });
-    // Enable dark mode by default
-    $('body').addClass('dark-mode');
-
-    // Change the icon to the sun since the page starts in dark mode
-    $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun');
-
-    // Toggle dark mode on click
-    $('.dark-mode-toggle').on('click', function() {
-        $('body').toggleClass('dark-mode');
-
-        // Change the icon based on the current mode
-        if ($('body').hasClass('dark-mode')) {
-            $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun'); // Sun for dark mode
-        } else {
-            $('.dark-mode-toggle i').removeClass('fa-sun').addClass('fa-moon'); // Moon for light mode
-        }
-    });
+    
     // "Stop me" Button Functionality
     let clickCount = 0;
     const stopButton = $('#stop-button');
