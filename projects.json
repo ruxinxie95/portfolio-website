@@ -60,14 +60,70 @@
         "title": "Timber Installation Project3",
         "categories": ["Installation"],
         "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
-        "cover_image": "projects/project4/images/cover.jpg",
+        "cover_image": "projects/project5/images/cover.jpg",
         "images": [
-            "projects/project4/images/image1.jpg",
+            "projects/project5/images/image1.jpg",
             "projects/project4/images/image2.jpg",
             "projects/project4/images/image3.jpg"
         ],
         "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
         "highlight": false
+    },
+    {
+        "id": "6",
+        "title": "Timber Installation Project3",
+        "categories": ["Installation"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project6/images/cover.jpg",
+        "images": [
+            "projects/project6/images/image1.jpg",
+            "projects/project4/images/image2.jpg",
+            "projects/project4/images/image3.jpg"
+        ],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
+        "highlight": true
+    },
+    {
+        "id": "7",
+        "title": "Timber Installation Project3",
+        "categories": ["Installation"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project7/images/cover.jpg",
+        "images": [
+            "projects/project7/images/image1.jpg",
+            "projects/project4/images/image2.jpg",
+            "projects/project4/images/image3.jpg"
+        ],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
+        "highlight": true
+    },
+    {
+        "id": "8",
+        "title": "Timber Installation Project3",
+        "categories": ["Installation"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project8/images/cover.jpg",
+        "images": [
+            "projects/project7/images/image1.jpg",
+            "projects/project4/images/image2.jpg",
+            "projects/project4/images/image3.jpg"
+        ],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
+        "highlight": true
+    },
+    {
+        "id": "9",
+        "title": "Bermuda",
+        "categories": ["Architecture"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project9/images/cover.jpg",
+        "images": [
+            "projects/project7/images/image1.jpg",
+            "projects/project4/images/image2.jpg",
+            "projects/project4/images/image3.jpg"
+        ],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
+        "highlight": true
     }
     
 

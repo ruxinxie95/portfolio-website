@@ -215,11 +215,7 @@ header {
     width: calc(100% + 10px);
 }
 
-/* ---- Updated "Stop me" Button Styles ---- */
-.stop-me-section {
-    text-align: center;
-    margin-top: 20px;
-}
+
 #stop-button {
     padding: 10px 15px;
     font-size: 1em;
@@ -257,7 +253,61 @@ header {
 #message {
     font-size: 1em;
     margin-top: 5px;
-    color: #333;
+    color: rgb(163, 48, 48);
 }
 
-/* Existing Styles... */
+#message {
+    position: relative;
+    margin-top: 15px; /* Space between the icons and the message */
+}
+
+
+#message span {
+    white-space: nowrap; /* Prevents the message from breaking into multiple lines */
+}
+
+
+/* Bling-like effect for button disappearance */
+@keyframes blingDisappear {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2); /* Slightly enlarge */
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0); /* Shrink to nothing */
+    }
+}
+/* Fade-in effect */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* 1-second fade-in animation */
+}
+
+.social-icons {
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: 10px; /* Adds space between the icons and the message */
+}
+
+.social-icons .icon {
+    margin: 0 10px;
+    font-size: 1.5em; /* Adjust icon size */
+    color: #898989;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-icons .icon:hover {
+    color: #555; /* Change color on hover */
+}
+
