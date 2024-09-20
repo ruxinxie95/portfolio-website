@@ -116,4 +116,69 @@ $(document).ready(function() {
             $('.dark-mode-toggle i').removeClass('fa-sun').addClass('fa-moon'); // Switch back to moon icon for dark mode
         }
     });
+
+    // "Stop me" Button Functionality
+    let clickCount = 0;
+    const stopButton = $('#stop-button');
+    const messageElement = $('#message');
+
+    stopButton.on('click', function() {
+        clickCount++;
+
+        function triggerFlash() {
+            messageElement.addClass('flash');
+            messageElement.on('animationend', function() {
+                messageElement.removeClass('flash');
+            });
+        }
+
+        if (clickCount <= 2) {
+            messageElement.text("No, you can't.");
+            triggerFlash();
+            if (clickCount === 2) stopButton.text("Stop me again");
+        } else if (clickCount < 5) {
+            messageElement.text("Really?");
+            triggerFlash();
+        } else if (clickCount === 5) {
+            // Apply the magic bling effect to the button
+            stopButton.addClass('bling-disappear');
+
+            // Set a timeout to remove the button and show icons with the message at the same time
+            setTimeout(function() {
+                stopButton.remove(); // Completely remove the button from the DOM
+
+                // Add the social icons above the message
+                $('.stop-me-section').prepend(`
+                    <div class="social-icons fade-in">
+                        <a href="your-cv-link" target="_blank" class="icon" title="CV">
+                            <i class="fas fa-file-alt"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" class="icon" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.behance.net/ruxinqq" target="_blank" class="icon" title="Behance">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                    </div>
+                `);
+
+                // Keep the message visible and ensure it stays in place
+                messageElement.html(`
+                    Let's talk! 
+                    <span>ruxinx.design@gmail.com | 7348828500</span>
+                `);
+
+                // Apply fade-in to both icons and message
+                $('.social-icons, #message').addClass('fade-in');
+            }, 1000); // Timeout to match the bling animation
+        }
+    });
+
+    // Favicon Animation Functionality
+    const faviconFrames = ['icons/favicon1.png', 'icons/favicon2.png', 'icons/favicon3.png'];
+    let currentFaviconFrame = 0;
+    const faviconTimer = setInterval(function() {
+        $('#dynamic-favicon').attr('href', faviconFrames[currentFaviconFrame]);
+        currentFaviconFrame = (currentFaviconFrame + 1) % faviconFrames.length;
+    }, 200);
 });
