@@ -23,6 +23,13 @@ $(document).ready(function() {
         // Append each project to the grid
         $.each(data, function(index, project) {
             createProjectArticle(project, index);
+
+            // Add categories to the filter array
+            project.categories.forEach(function(category) {
+                if (!categories.includes(category)) {
+                    categories.push(category);
+                }
+            });
         });
 
         // Initialize category filters
@@ -44,7 +51,7 @@ $(document).ready(function() {
             });
         });
 
-        // Filtering function
+        // Filter items on button click
         $('.filters').on('click', 'button', function() {
             var filterValue = $(this).attr('data-filter');
             $grid.isotope({ filter: filterValue });
