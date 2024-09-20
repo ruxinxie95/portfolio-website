@@ -124,6 +124,20 @@
         ],
         "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
         "highlight": true
+    },
+    {
+        "id": "10",
+        "title": "Generative Design",
+        "categories": ["Digital Fabrication"],
+        "description": "A timber structure designed and fabricated with a focus on sustainable practices.",
+        "cover_image": "projects/project10/images/cover.jpg",
+        "images": [
+            "projects/project7/images/image1.jpg",
+            "projects/project4/images/image2.jpg",
+            "projects/project4/images/image3.jpg"
+        ],
+        "tags": ["Sustainability", "Timber Construction", "Robotic Fabrication"],
+        "highlight": true
     }
     
 
