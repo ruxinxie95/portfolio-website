@@ -274,8 +274,8 @@ header {
 .social-icons {
     display: inline-flex;
     justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .social-icons .icon {
@@ -318,6 +318,43 @@ header {
     animation: fadeInSlideUp 1s ease-out forwards;
 }
 
+/* Flash Animation */
+@keyframes flashAnimation {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
 .flash {
-    animation: flash 0.5s;
+    animation: flashAnimation 0.3s ease-in-out;
+}
+
+/* ------------------- Animated Strikethrough for All Links (Except .project-link) ------------------- */
+
+a:not(.project-link) {
+    position: relative; /* Establishes a positioning context for the pseudo-element */
+    color: inherit; /* Ensures links inherit the text color */
+    text-decoration: none; /* Removes the default underline */
+    transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+a:not(.project-link)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%; /* Positions the line vertically at the middle of the text */
+    width: 0;
+    height: 2px; /* Thickness of the strikethrough line */
+    background-color: currentColor; /* Matches the line color to the text color */
+    transition: width 0.3s ease-in-out; /* Smooth expansion of the line */
+    transform: translateY(-50%); /* Centers the line vertically */
+}
+
+a:not(.project-link):hover::after {
+    width: 100%; /* Expands the line to cover the entire width of the text */
+}
+
+/* Optional: Change link color on hover for better visibility */
+a:not(.project-link):hover {
+    color: #555; /* Adjust to desired hover color */
 }

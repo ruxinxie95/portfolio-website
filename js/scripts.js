@@ -122,15 +122,15 @@ $(document).ready(function() {
     const stopButton = $('#stop-button');
     const messageElement = $('#message');
 
+    // Improved triggerFlash function to prevent multiple event listeners
+    function triggerFlash() {
+        messageElement.addClass('flash').one('animationend', function() {
+            messageElement.removeClass('flash');
+        });
+    }
+
     stopButton.on('click', function() {
         clickCount++;
-
-        function triggerFlash() {
-            messageElement.addClass('flash');
-            messageElement.on('animationend', function() {
-                messageElement.removeClass('flash');
-            });
-        }
 
         if (clickCount <= 2) {
             messageElement.text("No, you can't.");
@@ -140,37 +140,18 @@ $(document).ready(function() {
             messageElement.text("Really?");
             triggerFlash();
         } else if (clickCount === 5) {
-            // Apply the magic bling effect to the button
-            stopButton.addClass('bling-disappear');
+            // Remove the "Stop me" button immediately
+            stopButton.remove();
 
-            // Set a timeout to remove the button and show icons with the message at the same time
-            setTimeout(function() {
-                stopButton.remove(); // Completely remove the button from the DOM
-
-                // Add the social icons above the message
-                $('.stop-me-section').prepend(`
-                    <div class="social-icons fade-in">
-                        <a href="your-cv-link" target="_blank" class="icon" title="CV">
-                            <i class="fas fa-file-alt"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" class="icon" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://www.behance.net/ruxinqq" target="_blank" class="icon" title="Behance">
-                            <i class="fab fa-behance"></i>
-                        </a>
-                    </div>
-                `);
-
-                // Keep the message visible and ensure it stays in place
-                messageElement.html(`
-                    Let's talk! 
-                    <span>ruxinx.design@gmail.com | 7348828500</span>
-                `);
-
-                // Apply fade-in to both icons and message
-                $('.social-icons, #message').addClass('fade-in');
-            }, 1000); // Timeout to match the bling animation
+            // Update the messageElement with the final message
+            messageElement.html(`
+                ruxinx.design@gmail.com | 734-882-8500 | 
+                <a href="your-cv-link" target="_blank" aria-label="View CV">CV</a> | 
+                <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" aria-label="Visit LinkedIn Profile">LinkedIn</a>
+            `);
+            
+            // Trigger the flash effect for the final message
+            triggerFlash();
         }
     });
 
