@@ -1,10 +1,11 @@
+
 $(document).ready(function() {
     // Update the footer with the current year
     $('#current-year').text(new Date().getFullYear());
 
-    // Apply Dark Mode on Page Load (handled by main.js, so no need to duplicate here)
+    // Apply Dark Mode on Page Load (Handled by main.js)
 
-    // "Stop me" Button Functionality is handled by main.js, so no need to duplicate here
+    // "Stop me" Button Functionality (Handled by main.js)
 
     // Function to get query parameters
     function getQueryParam(param) {
@@ -48,8 +49,12 @@ $(document).ready(function() {
 
         // Initialize lightbox after images are loaded
         imagesContainer.imagesLoaded(function() {
-            initializeLightbox();
+            // Remove the img-hidden class from all images once they are loaded
+            imagesContainer.find('img').removeClass('img-hidden');
+            initializeLightbox(); // Initialize the lightbox after the images are shown
         });
+        
+
     }).fail(function() {
         $('#project-title').text('Error');
         $('#project-description').text('Failed to load project data.');
