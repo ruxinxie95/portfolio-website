@@ -141,7 +141,10 @@ $(document).ready(function() {
     const messageElement = $('#message');
 
     function updateMessage() {
-        if (clickCount <= 2) {
+        if (clickCount === 0) {
+            messageElement.text(""); // No message on initial load
+            stopButton.text("Stop me"); // Ensure button text is default
+        } else if (clickCount <= 2) {
             messageElement.text("No, you can't.");
             if (clickCount === 2) stopButton.text("Stop me again");
         } else if (clickCount < 5) {

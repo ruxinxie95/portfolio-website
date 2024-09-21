@@ -30,6 +30,39 @@ $(document).ready(function() {
         }
     });
 
+    // "Stop me" Link Functionality and Persistence with sessionStorage
+    let clickCount = sessionStorage.getItem('clickCount') ? parseInt(sessionStorage.getItem('clickCount')) : 0;
+    const stopButton = $('#stop-button');
+    const messageElement = $('#message');
+
+    function updateMessage() {
+        if (clickCount === 0) {
+            messageElement.text(""); // No message on initial load
+            stopButton.text("Stop me"); // Ensure button text is default
+        } else if (clickCount <= 2) {
+            messageElement.text("No, you can't.");
+            if (clickCount === 2) stopButton.text("Stop me again");
+        } else if (clickCount < 5) {
+            messageElement.text("Really?");
+        } else if (clickCount === 5) {
+            stopButton.remove();
+            messageElement.html(`
+                ruxinx.design@gmail.com | 734-882-8500 | 
+                <a href="your-cv-link" target="_blank" aria-label="View CV">CV</a> | 
+                <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" aria-label="Visit LinkedIn Profile">LinkedIn</a>
+            `);
+        }
+    }
+    
+    updateMessage();  // Update the message immediately based on stored click count
+
+    stopButton.on('click', function(event) {
+        event.preventDefault(); // Prevent default <a> behavior
+        clickCount++;
+        sessionStorage.setItem('clickCount', clickCount); // Save click count to sessionStorage
+        updateMessage();
+    });
+
     // Function to get query parameters
     function getQueryParam(param) {
         let urlParams = new URLSearchParams(window.location.search);
@@ -147,4 +180,12 @@ $(document).ready(function() {
             }
         });
     }
+
+    // Favicon Animation Functionality
+    const faviconFrames = ['icons/favicon1.png', 'icons/favicon2.png', 'icons/favicon3.png'];
+    let currentFaviconFrame = 0;
+    const faviconTimer = setInterval(function() {
+        $('#dynamic-favicon').attr('href', faviconFrames[currentFaviconFrame]);
+        currentFaviconFrame = (currentFaviconFrame + 1) % faviconFrames.length;
+    }, 200);
 });
