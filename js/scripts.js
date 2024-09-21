@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Load data from JSON
+    // Load data from JSON (homepage-specific code)
     $.getJSON('projects.json', function(data) {
         var $grid = $('.grid');
         var categories = [];
@@ -65,7 +65,7 @@ $(document).ready(function() {
         });
     });
 
-    // Intersection Observer setup
+    // Intersection Observer setup (homepage-specific code)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -76,7 +76,7 @@ $(document).ready(function() {
             }
         });
     }, {
-        threshold: 0.5
+        threshold: 0.25
     });
 
     // Function to observe an image
@@ -104,61 +104,65 @@ $(document).ready(function() {
         });
     });
 
-    // Dark Mode Toggle
-    $('.stop-me-section').append(`
-        <div class="dark-mode-toggle">
-            <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
-        </div>
-    `);
+    // Dark Mode Toggle and Persistence with localStorage
 
+    // First, ensure the toggle is added to the DOM
+    if ($('.stop-me-section .dark-mode-toggle').length === 0) {
+        $('.stop-me-section').append(`
+            <div class="dark-mode-toggle">
+                <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+            </div>
+        `);
+    }
+
+    // Apply dark mode if previously set in localStorage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        $('body').addClass('dark-mode');
+        $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun');
+    }
+
+    // Toggle dark mode on click
     $('.dark-mode-toggle').on('click', function() {
         $('body').toggleClass('dark-mode'); // Toggle the dark-mode class on body
 
         // Optionally change the icon based on mode
         if ($('body').hasClass('dark-mode')) {
-            $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun'); // Switch to sun icon for light mode
+            $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun');
+            localStorage.setItem('darkMode', 'enabled'); // Save dark mode state to localStorage
         } else {
-            $('.dark-mode-toggle i').removeClass('fa-sun').addClass('fa-moon'); // Switch back to moon icon for dark mode
+            $('.dark-mode-toggle i').removeClass('fa-sun').addClass('fa-moon');
+            localStorage.setItem('darkMode', 'disabled'); // Save dark mode state to localStorage
         }
     });
 
-    // "Stop me" Link Functionality
-    let clickCount = 0;
+    // "Stop me" Link Functionality and Persistence with sessionStorage
+    let clickCount = sessionStorage.getItem('clickCount') ? parseInt(sessionStorage.getItem('clickCount')) : 0;
     const stopButton = $('#stop-button');
     const messageElement = $('#message');
 
-    // Improved triggerFlash function to prevent multiple event listeners
-    function triggerFlash() {
-        messageElement.addClass('flash').one('animationend', function() {
-            messageElement.removeClass('flash');
-        });
-    }
-
-    stopButton.on('click', function(event) {
-        event.preventDefault(); // Prevent default <a> behavior
-        clickCount++;
-
+    function updateMessage() {
         if (clickCount <= 2) {
             messageElement.text("No, you can't.");
-            triggerFlash();
             if (clickCount === 2) stopButton.text("Stop me again");
         } else if (clickCount < 5) {
             messageElement.text("Really?");
-            triggerFlash();
         } else if (clickCount === 5) {
-            // Remove the "Stop me" link immediately
             stopButton.remove();
-
-            // Update the messageElement with the final message
             messageElement.html(`
                 ruxinx.design@gmail.com | 734-882-8500 | 
                 <a href="your-cv-link" target="_blank" aria-label="View CV">CV</a> | 
                 <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" aria-label="Visit LinkedIn Profile">LinkedIn</a>
             `);
-            
-            // Trigger the flash effect for the final message
-            triggerFlash();
         }
+    }
+    
+    updateMessage();  // Update the message immediately based on stored click count
+
+    stopButton.on('click', function(event) {
+        event.preventDefault(); // Prevent default <a> behavior
+        clickCount++;
+        sessionStorage.setItem('clickCount', clickCount); // Save click count to sessionStorage
+        updateMessage();
     });
 
     // Favicon Animation Functionality
