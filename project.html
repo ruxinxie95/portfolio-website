@@ -7,15 +7,24 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/project-style.css">
     
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Include Isotope -->
-    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    <!-- Include imagesLoaded -->
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <!-- Pre-Apply Dark Mode to Prevent Flicker -->
+    <script>
+        (function() {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+    </script>
 
     <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <!-- Include Isotope -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js" defer></script>
+    <!-- Include imagesLoaded -->
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js" defer></script>
 </head>
 <body>
     <!-- Header Section -->
@@ -30,7 +39,7 @@
             <div class="stop-me-section">
                 <a href="#" id="stop-button">Stop me</a>
                 <p id="message"></p> <!-- Message container -->
-
+                
                 <!-- Dark Mode Toggle -->
                 <div class="dark-mode-toggle">
                     <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
@@ -68,7 +77,9 @@
         </div>
     </footer>
 
-    <!-- Link to External JavaScript File -->
-    <script src="js/project.js"></script> <!-- Link to the new project-specific JavaScript file -->
+    <!-- Link to Common JavaScript File -->
+    <script src="js/main.js" defer></script>
+    <!-- Link to Project-specific JavaScript File -->
+    <script src="js/project.js" defer></script>
 </body>
 </html>
