@@ -1,3 +1,70 @@
+    /* Ensure header and description are fixed */
+    .site-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .site-description {
+        margin-top: 10px;
+        color: #666;
+        font-size: 16px;
+    }
+
+    /* Project Content */
+    .project-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start; /* Align items to the top */
+        margin-top: 200px; /* Adjusted from 200px to 120px */
+        padding: 20px;
+        height: calc(100vh - 120px); /* Adjusted to match the new margin-top */
+        overflow: hidden; /* Hide overflow to manage scrolling */
+    }
+
+
+/* Project Info - Simplified */
+.project-info {
+    width: 40%;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+    font-family: 'Courier', monospace; /* Use Courier font */
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff; /* Default text color for light mode */
+    background-color: transparent; /* Remove background for simplicity */
+    padding: 0; /* Remove padding for simplicity */
+    border: none; /* No border for a clean look */
+    box-shadow: none; /* Remove shadow for simplicity */
+}
+
+.project-info.dark-mode {
+    color: var(--header-filter-color); /* Change text to header/filter color in dark mode */
+}
+
+/* Dark mode toggle for body */
+body.dark-mode .project-info {
+    color: var(--header-filter-color); /* Use a color variable for header/filter color */
+}
+
+/* Add a simple hover effect for links in the description */
+.project-info a {
+    color: #ff6f61; /* Accent color for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.project-info a:hover {
+    color: #ff886f; /* Lighter accent on hover */
+    text-decoration: underline;
+}
+
 /* Ensure header and description are fixed */
 .site-header {
     position: fixed;
@@ -10,47 +77,27 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.site-description {
-    margin-top: 10px;
-    color: #666;
-    font-size: 16px;
-}
-
 /* Project Content */
 .project-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Align items to the top */
-    margin-top: 200px; /* Adjusted from 200px to 120px */
+    align-items: flex-start;
+    margin-top: 200px; /* Adjusted */
     padding: 20px;
-    height: calc(100vh - 120px); /* Adjusted to match the new margin-top */
-    overflow: hidden; /* Hide overflow to manage scrolling */
-}
-
-
-/* Project Info */
-.project-info {
-    width: 40%; /* Set the description area width */
-    position: sticky; /* Make it sticky within the container */
-    top: 20px; /* Distance from the top of the container */
-    align-self: flex-start; /* Ensure it sticks to the top */
-    background-color: #f9f9f9; /* Optional: Background for better readability */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    height: fit-content; /* Adjust height based on content */
+    height: calc(100vh - 120px);
+    overflow: hidden;
 }
 
 /* Project Images */
 .project-images {
     width: 50%;
     margin-left: 20px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    height: 100%; /* Ensure it takes full height for scrolling */
-    padding-right: 10px; /* Optional: Add some padding for scrollbar */
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 10px;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Gap between images */
+    gap: 20px;
 }
 
 /* Style for project images */
@@ -58,7 +105,7 @@
     width: 100%;
     height: auto;
     border-radius: 8px;
-    cursor: pointer; /* Indicate that images are clickable */
+    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -67,124 +114,124 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Close button */
-.close-project {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-/* Zoom effect when opening a project */
-.transition-fade {
-    transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-.transition-fade.zoomed {
-    transform: scale(1.05);
-    opacity: 1;
-}
-
-/* Lightbox Styles */
-
-/* Lightbox Container */
-.lightbox {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1001; /* Above other elements */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-}
-
-/* Lightbox Container Active State */
-.lightbox.active {
-    display: flex; /* Show the lightbox as a flex container */
-    justify-content: center; /* Horizontal centering */
-    align-items: center; /* Vertical centering */
-}
-
-/* Lightbox Content (Image) */
-.lightbox-content {
-    max-width: 90%; /* Ensure the image doesn't overflow horizontally */
-    max-height: 90%; /* Ensure the image doesn't overflow vertically */
-    border-radius: 8px;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-/* Close Button in Lightbox */
-.lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.lightbox-close:hover,
-.lightbox-close:focus {
-    color: #bbb;
-    text-decoration: none;
-}
-
-/* Lightbox Navigation Buttons */
-.lightbox-prev,
-.lightbox-next {
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -50px;
-    color: white;
-    font-weight: bold;
-    font-size: 30px;
-    cursor: pointer;
-    user-select: none;
-    transition: color 0.3s;
-    border-radius: 0 3px 3px 0;
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-.lightbox-prev {
-    left: 10px;
-    border-radius: 3px 0 0 3px;
-}
-
-.lightbox-next {
-    right: 10px;
-    border-radius: 3px 0 0 3px;
-}
-
-.lightbox-prev:hover,
-.lightbox-next:hover {
-    color: #bbb;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-/* Animation */
-@keyframes zoom {
-    from {transform: scale(0)}
-    to {transform: scale(1)}
-}
-
-/* Lightbox Responsive */
-@media only screen and (max-width: 700px){
-    .lightbox-content {
-        width: 100%;
-        max-width: none; /* Remove max-width for smaller screens */
-        max-height: 100%; /* Allow full height on small screens */
+    /* Close button */
+    .close-project {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1000;
     }
-}
+
+    /* Zoom effect when opening a project */
+    .transition-fade {
+        transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .transition-fade.zoomed {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    /* Lightbox Styles */
+
+    /* Lightbox Container */
+    .lightbox {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1001; /* Above other elements */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    }
+
+    /* Lightbox Container Active State */
+    .lightbox.active {
+        display: flex; /* Show the lightbox as a flex container */
+        justify-content: center; /* Horizontal centering */
+        align-items: center; /* Vertical centering */
+    }
+
+    /* Lightbox Content (Image) */
+    .lightbox-content {
+        max-width: 90%; /* Ensure the image doesn't overflow horizontally */
+        max-height: 90%; /* Ensure the image doesn't overflow vertically */
+        border-radius: 8px;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Close Button in Lightbox */
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-close:focus {
+        color: #bbb;
+        text-decoration: none;
+    }
+
+    /* Lightbox Navigation Buttons */
+    .lightbox-prev,
+    .lightbox-next {
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+        cursor: pointer;
+        user-select: none;
+        transition: color 0.3s;
+        border-radius: 0 3px 3px 0;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .lightbox-prev {
+        left: 10px;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .lightbox-next {
+        right: 10px;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+        color: #bbb;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Animation */
+    @keyframes zoom {
+        from {transform: scale(0)}
+        to {transform: scale(1)}
+    }
+
+    /* Lightbox Responsive */
+    @media only screen and (max-width: 700px){
+        .lightbox-content {
+            width: 100%;
+            max-width: none; /* Remove max-width for smaller screens */
+            max-height: 100%; /* Allow full height on small screens */
+        }
+    }
 
