@@ -150,9 +150,7 @@ header {
     color: #f0f0f0;
 }
 
-.dark-mode #stop-button:hover {
-    box-shadow: 0 0 10px rgba(240, 240, 240, 0.7);
-}
+
 
 .dark-mode .dark-mode-toggle {
     color: #f0f0f0;
@@ -360,6 +358,13 @@ a:not(.project-link):hover::after {
     color: inherit; /* Ensures the link inherits text color */
     text-decoration: none; /* Removes underline */
     cursor: pointer; /* Indicates interactivity */
+    margin-top: 200px !important; /* Force it to apply */
+}
+
+.stop-me-section {
+    padding-top: 0px; /* Adds space at the top to allow for button movement */
+    padding-bottom: 0px; /* Ensures the section can contain the button */
+    text-align: center; /* Centers the button horizontally */
 }
 
 #stop-button::after {

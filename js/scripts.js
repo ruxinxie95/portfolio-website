@@ -105,7 +105,7 @@ $(document).ready(function() {
     });
 
     // Dark Mode Toggle
-    $('.stop-me-section').prepend(`
+    $('.stop-me-section').append(`
         <div class="dark-mode-toggle">
             <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
         </div>
@@ -151,7 +151,7 @@ $(document).ready(function() {
 
             // Update the messageElement with the final message
             messageElement.html(`
-                ruxinx.design@gmail.com | 734088208500 | 
+                ruxinx.design@gmail.com | 734-882-8500 | 
                 <a href="your-cv-link" target="_blank" aria-label="View CV">CV</a> | 
                 <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" aria-label="Visit LinkedIn Profile">LinkedIn</a>
             `);
