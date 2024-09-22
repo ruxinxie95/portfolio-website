@@ -14,7 +14,8 @@ template = {
     "url": "",
     "short_description": "",
     "full_description": "",
-    "team_credit": ""
+    "team_credit": "",
+    "categories": []  # Default categories field
 }
 
 # List of fields to remove from project.json files
@@ -24,7 +25,7 @@ fields_to_remove = ["images"]  # Add any fields you want to remove here
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Set the path to the 'projects' folder relative to the script's location
-projects_dir = os.path.join(script_dir, 'projects')
+projects_dir = os.path.join(script_dir, 'public', 'projects')  # Updated path to match your folder structure
 
 # Function to update or create project.json files
 def update_project_json(project_folder):
@@ -43,6 +44,10 @@ def update_project_json(project_folder):
     for key, value in template.items():
         if key not in project_data:
             project_data[key] = value  # Add the missing key from the template
+
+    # Ensure categories are present or set to a default value
+    if not project_data.get('categories'):
+        project_data['categories'] = ["architecture", "digital fabrication"]  # Add default categories if none are specified
 
     # Remove specified fields if they exist in project_data
     for field in fields_to_remove:

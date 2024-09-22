@@ -1,17 +1,28 @@
 $(document).ready(function() {
-    // Load data from JSON (homepage-specific code)
-    $.getJSON('projects.json', function(data) {
-        var $grid = $('.grid');
-        var categories = [];
+    var $grid = $('.grid');
+    var categories = [];
 
-        // Function to create project articles with images and hover info
-        function createProjectArticle(project, index) {
+    // Function to fetch and create project articles with images and hover info
+    function fetchAndCreateProjectArticle(projectId) {
+        $.getJSON(`projects/project${projectId}/project.json`, function(project) {
+            if (!project.categories) {
+                console.error(`Project ${projectId} is missing 'categories' data.`);
+                return;
+            }
+
             var categoryClasses = project.categories.map(cat => cat.toLowerCase().replace(/\s+/g, '-')).join(' ');
+
+            if (!$grid.length) {
+                console.error('No grid element found.');
+                return;
+            }
+
+            var coverImagePath = `projects/project${projectId}/images/cover.jpg`; // Path to cover image
 
             var $article = $(`
                 <article class="project ${categoryClasses} project${project.id}">
                     <a href="project.html?id=${project.id}" class="project-link">
-                        <img src="${project.cover_image}" alt="${project.title}" class="wp-post-image img-hidden">
+                        <img src="${coverImagePath}" alt="${project.title}" class="wp-post-image img-hidden">
                         <div class="project-info">
                             <h2>${project.title}</h2>
                             <p>${project.year} | ${project.location}</p>
@@ -19,30 +30,33 @@ $(document).ready(function() {
                     </a>
                 </article>
             `);
-            
+
             $grid.append($article);
             observeImage($article.find('img'));  // Add observer for every image
-        }
 
-        // Append each project to the grid
-        $.each(data, function(index, project) {
-            createProjectArticle(project, index);
-
-            // Add categories to the filter array
+            // Handle categories for filtering
             project.categories.forEach(function(category) {
                 if (!categories.includes(category)) {
                     categories.push(category);
                 }
             });
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Failed to fetch project data:', textStatus, errorThrown);
         });
+    }
 
-        // Initialize category filters
+    // Assuming a known number of projects, modify accordingly if dynamic
+    for (let i = 1; i <= 20; i++) {
+        fetchAndCreateProjectArticle(i);
+    }
+
+    // Once all projects are likely loaded, set up the filters
+    $(document).ajaxStop(function() {
         categories.forEach(function(category) {
             var categoryClass = category.toLowerCase().replace(/\s+/g, '-');
             $('.filters').append(`<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`);
         });
 
-        // Isotope grid setup
         $grid.imagesLoaded().done(function() {
             $grid.isotope({
                 itemSelector: '.project',
@@ -61,7 +75,7 @@ $(document).ready(function() {
             $grid.isotope({ filter: filterValue });
             $('.filter-button').removeClass('active');
             $(this).addClass('active');
-            
+
             // Trigger flash effect for strikethrough
             $(this).addClass('flash').one('animationend', function() {
                 $(this).removeClass('flash');
@@ -107,6 +121,7 @@ $(document).ready(function() {
             }
         });
     });
+
     // Favicon Animation Functionality
     const faviconFrames = ['icons/favicon1.png', 'icons/favicon2.png', 'icons/favicon3.png'];
     let currentFaviconFrame = 0;

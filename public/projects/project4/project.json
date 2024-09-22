@@ -10,5 +10,9 @@
     "url": "",
     "short_description": "",
     "full_description": "",
-    "team_credit": ""
+    "team_credit": "",
+    "categories": [
+        "architecture",
+        "digital fabrication"
+    ]
 }
