@@ -103,6 +103,7 @@ header {
     font-size: 1em;
     position: relative;
     transition: color 0.3s;
+    font-family: Courier, monospace; /* Added Courier font */
 }
 
 .filter-button:hover,
