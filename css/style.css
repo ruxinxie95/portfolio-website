@@ -410,3 +410,44 @@ a:not(.project-link):hover::after {
 #stop-button {
     margin: 100px; /* Adjust the value (e.g., 20px) as needed */
 }
+
+
+/* ------------------- Project Hover Effect Styles ------------------- */
+.project {
+    position: relative;
+    overflow: hidden;
+}
+
+.project img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth image zoom on hover */
+}
+
+.project:hover img {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.project-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(20, 20, 20); /* Semi-transparent overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: Courier, monospace;
+    font-size: 0.8em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    padding: 20px;
+}
+
+.project:hover .project-info {
+    opacity: 1; /* Reveal project info on hover */
+}

@@ -4,14 +4,18 @@ $(document).ready(function() {
         var $grid = $('.grid');
         var categories = [];
 
-        // Function to create project articles with images
+        // Function to create project articles with images and hover info
         function createProjectArticle(project, index) {
             var categoryClasses = project.categories.map(cat => cat.toLowerCase().replace(/\s+/g, '-')).join(' ');
 
             var $article = $(`
-                <article class="project ${categoryClasses}">
+                <article class="project ${categoryClasses} project${project.id}">
                     <a href="project.html?id=${project.id}" class="project-link">
                         <img src="${project.cover_image}" alt="${project.title}" class="wp-post-image img-hidden">
+                        <div class="project-info">
+                            <h2>${project.title}</h2>
+                            <p>${project.year} | ${project.location}</p>
+                        </div>
                     </a>
                 </article>
             `);
@@ -103,4 +107,11 @@ $(document).ready(function() {
             }
         });
     });
+    // Favicon Animation Functionality
+    const faviconFrames = ['icons/favicon1.png', 'icons/favicon2.png', 'icons/favicon3.png'];
+    let currentFaviconFrame = 0;
+    const faviconTimer = setInterval(function() {
+        $('#dynamic-favicon').attr('href', faviconFrames[currentFaviconFrame]);
+        currentFaviconFrame = (currentFaviconFrame + 1) % faviconFrames.length;
+    }, 200);
 });
