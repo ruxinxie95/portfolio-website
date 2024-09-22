@@ -1,15 +1,18 @@
 {
   "name": "portfolio-website",
   "version": "1.0.0",
+  "description": "Ruxin Xie's Portfolio Website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "vercel dev",
+    "build": "echo 'No build step required'",
+    "projecttemp": "python projecttemp.py"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "express": "^4.21.0"
+    
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.x"
   }
 }
