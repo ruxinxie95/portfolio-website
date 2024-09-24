@@ -95,7 +95,7 @@ $(document).ready(function() {
     });
 
     // Favicon Animation Functionality
-    const faviconFrames = ['icons/favicon1.png', 'icons/favicon2.png', 'icons/favicon3.png'];
+    const faviconFrames = ['/icons/favicon1.png', '/icons/favicon2.png', '/icons/favicon3.png'];
     let currentFaviconFrame = 0;
     const faviconTimer = setInterval(function() {
         $('#dynamic-favicon').attr('href', faviconFrames[currentFaviconFrame]);
@@ -104,7 +104,7 @@ $(document).ready(function() {
 
     // Dynamic Project Loading
     function loadProjects() {
-        $.getJSON('/api/projects', function(projects) {
+        $.getJSON('/api/getProjects', function(projects) { // Updated API endpoint here
             console.log(`Fetched ${projects.length} project(s) from the server.`);
             projects.forEach(function(project) {
                 // Process categories
@@ -116,7 +116,9 @@ $(document).ready(function() {
                 var categoryClasses = project.categories.map(cat => cat.toLowerCase().replace(/\s+/g, '-')).join(' ');
 
                 // Path to cover image
-                var coverImagePath = `projects/${project.folder}/images/cover.jpg`;
+                // scripts.js (within loadProjects function)
+                var coverImagePath = `/projects/${project.folder}/images/cover.jpg`; // Ensure this path is correct
+
 
                 // Create project element with 'img-hidden' class
                 var $article = $(`
