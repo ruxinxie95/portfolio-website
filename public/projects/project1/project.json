@@ -1,18 +1,9 @@
 {
-    "id": "1",
-    "title": "Timber Installation Project",
-    "status": "finished",
-    "year": "2024",
-    "location": "Cupertino, CA",
-    "design": "Princeton University",
-    "role": "Lead Designer",
-    "image_credit": "John Doe Photography",
-    "url": "https://example.com/project1",
-    "short_description": "A timber structure designed and fabricated with a focus on sustainable practices.",
-    "full_description": "This project was developed at Princeton University as a sustainable timber installation...",
-    "team_credit": "John Doe, Jane Smith, Ruxin Xie, and others.",
-    "categories": [
-        "architecture",
-        "digital fabrication"
-    ]
+    "id": 1,
+    "title": "Project One",
+    "categories": ["Design", "Photography"],
+    "year": 2023,
+    "location": "New York",
+    "description": "A brief description of Project One."
+
 }

@@ -60,31 +60,57 @@ header {
 
 /* ------------------- Project Grid and Item Styles ------------------- */
 .grid {
-    background-color: inherit;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    /* Remove Flexbox properties */
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
     margin: 0 auto;
-    max-width: 100vw;
     width: 100%;
+    position: relative; /* Ensure Masonry can position items correctly */
+    max-width: 1200px;
 }
 
+/* Grid Sizer */
+.grid-sizer {
+    width: 30%; /* 3 columns */
+}
+
+/* Project Items */
 .project {
     background-color: #fff;
-    width: calc((100% / 3) - 10px); /* Adjust as needed */
-    margin: 5px;
+    width: 30%; /* 3 columns */
+    margin-bottom: 10px; /* Adjust gutter as needed */
     overflow: hidden;
     transition: opacity 0.4s ease;
+    max-width: 960px;
+    /* Optional: Add some padding or border if desired */
 }
 
-.project img {
-    width: 100%;
-    height: auto;
-    display: block;
+/* Hidden Class for Filtering */
+.hidden {
+    display: none;
 }
 
-.project.highlight {
-    border: 2px solid #ff0; /* Highlight border */
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .grid-sizer,
+    .project {
+        width: 33.333%; /* 3 columns remain on medium screens */
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid-sizer,
+    .project {
+        width: 50%; /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-sizer,
+    .project {
+        width: 100%; /* 1 column on small screens */
+    }
 }
 
 /* ------------------- Filter Buttons Styles ------------------- */
@@ -151,8 +177,6 @@ header {
     color: #f0f0f0;
 }
 
-
-
 .dark-mode .dark-mode-toggle {
     cursor: pointer;
     font-size: 1em;
@@ -178,43 +202,6 @@ header {
 
 .dark-mode .coordinates-link:hover {
     color: #bbb;
-}
-
-/* ------------------- Responsive Design ------------------- */
-@media (max-width: 1024px) {
-    .project {
-        width: calc(33.333% - 20px);
-    }
-}
-
-@media (max-width: 768px) {
-    .project {
-        width: calc(50% - 20px);
-    }
-}
-
-@media (max-width: 480px) {
-    .project {
-        width: calc(100% - 20px);
-    }
-}
-
-@media (min-width: 768px) {
-    .grid {
-        max-width: 95%;
-    }
-}
-
-@media (min-width: 1024px) {
-    .grid {
-        max-width: 90%;
-    }
-}
-
-@media (min-width: 1200px) {
-    .grid {
-        max-width: 85%;
-    }
 }
 
 /* ------------------- Bling Text and Rotating X ------------------- */

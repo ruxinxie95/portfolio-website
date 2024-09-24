@@ -1,18 +1,9 @@
 {
-    "id": "",
-    "title": "",
-    "status": "",
-    "year": "",
-    "location": "",
-    "design": "",
-    "role": "",
-    "image_credit": "",
-    "url": "",
-    "short_description": "",
-    "full_description": "",
-    "team_credit": "",
-    "categories": [
-        "architecture",
-        "digital fabrication"
-    ]
+    "id": 9,
+    "title": "Project One",
+    "categories": ["Design", "Photography"],
+    "year": 2023,
+    "location": "New York",
+    "description": "A brief description of Project One."
+
 }
