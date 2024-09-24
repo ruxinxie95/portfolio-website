@@ -22,7 +22,7 @@ $(document).ready(function() {
         }
     }, 100);
 
-    // Filtering functionality
+    // Filtering functionality (event handler setup)
     function setupFilterButtons() {
         $('.filters').on('click', '.filter-button', function() {
             var filterValue = $(this).attr('data-filter');
@@ -99,6 +99,10 @@ $(document).ready(function() {
     function loadProjects() {
         $.getJSON('/api/getProjects', function(projects) { // Updated API endpoint here
             console.log(`Fetched ${projects.length} project(s) from the server.`);
+            
+            // Array to keep track of asynchronous image load checks
+            let imageChecks = [];
+
             projects.forEach(function(project) {
                 // Process categories
                 project.categories.forEach(function(category) {
@@ -111,57 +115,76 @@ $(document).ready(function() {
                 // Path to cover image
                 var coverImagePath = `/projects/${project.folder}/images/cover.jpg`; // Ensure this path is correct
 
-                // Create project element with 'img-hidden' class
-                var $article = $(`
-                    <article class="project ${categoryClasses} project${project.id}">
-                        <a href="${project.link || '#'}" class="project-link">
-                            <img src="${coverImagePath}" alt="${project.title}" class="wp-post-image img-hidden" loading="lazy">
-                            <div class="project-info">
-                                <h2>${project.title}</h2>
-                                <p>${project.year} | ${project.location}</p>
-                            </div>
-                        </a>
-                    </article>
-                `);
+                // Create a new Image object to check if the cover image exists
+                let imgCheck = new Promise((resolve, reject) => {
+                    let img = new Image();
+                    img.src = coverImagePath;
+                    img.onload = function() {
+                        resolve(true);
+                    };
+                    img.onerror = function() {
+                        console.warn(`Cover image not found for project: ${project.title}`);
+                        resolve(false); // Resolve with false to indicate missing image
+                    };
+                });
 
-                // Append to grid
-                $grid.append($article);
-                console.log('Appended project:', project.title); // Debugging log
+                // Add the image check promise to the array
+                imageChecks.push(imgCheck.then((exists) => {
+                    if (exists) {
+                        // Create project element with 'img-hidden' class
+                        var $article = $(`
+                            <article class="project ${categoryClasses} project${project.id}">
+                                <a href="${project.link || '#'}" class="project-link">
+                                    <img src="${coverImagePath}" alt="${project.title}" class="wp-post-image img-hidden" loading="lazy">
+                                    <div class="project-info">
+                                        <h2>${project.title}</h2>
+                                        <p>${project.year} | ${project.location}</p>
+                                    </div>
+                                </a>
+                            </article>
+                        `);
 
-                // Note: Do not observe images here; observe them after Masonry layout
+                        // Append to grid
+                        $grid.append($article);
+                        console.log('Appended project:', project.title); // Debugging log
+
+                        // Observe the image for reveal
+                        observeImage($article.find('img'));
+                    }
+                    // If the image doesn't exist, do nothing (skip appending)
+                }));
             });
 
-            // After all projects are appended, wait for images to load
-            $grid.imagesLoaded(function() {
-                console.log('All images have been loaded.');
+            // After all image checks are done, initialize Masonry
+            Promise.all(imageChecks).then(() => {
+                // Wait for all images to load
+                $grid.imagesLoaded(function() {
+                    console.log('All images have been loaded.');
 
-                // Initialize Masonry
-                $grid.masonry({
-                    itemSelector: '.project',
-                    columnWidth: '.grid-sizer',
-                    percentPosition: true,
-                    gutter: 10
+                    // Initialize Masonry
+                    $grid.masonry({
+                        itemSelector: '.project',
+                        columnWidth: '.grid-sizer',
+                        percentPosition: true,
+                        gutter: 10
+                    });
+
+                    // Once Masonry has completed layout, make the grid visible
+                    $grid.on('layoutComplete', function() {
+                        $grid.addClass('is-loaded');
+                        console.log('Masonry layout complete.');
+                    });
+
+                    console.log('Masonry initialized after projects loaded.');
+
+                    // Optionally, trigger Masonry layout in case some images are already in viewport
+                    debouncedLayout();
                 });
-
-                // Once Masonry has completed layout, make the grid visible
-                $grid.on('layoutComplete', function() {
-                    $grid.addClass('is-loaded');
-                    console.log('Masonry layout complete.');
-                });
-
-                console.log('Masonry initialized after projects loaded.');
-
-                // Now, observe all images for fade-in effect
-                $grid.find('img.img-hidden').each(function() {
-                    observeImage($(this));
-                });
-
-                // Optionally, trigger Masonry layout in case some images are already in viewport
-                debouncedLayout();
             });
 
             // Set up filter buttons after projects are loaded
             setupFilterButtons();
+            setupFilters(); // Ensure this is called to generate dynamic buttons
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.error('Failed to load projects:', textStatus, errorThrown);
             $('.grid').append('<p class="error">Failed to load projects. Please try again later.</p>');
@@ -173,14 +196,17 @@ $(document).ready(function() {
         if (categories.size > 0) {
             // First, clear existing category buttons except "All"
             $('.filters').find('.filter-button').not('[data-filter="*"]').remove();
+            console.log('Existing category filter buttons removed.');
 
             categories.forEach(function(category) {
                 var categoryClass = category.toLowerCase().replace(/\s+/g, '-');
                 $('.filters').append(`<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`);
-                console.log('Added filter button for category:', category); // Debugging log
+                console.log('Added filter button for category:', category);
             });
 
             console.log(`Added ${categories.size} filter button(s).`);
+        } else {
+            console.warn('No categories found to create filter buttons.');
         }
     }
 
