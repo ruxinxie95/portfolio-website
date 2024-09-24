@@ -438,3 +438,16 @@ a:not(.project-link):hover::after {
 .project:hover .project-info {
     opacity: 1; /* Reveal project info on hover */
 }
+
+/* Add this to your existing CSS */
+
+/* Initially hide the grid */
+.grid {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+/* Visible state for the grid */
+.grid.is-loaded {
+    opacity: 1;
+}

@@ -2,17 +2,6 @@ $(document).ready(function() {
     var $grid = $('.grid');
     var categories = new Set(); // Use a Set to avoid duplicate categories
 
-    // Initialize Masonry after all images have loaded
-    $grid.imagesLoaded().done(function() {
-        $grid.masonry({
-            itemSelector: '.project',
-            columnWidth: '.grid-sizer',
-            percentPosition: true,
-            gutter: 10
-        });
-        console.log('Masonry initialized with dynamic projects');
-    });
-
     // Filtering functionality
     $('.filters').on('click', '.filter-button', function() {
         var filterValue = $(this).attr('data-filter');
@@ -49,7 +38,11 @@ $(document).ready(function() {
                 setTimeout(() => {
                     entry.target.classList.remove('img-hidden');
                     entry.target.classList.add('fade-in');
-                }, 1000);
+                    // Trigger Masonry layout after the animation completes
+                    entry.target.addEventListener('animationend', function() {
+                        $grid.masonry('layout');
+                    }, { once: true });
+                }, 500); // Adjust the timeout as needed
             }
         });
     }, {
@@ -74,11 +67,29 @@ $(document).ready(function() {
 
     // After all images are loaded, check which ones are in the viewport
     $(window).on('load', function() {
+        // Initialize Masonry
+        $grid.masonry({
+            itemSelector: '.project',
+            columnWidth: '.grid-sizer',
+            percentPosition: true,
+            gutter: 10
+        });
+
+        // Once Masonry has completed layout, make the grid visible
+        $grid.on('layoutComplete', function() {
+            $grid.addClass('is-loaded');
+        });
+
+        console.log('Masonry initialized after window load');
+
+        // Iterate over each image to determine if it's in the viewport
         $('img').each(function() {
             if (isInViewport(this)) {
-                $(this).removeClass('img-hidden').addClass('fade-in');  // Show immediately if in viewport
+                // If the image is in the viewport, remove 'img-hidden' and add 'fade-in'
+                $(this).removeClass('img-hidden').addClass('fade-in');
             } else {
-                observeImage($(this)); // Observe images not in viewport
+                // Otherwise, observe the image for when it enters the viewport
+                observeImage($(this));
             }
         });
     });
@@ -107,7 +118,7 @@ $(document).ready(function() {
                 // Path to cover image
                 var coverImagePath = `projects/${project.folder}/images/cover.jpg`;
 
-                // Create project element
+                // Create project element with 'img-hidden' class
                 var $article = $(`
                     <article class="project ${categoryClasses} project${project.id}">
                         <a href="${project.link || '#'}" class="project-link">
