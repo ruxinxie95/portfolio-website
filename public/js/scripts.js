@@ -2,97 +2,90 @@ $(document).ready(function() {
     var $grid = $('.grid');
     var categories = new Set(); // Use a Set to avoid duplicate categories
 
-    // Filtering functionality
-    $('.filters').on('click', '.filter-button', function() {
-        var filterValue = $(this).attr('data-filter');
+    // Debounce function to limit the rate of function execution
+    function debounce(fn, delay) {
+        let timer = null;
+        return function() {
+            let context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                fn.apply(context, args);
+            }, delay);
+        };
+    }
 
-        if (filterValue === '*') {
-            $('.project').removeClass('hidden');
-        } else {
-            $('.project').each(function() {
-                if ($(this).hasClass(filterValue.substring(1))) { // Remove the dot from filterValue
-                    $(this).removeClass('hidden');
-                } else {
-                    $(this).addClass('hidden');
-                }
-            });
+    // Debounced Masonry layout to optimize performance
+    const debouncedLayout = debounce(function() {
+        if ($grid.data('masonry')) { // Check if Masonry is initialized
+            $grid.masonry('layout');
+            console.log('Debounced Masonry layout called.');
         }
+    }, 100);
 
-        // Trigger Masonry layout after filtering
-        $grid.masonry('layout');
+    // Filtering functionality
+    function setupFilterButtons() {
+        $('.filters').on('click', '.filter-button', function() {
+            var filterValue = $(this).attr('data-filter');
 
-        // Update active button
-        $('.filter-button').removeClass('active');
-        $(this).addClass('active');
+            if (filterValue === '*') {
+                $('.project').removeClass('hidden');
+            } else {
+                $('.project').each(function() {
+                    if ($(this).hasClass(filterValue.substring(1))) { // Remove the dot from filterValue
+                        $(this).removeClass('hidden');
+                    } else {
+                        $(this).addClass('hidden');
+                    }
+                });
+            }
 
-        // Trigger flash effect for strikethrough
-        $(this).addClass('flash').one('animationend', function() {
-            $(this).removeClass('flash');
+            // Trigger Masonry layout after filtering
+            debouncedLayout();
+
+            // Update active button
+            $('.filter-button').removeClass('active');
+            $(this).addClass('active');
+
+            // Trigger flash effect for strikethrough
+            $(this).addClass('flash').one('transitionend', function() {
+                $(this).removeClass('flash');
+            });
         });
-    });
+    }
 
     // Intersection Observer setup for image reveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.remove('img-hidden');
-                    entry.target.classList.add('fade-in');
-                    // Trigger Masonry layout after the animation completes
-                    entry.target.addEventListener('animationend', function() {
-                        $grid.masonry('layout');
-                    }, { once: true });
-                }, 500); // Adjust the timeout as needed
+                console.log('Image is intersecting:', entry.target); // Debugging log
+
+                // Remove the observer for the current target to prevent repeated triggers
+                observer.unobserve(entry.target);
+
+                // Add 'fade-in' class to trigger CSS opacity transition
+                $(entry.target).removeClass('img-hidden').addClass('fade-in');
+                console.log('Added fade-in class to:', entry.target); // Debugging log
+
+                // Once the transition completes, trigger Masonry layout
+                $(entry.target).on('transitionend', function() {
+                    debouncedLayout();
+                    console.log('Transition ended for:', entry.target); // Debugging log
+                });
             }
         });
     }, {
-        threshold: 0.5
+        threshold: 0.1 // Adjust threshold as needed (0.1 means 10% of the image is visible)
     });
 
     // Function to observe an image
     function observeImage(img) {
-        observer.observe(img[0]);  // Ensure the DOM element is passed
+        if (img.length) { // Ensure the jQuery object has elements
+            observer.observe(img[0]);  // Ensure the DOM element is passed
+            console.log('Observing image:', img[0]); // Debugging log
+        } else {
+            console.warn('No image found to observe.');
+        }
     }
-
-    // Function to check if the element is in the viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    // After all images are loaded, check which ones are in the viewport
-    $(window).on('load', function() {
-        // Initialize Masonry
-        $grid.masonry({
-            itemSelector: '.project',
-            columnWidth: '.grid-sizer',
-            percentPosition: true,
-            gutter: 10
-        });
-
-        // Once Masonry has completed layout, make the grid visible
-        $grid.on('layoutComplete', function() {
-            $grid.addClass('is-loaded');
-        });
-
-        console.log('Masonry initialized after window load');
-
-        // Iterate over each image to determine if it's in the viewport
-        $('img').each(function() {
-            if (isInViewport(this)) {
-                // If the image is in the viewport, remove 'img-hidden' and add 'fade-in'
-                $(this).removeClass('img-hidden').addClass('fade-in');
-            } else {
-                // Otherwise, observe the image for when it enters the viewport
-                observeImage($(this));
-            }
-        });
-    });
 
     // Favicon Animation Functionality
     const faviconFrames = ['/icons/favicon1.png', '/icons/favicon2.png', '/icons/favicon3.png'];
@@ -116,9 +109,7 @@ $(document).ready(function() {
                 var categoryClasses = project.categories.map(cat => cat.toLowerCase().replace(/\s+/g, '-')).join(' ');
 
                 // Path to cover image
-                // scripts.js (within loadProjects function)
                 var coverImagePath = `/projects/${project.folder}/images/cover.jpg`; // Ensure this path is correct
-
 
                 // Create project element with 'img-hidden' class
                 var $article = $(`
@@ -134,14 +125,43 @@ $(document).ready(function() {
                 `);
 
                 // Append to grid
-                $grid.append($article).masonry('appended', $article);
+                $grid.append($article);
+                console.log('Appended project:', project.title); // Debugging log
 
-                // Observe the image for reveal
-                observeImage($article.find('img'));
+                // Note: Do not observe images here; observe them after Masonry layout
             });
 
-            // After all projects are loaded, set up the filters
-            setupFilters();
+            // After all projects are appended, wait for images to load
+            $grid.imagesLoaded(function() {
+                console.log('All images have been loaded.');
+
+                // Initialize Masonry
+                $grid.masonry({
+                    itemSelector: '.project',
+                    columnWidth: '.grid-sizer',
+                    percentPosition: true,
+                    gutter: 10
+                });
+
+                // Once Masonry has completed layout, make the grid visible
+                $grid.on('layoutComplete', function() {
+                    $grid.addClass('is-loaded');
+                    console.log('Masonry layout complete.');
+                });
+
+                console.log('Masonry initialized after projects loaded.');
+
+                // Now, observe all images for fade-in effect
+                $grid.find('img.img-hidden').each(function() {
+                    observeImage($(this));
+                });
+
+                // Optionally, trigger Masonry layout in case some images are already in viewport
+                debouncedLayout();
+            });
+
+            // Set up filter buttons after projects are loaded
+            setupFilterButtons();
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.error('Failed to load projects:', textStatus, errorThrown);
             $('.grid').append('<p class="error">Failed to load projects. Please try again later.</p>');
@@ -157,14 +177,10 @@ $(document).ready(function() {
             categories.forEach(function(category) {
                 var categoryClass = category.toLowerCase().replace(/\s+/g, '-');
                 $('.filters').append(`<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`);
+                console.log('Added filter button for category:', category); // Debugging log
             });
 
             console.log(`Added ${categories.size} filter button(s).`);
-
-            // Relayout Masonry after all images have loaded
-            $grid.imagesLoaded().done(function() {
-                $grid.masonry('layout');
-            });
         }
     }
 

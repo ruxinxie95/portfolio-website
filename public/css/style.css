@@ -60,7 +60,7 @@ header {
 
 /* ------------------- Project Grid and Item Styles ------------------- */
 .grid {
-    /* Remove Flexbox properties */
+    /* Removed Flexbox properties */
     /* display: flex; */
     /* flex-wrap: wrap; */
     /* justify-content: center; */
@@ -298,12 +298,14 @@ header {
 /* Initial hidden state for images */
 .img-hidden {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.5s ease-out; /* Smooth opacity transition */
+    /* Removed transform to prevent layout shifts */
 }
 
+/* Fade-in effect for images */
 .fade-in {
-    animation: fadeInSlideUp 1s ease-out forwards;
+    opacity: 1;
+    /* Transition is already defined in .img-hidden */
 }
 
 /* Flash Animation */
@@ -408,7 +410,12 @@ a:not(.project-link):hover::after {
 .project img {
     width: 100%;
     height: auto;
-    transition: transform 0.3s ease; /* Smooth image zoom on hover */
+    opacity: 0; /* Initial state */
+    transition: opacity 0.5s ease-out; /* Smooth opacity transition */
+}
+
+.project img.fade-in {
+    opacity: 1; /* Final state */
 }
 
 .project:hover img {
@@ -438,8 +445,6 @@ a:not(.project-link):hover::after {
 .project:hover .project-info {
     opacity: 1; /* Reveal project info on hover */
 }
-
-/* Add this to your existing CSS */
 
 /* Initially hide the grid */
 .grid {
