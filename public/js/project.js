@@ -32,9 +32,18 @@ $(document).ready(function() {
         $('#project-title').text(projectData.title);
         $('#project-description').text(projectData.description || "No description available.");
 
+        // ** Populate the project-info section **
+        const projectInfoHTML = `
+            <h2>${projectData.title}</h2>
+            <p><strong>Year:</strong> ${projectData.year}</p>
+            <p><strong>Location:</strong> ${projectData.location}</p>
+            <p><strong>Description:</strong> ${projectData.description}</p>
+        `;
+        $('.project-info').html(projectInfoHTML); // Set the HTML content of the .project-info element
+
         // Populate team credit if available
         if (projectData.team_credit) {
-            $('#project-description').append(`<p>Team Credit: ${projectData.team_credit}</p>`);
+            $('.project-info').append(`<p><strong>Team Credit:</strong> ${projectData.team_credit}</p>`);
         }
 
         // Load images dynamically from the project data

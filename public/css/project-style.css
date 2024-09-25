@@ -1,4 +1,11 @@
-    /* Ensure header and description are fixed */
+/* Restricting page width to 1000px */
+/* Optional: Ensure #page has enough space */
+#page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+   /* Ensure header and description are fixed */
     .site-header {
         position: fixed;
         top: 0;
@@ -17,32 +24,37 @@
     }
 
     /* Project Content */
-    .project-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start; /* Align items to the top */
-        margin-top: 200px; /* Adjusted from 200px to 120px */
-        padding: 20px;
-        height: calc(100vh - 120px); /* Adjusted to match the new margin-top */
-        overflow: hidden; /* Hide overflow to manage scrolling */
-    }
+/* Adjust the layout of the project content */
+.project-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 150px; /* Adjust to make sure it's below the header */
+    padding: 20px;
+    flex-direction: row; /* Images on the left, text on the right */
+    overflow: visible; /* No internal scrolling */
+    height: auto; /* Allow the content to grow naturally */
+}
 
 
 /* Project Info - Simplified */
+/* Descriptive text (20% of 1000px = 200px) */
 .project-info {
-    width: 40%;
+    width: 20%; /* Should be set correctly */
     position: sticky;
     top: 20px;
     align-self: flex-start;
-    font-family: 'Courier', monospace; /* Use Courier font */
+    font-family: 'Courier', monospace;
     font-size: 16px;
     line-height: 1.6;
-    color: #fff; /* Default text color for light mode */
-    background-color: transparent; /* Remove background for simplicity */
-    padding: 0; /* Remove padding for simplicity */
-    border: none; /* No border for a clean look */
-    box-shadow: none; /* Remove shadow for simplicity */
+    background-color: transparent; /* Ensure background doesn't hide text */
+    padding: 0;
+    opacity: 1; 
+    color: #000000; /* Bright red for debugging */
+    height: auto; /* Remove any height restrictions */
+
 }
+
 
 .project-info.dark-mode {
     color: var(--header-filter-color); /* Change text to header/filter color in dark mode */
@@ -77,38 +89,54 @@ body.dark-mode .project-info {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Project Content */
+/* Adjust the layout of the project content */
+/* Adjust the layout of the project content */
 .project-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 200px; /* Adjusted */
+    margin-top: 300px; /* Increase margin-top to account for the height of the fixed header */
     padding: 20px;
-    height: calc(100vh - 120px);
+
     overflow: hidden;
+    flex-direction: row;
+    height: auto; /* Ensure height adjusts dynamically */
 }
 
+
 /* Project Images */
+/* Image section (80% of 1000px = 800px) */
+
+
+/* Remove height restriction */
 .project-images {
-    width: 50%;
+    width: 80%; /* Keep the 80% width */
     margin-left: 20px;
-    overflow-y: auto;
-    height: 100%;
+    height: auto; /* Allow height to grow dynamically based on content */
     padding-right: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Style for project images */
+/* Ensure the overall page can scroll */
+#page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 20px; /* Ensure there's padding at the bottom for easier scrolling */
+}
+
+
+
+
+/* Ensure images scale properly and fit within the allocated width */
 .project-images img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 0px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .project-images img:hover {
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -139,17 +167,19 @@ body.dark-mode .project-info {
     /* Lightbox Styles */
 
     /* Lightbox Container */
-    .lightbox {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1001; /* Above other elements */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-    }
+/* Lightbox Container */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000; /* Change to solid black */
+}
+
 
     /* Lightbox Container Active State */
     .lightbox.active {
