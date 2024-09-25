@@ -143,7 +143,7 @@ $(document).ready(function() {
                         // Create project element with 'img-hidden' class
                         var $article = $(`
                             <article class="project ${categoryClasses} project${project.id}">
-                                <a href="${project.link || '#'}" class="project-link">
+                                <a href="project.html?id=${project.id}" class="project-link">
                                     <img src="${coverImagePath}" alt="${project.title}" class="wp-post-image img-hidden" loading="lazy">
                                     <div class="project-info">
                                         <h2>${project.title}</h2>
@@ -152,6 +152,7 @@ $(document).ready(function() {
                                 </a>
                             </article>
                         `);
+                        
 
                         // Append to grid
                         $grid.append($article);

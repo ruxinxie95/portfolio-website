@@ -1,4 +1,3 @@
-// api/getProjects.js
 const fs = require('fs').promises;
 const path = require('path');
 
@@ -24,6 +23,7 @@ module.exports = async function handler(req, res) {
 
         for (const folder of projectFolders) {
             const projectJsonPath = path.join(projectsDir, folder, 'project.json');
+            const imagesDirPath = path.join(projectsDir, folder, 'images');
             console.log(`Processing folder: ${folder}`);
 
             try {
@@ -38,6 +38,17 @@ module.exports = async function handler(req, res) {
                     if (!projectData.folder) {
                         projectData.folder = folder;
                         console.log(`Added 'folder' field to project "${folder}":`, projectData.folder);
+                    }
+
+                    // Scan the images folder and include image filenames
+                    try {
+                        const imageFiles = await fs.readdir(imagesDirPath);
+                        const validImageFiles = imageFiles.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
+                        projectData.images = validImageFiles;
+                        console.log(`Found ${validImageFiles.length} image(s) for project "${folder}":`, validImageFiles);
+                    } catch (err) {
+                        console.warn(`Images folder not found or empty for project: ${folder}`);
+                        projectData.images = [];  // No images found
                     }
 
                     projects.push(projectData);
@@ -67,4 +78,4 @@ module.exports = async function handler(req, res) {
         console.error('Error reading projects directory:', err);
         res.status(500).json({ error: 'Failed to read projects directory.' });
     }
-}
+};

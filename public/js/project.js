@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Update the footer with the current year
     $('#current-year').text(new Date().getFullYear());
 
-    // Function to get query parameters
+    // Function to get query parameters (project ID)
     function getQueryParam(param) {
         let urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
@@ -16,56 +16,50 @@ $(document).ready(function() {
         return;
     }
 
-    // Fetch the project.json for project details
-    $.getJSON(`projects/project${projectId}/project.json`, function(projectData) {
+    // Fetch the project.json data (which now includes image filenames) for the specific project
+    $.getJSON(`/api/getProjects`, function(projects) {
+        const projectData = projects.find(p => p.id === parseInt(projectId));
+
+        if (!projectData) {
+            $('#project-title').text('Project Not Found');
+            $('#project-description').text('No project data available.');
+            return;
+        }
+
         console.log("Loaded project data:", projectData);
         
         // Populate the project details
         $('#project-title').text(projectData.title);
-        $('#project-description').text(projectData.short_description);
+        $('#project-description').text(projectData.description || "No description available.");
 
         // Populate team credit if available
         if (projectData.team_credit) {
-            $('#team-credit').text(`Team Credit: ${projectData.team_credit}`);
+            $('#project-description').append(`<p>Team Credit: ${projectData.team_credit}</p>`);
         }
 
-        // Fetch the images from the server
-        $.getJSON(`/api/get-project-images/${projectId}`, function(imageFiles) {
-            console.log("Loaded image files:", imageFiles);
+        // Load images dynamically from the project data
+        let imagesContainer = $('#project-images');
+        imagesContainer.empty(); // Clear any existing content
 
-            let imagesContainer = $('#project-images');
-            imagesContainer.empty(); // Clear any existing content
+        if (projectData.images && projectData.images.length > 0) {
+            projectData.images.forEach(function(image, index) {
+                let imgPath = `/projects/${projectData.folder}/images/${image}`;
+                let imgElement = `<img src="${imgPath}" alt="Project ${projectId} Image ${index + 1}" class="lightbox-trigger img-hidden">`;
+                imagesContainer.append(imgElement);
+            });
 
-            if (imageFiles && imageFiles.length > 0) {
-                imageFiles.forEach(function(image, index) {
-                    let imgPath = `projects/project${projectId}/images/${image}`;
-                    
-                    let imgElement = `
-                        <img src="${imgPath}" alt="Project ${projectId} Image ${index + 1}" class="lightbox-trigger img-hidden">
-                    `;
-                    imagesContainer.append(imgElement);
-                });
-
-                // Initialize lightbox after images are loaded
-                imagesContainer.imagesLoaded(function() {
-                    console.log("Images loaded");
-                    // Remove the img-hidden class from all images once they are loaded
-                    imagesContainer.find('img').removeClass('img-hidden');
-                    initializeLightbox(); // Initialize the lightbox after the images are shown
-                });
-            } else {
-                console.log("No images found for this project");
-                $('#project-description').text('No images available for this project.');
-            }
-        }).fail(function(jqxhr, textStatus, error) {
-            let err = textStatus + ", " + error;
-            console.log("Failed to load project images:", err);
-            $('#project-title').text('Error');
-            $('#project-description').text('Failed to load project images.');
-        });
+            // Initialize lightbox after images are loaded
+            imagesContainer.imagesLoaded(function() {
+                console.log("Images loaded");
+                imagesContainer.find('img').removeClass('img-hidden');
+                initializeLightbox(); // Initialize the lightbox after the images are shown
+            });
+        } else {
+            console.log("No images found for this project");
+            $('#project-description').text('No images available for this project.');
+        }
     }).fail(function(jqxhr, textStatus, error) {
-        let err = textStatus + ", " + error;
-        console.log("Failed to load project data:", err);
+        console.log("Failed to load project data:", textStatus, error);
         $('#project-title').text('Error');
         $('#project-description').text('Failed to load project data.');
     });
