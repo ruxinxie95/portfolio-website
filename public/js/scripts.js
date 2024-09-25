@@ -74,7 +74,7 @@ $(document).ready(function() {
             }
         });
     }, {
-        threshold: 0.1 // Adjust threshold as needed (0.1 means 10% of the image is visible)
+        threshold: 0.6 // Adjust threshold as needed (0.1 means 10% of the image is visible)
     });
 
     // Function to observe an image
@@ -99,14 +99,23 @@ $(document).ready(function() {
     function loadProjects() {
         $.getJSON('/api/getProjects', function(projects) { // Updated API endpoint here
             console.log(`Fetched ${projects.length} project(s) from the server.`);
-            
+
+            // **Sort projects numerically by 'id' in ascending order**
+            projects.sort(function(a, b) {
+                return a.id - b.id;
+            });
+            console.log('Projects sorted numerically by id.');
+
             // Array to keep track of asynchronous image load checks
             let imageChecks = [];
 
-            projects.forEach(function(project) {
+            projects.forEach(function(project, index) { // Added index for first 3 projects
                 // Process categories
                 project.categories.forEach(function(category) {
-                    categories.add(category);
+                    if (!categories.has(category)) { // Only add if it's a new category
+                        categories.add(category);
+                        addFilterButton(category); // Add filter button immediately
+                    }
                 });
 
                 // Generate category classes
@@ -150,6 +159,12 @@ $(document).ready(function() {
 
                         // Observe the image for reveal
                         observeImage($article.find('img'));
+
+                        // **Show the first 3 images immediately**
+                        if (index < 3) { // Show first 3 images immediately
+                            $article.find('img').removeClass('img-hidden').addClass('fade-in');
+                            console.log('Displayed first image immediately:', project.title);
+                        }
                     }
                     // If the image doesn't exist, do nothing (skip appending)
                 }));
@@ -157,7 +172,7 @@ $(document).ready(function() {
 
             // After all image checks are done, initialize Masonry
             Promise.all(imageChecks).then(() => {
-                
+
                 // Wait for all images to load
                 $grid.imagesLoaded(function() {
                     console.log('All images have been loaded.');
@@ -184,33 +199,23 @@ $(document).ready(function() {
             });
 
             // Set up filter buttons after projects are loaded
-            setupFilterButtons();
-            setupFilters(); // Ensure this is called to generate dynamic buttons
+            // Removed setupFilters call from here
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.error('Failed to load projects:', textStatus, errorThrown);
             $('.grid').append('<p class="error">Failed to load projects. Please try again later.</p>');
         });
     }
 
-    function setupFilters() {
-        // Add filter buttons based on categories
-        if (categories.size > 0) {
-            // First, clear existing category buttons except "All"
-            $('.filters').find('.filter-button').not('[data-filter="*"]').remove();
-            console.log('Existing category filter buttons removed.');
-
-            categories.forEach(function(category) {
-                var categoryClass = category.toLowerCase().replace(/\s+/g, '-');
-                $('.filters').append(`<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`);
-                console.log('Added filter button for category:', category);
-            });
-
-            console.log(`Added ${categories.size} filter button(s).`);
-        } else {
-            console.warn('No categories found to create filter buttons.');
-        }
+    // Function to add a single filter button
+    function addFilterButton(category) {
+        var categoryClass = category.toLowerCase().replace(/\s+/g, '-');
+        $('.filters').append(`<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`);
+        console.log('Added filter button for category:', category);
     }
 
+
+
     // Initiate dynamic loading
+    setupFilterButtons(); // Initialize filter button event handlers immediately
     loadProjects();
 });

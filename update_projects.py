@@ -1,9 +1,10 @@
 import os
 import json
+import re
 
 # Define the project template with required fields
 template = {
-    "id": "",
+    "id": 0,  # Placeholder; will be overwritten with folder number
     "title": "",
     "categories": [],
     "year": "",
@@ -22,12 +23,26 @@ valid_categories = ["Design", "Photography", "Architecture", "Digital Fabricatio
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Set the path to the 'projects' folder relative to the script's location
-projects_dir = os.path.join(script_dir, 'public', 'projects')  # Ensure this path is correct
+projects_dir = os.path.join(script_dir, 'projects')  # Ensure this path is correct
+
+# Function to extract the numeric ID from the folder name
+def extract_id_from_folder(folder_name):
+    match = re.search(r'(\d+)', folder_name)
+    if match:
+        return int(match.group(1))
+    else:
+        return None
 
 # Function to update or create project.json files
 def update_project_json(project_folder):
     project_json_path = os.path.join(project_folder, 'project.json')
+    folder_name = os.path.basename(project_folder)
 
+    # Extract the numeric ID from the folder name
+    project_id = extract_id_from_folder(folder_name)
+    if project_id is None:
+        print(f"Warning: Could not extract numeric ID from folder name '{folder_name}'. Skipping 'id' update.")
+    
     # Try to read and parse the existing project.json file, or start with an empty dictionary if it's invalid
     project_data = {}
     if os.path.exists(project_json_path):
@@ -39,15 +54,21 @@ def update_project_json(project_folder):
     else:
         print(f"Warning: project.json not found at {project_json_path}. Creating a new one based on the template.")
 
-    # Update the project_data with fields from the template, but don't overwrite existing content
+    # Update the project_data with fields from the template, but don't overwrite existing content except 'id'
     for key, value in template.items():
-        if key not in project_data:
+        if key != 'id' and key not in project_data:
             project_data[key] = value  # Add the missing key from the template
 
+    # Overwrite the 'id' field if a valid project_id was extracted
+    if project_id is not None:
+        if project_data.get('id') != project_id:
+            print(f"Updating 'id' field in {project_json_path} to {project_id}.")
+            project_data['id'] = project_id
+
     # Ensure 'folder' field matches the actual folder name
-    if project_data.get('folder') != os.path.basename(project_folder):
+    if project_data.get('folder') != folder_name:
         print(f"Updating 'folder' field in {project_json_path} to match the folder name.")
-        project_data['folder'] = os.path.basename(project_folder)
+        project_data['folder'] = folder_name
 
     # Validate and clean categories
     if 'categories' in project_data and isinstance(project_data['categories'], list):

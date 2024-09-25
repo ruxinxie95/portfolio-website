@@ -65,9 +65,11 @@ header {
     /* flex-wrap: wrap; */
     /* justify-content: center; */
     margin: 0 auto;
-    width: 100%;
+    /* width: 100%; */
     position: relative; /* Ensure Masonry can position items correctly */
     max-width: 1200px;
+    /* width: 100% */
+    
 }
 
 /* Grid Sizer */
@@ -82,7 +84,7 @@ header {
     margin-bottom: 10px; /* Adjust gutter as needed */
     overflow: hidden;
     transition: opacity 0.4s ease;
-    max-width: 960px;
+    /* max-width: 960px; */
     /* Optional: Add some padding or border if desired */
 }
 
@@ -412,6 +414,7 @@ a:not(.project-link):hover::after {
     height: auto;
     opacity: 0; /* Initial state */
     transition: opacity 0.5s ease-out; /* Smooth opacity transition */
+    display: block; /* Prevents inline element gaps */
 }
 
 .project img.fade-in {
@@ -455,4 +458,10 @@ a:not(.project-link):hover::after {
 /* Visible state for the grid */
 .grid.is-loaded {
     opacity: 1;
+}
+/* Add these styles temporarily for debugging */
+#content.site-content,
+#primary.content-area,
+.site-main.grid {
+    border: 2px solid red; /* Change color as needed */
 }
