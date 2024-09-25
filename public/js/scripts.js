@@ -180,9 +180,12 @@ $(document).ready(function() {
                     // Initialize Masonry
                     $grid.masonry({
                         itemSelector: '.project',
+                        // columnWidth: '.grid-sizer',
                         columnWidth: '.grid-sizer',
+
                         percentPosition: true,
-                        gutter: 10
+                        gutter: 10,
+                        isFitWidth: true
                     });
 
                     // Once Masonry has completed layout, make the grid visible
