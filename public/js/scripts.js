@@ -157,6 +157,7 @@ $(document).ready(function() {
 
             // After all image checks are done, initialize Masonry
             Promise.all(imageChecks).then(() => {
+                
                 // Wait for all images to load
                 $grid.imagesLoaded(function() {
                     console.log('All images have been loaded.');
