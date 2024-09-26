@@ -7,7 +7,7 @@
 
 body {
     margin: 0;
-    font-family: Courier, monospace;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     padding: 0;
     transition: background-color 0.5s, color 0.5s; /* Smooth transition for dark mode */
 }
@@ -45,12 +45,11 @@ header {
     transition: background-color 0.5s, color 0.5s; /* Smooth transition for dark mode */
 }
 
-/* Clickable Coordinates Link */
 .coordinates-link {
     color: #333;
-    text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     font-size: 1em;
+    text-decoration: none;
     transition: color 0.3s, text-decoration 0.3s;
 }
 
@@ -60,35 +59,21 @@ header {
 
 /* ------------------- Project Grid and Item Styles ------------------- */
 .grid {
-    /* Removed Flexbox properties */
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* justify-content: center; */
     margin: 0 auto;
-    /* width: 100%; */
     position: relative;
-    /* max-width: 1200px; */
-    /* width: 60% */
     width: 85% !important;
-    /* height: auto !important;
-    left: 0 !important;
-    top: 0 !important; */
 }
 
-/* Grid Sizer */
 .grid-sizer {
     width: 33.333%; /* 3 columns */
 }
 
-/* Project Items */
 .project {
     background-color: #fff;
     width: 33.333%; /* 3 columns */
     margin-bottom: 10px; 
     overflow: hidden;
     transition: opacity 0.4s ease;
-    /* max-width: 960px; */
-    /* Optional: Add some padding or border if desired */
 }
 
 /* Hidden Class for Filtering */
@@ -134,7 +119,7 @@ header {
     font-size: 1em;
     position: relative;
     transition: color 0.3s;
-    font-family: Courier, monospace; /* Added Courier font */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .filter-button:hover,
@@ -189,7 +174,6 @@ header {
     display: inline-block;
 }
 
-/* Header and Footer in Dark Mode */
 .dark-mode header,
 .dark-mode .site-footer {
     background-color: #000;
@@ -223,7 +207,6 @@ header {
     color: #f20000;
 }
 
-/* Rotate animation */
 @keyframes rotateX {
     from {
         transform: rotate(0deg);
@@ -232,29 +215,6 @@ header {
         transform: rotate(360deg);
     }
 }
-
-/* ------------------- Button Styles ------------------- */
-/* Removed all button-like styles for #stop-button */
-/* #stop-button {
-    padding: 10px 15px;
-    font-size: 1em;
-    cursor: pointer;
-    background: none;
-    border: 2px solid #333;
-    border-radius: 5px;
-    color: #333;
-    margin-top: 10px;
-    transition: box-shadow 0.3s, transform 0.1s;
-    font-family: inherit;
-}
-
-#stop-button:hover {
-    box-shadow: 0 0 10px rgba(51, 51, 51, 0.7);
-}
-
-#stop-button:active {
-    transform: scale(0.95);
-} */
 
 /* ------------------- Button Disappearance Effect ------------------- */
 @keyframes blingDisappear {
@@ -289,6 +249,10 @@ header {
     100% { opacity: 1; }
 }
 
+/* ------------------- Fade In Slide Up Effect ------------------- */
+.fadeInSlideUp {
+    animation: fadeInSlideUp 0.5s ease-out forwards;
+}
 @keyframes fadeInSlideUp {
     from {
         opacity: 0;
@@ -304,107 +268,61 @@ header {
 .img-hidden {
     opacity: 0;
     transition: opacity 0.5s ease-out; /* Smooth opacity transition */
-    /* Removed transform to prevent layout shifts */
 }
 
 /* Fade-in effect for images */
 .fade-in {
     opacity: 1;
-    /* Transition is already defined in .img-hidden */
 }
 
-/* Flash Animation */
-@keyframes flashAnimation {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
-}
-
-.flash {
-    animation: flashAnimation 0.3s ease-in-out;
-}
-
-/* ------------------- Animated Strikethrough for All Links (Except .project-link) ------------------- */
-
+/* ------------------- Animated Strikethrough for Links ------------------- */
 a:not(.project-link) {
-    position: relative; /* Establishes a positioning context for the pseudo-element */
-    color: inherit; /* Ensures links inherit the text color */
-    text-decoration: none; /* Removes the default underline */
-    transition: color 0.3s; /* Smooth color transition on hover */
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 a:not(.project-link)::after {
     content: '';
     position: absolute;
     left: 0;
-    top: 50%; /* Positions the line vertically at the middle of the text */
+    top: 50%;
     width: 0;
-    height: 2px; /* Thickness of the strikethrough line */
-    background-color: currentColor; /* Matches the line color to the text color */
-    transition: width 0.3s ease-in-out; /* Smooth expansion of the line */
-    transform: translateY(-50%); /* Centers the line vertically */
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease-in-out;
+    transform: translateY(-50%);
 }
 
 a:not(.project-link):hover::after {
-    width: 100%; /* Expands the line to cover the entire width of the text */
+    width: 100%;
 }
 
-/* ------------------- Animated Strikethrough for "Stop me" Link ------------------- */
-
+/* ------------------- Stop Button Styles ------------------- */
 #stop-button {
-    position: relative; /* Establishes positioning context for the pseudo-element */
-    color: inherit; /* Ensures the link inherits text color */
-    text-decoration: none; /* Removes underline */
-    cursor: pointer; /* Indicates interactivity */
-    margin-top: 200px !important; /* Force it to apply */
-}
-
-.stop-me-section {
-    padding-top: 0px; /* Adds space at the top to allow for button movement */
-    padding-bottom: 0px; /* Ensures the section can contain the button */
-    text-align: center; /* Centers the button horizontally */
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 100px;
 }
 
 #stop-button::after {
     content: '';
     position: absolute;
     left: 0;
-    top: 50%; /* Centers the strikethrough vertically */
+    top: 50%;
     width: 0;
-    height: 2px; /* Thickness of the strikethrough line */
-    background-color: currentColor; /* Matches the line color to the text color */
-    transition: width 0.3s ease-in-out; /* Smooth expansion of the line */
-    transform: translateY(-50%); /* Centers the line vertically */
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease-in-out;
+    transform: translateY(-50%);
 }
 
 #stop-button:hover::after {
-    width: 100%; /* Expands the line to cover the entire width of the text */
+    width: 100%;
 }
-
-/* ------------------- Animated Strikethrough for Filter Buttons ------------------- */
-
-.filter-button::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%; /* Centers the strikethrough vertically */
-    width: 0;
-    height: 2px; /* Thickness of the strikethrough line */
-    background-color: currentColor; /* Matches the line color to the text color */
-    transition: width 0.3s ease-in-out; /* Smooth expansion of the line */
-    transform: translateY(-50%); /* Centers the line vertically */
-}
-
-.filter-button:hover::after,
-.filter-button.active::after {
-    width: 100%; /* Expands the line to cover the entire width of the text */
-}
-
-/* Add this to your existing CSS */
-#stop-button {
-    margin: 100px; /* Adjust the value (e.g., 20px) as needed */
-}
-
 
 /* ------------------- Project Hover Effect Styles ------------------- */
 .project {
@@ -416,15 +334,15 @@ a:not(.project-link):hover::after {
     width: 100%;
     height: auto;
     opacity: 0; /* Initial state */
-    transition: opacity 0.5s ease-out; /* Smooth opacity transition */
+    transition: opacity 0.5s ease-out;
 }
 
 .project img.fade-in {
-    opacity: 1; /* Final state */
+    opacity: 1;
 }
 
 .project:hover img {
-    transform: scale(1.05); /* Slight zoom effect on hover */
+    transform: scale(1.05);
 }
 
 .project-info {
@@ -439,7 +357,7 @@ a:not(.project-link):hover::after {
     justify-content: center;
     align-items: center;
     color: white;
-    font-family: Courier, monospace;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     font-size: 0.8em;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -448,7 +366,7 @@ a:not(.project-link):hover::after {
 }
 
 .project:hover .project-info {
-    opacity: 1; /* Reveal project info on hover */
+    opacity: 1;
 }
 
 /* Initially hide the grid */

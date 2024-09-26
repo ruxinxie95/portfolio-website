@@ -62,9 +62,14 @@ $(document).ready(function() {
                 // Remove the observer for the current target to prevent repeated triggers
                 observer.unobserve(entry.target);
 
-                // Add 'fade-in' class to trigger CSS opacity transition
-                $(entry.target).removeClass('img-hidden').addClass('fade-in');
-                console.log('Added fade-in class to:', entry.target); // Debugging log
+                // Add both 'fade-in' and 'fadeInSlideUp' classes to trigger CSS transitions
+                $(entry.target).removeClass('img-hidden').addClass('fade-in fadeInSlideUp');
+                console.log('Added fade-in and fadeInSlideUp class to:', entry.target); // Debugging log
+
+                // Ensure the animation happens even on page refresh or fast loading
+                setTimeout(function() {
+                    $(entry.target).addClass('fadeInSlideUp');
+                }, 50);  // Delay ensures smooth animation triggering after adding the class
 
                 // Once the transition completes, trigger Masonry layout
                 $(entry.target).on('transitionend', function() {
@@ -74,7 +79,7 @@ $(document).ready(function() {
             }
         });
     }, {
-        threshold: 0.6 // Adjust threshold as needed (0.1 means 10% of the image is visible)
+        threshold: 0.1 // Lower threshold so the effect triggers when at least 10% of the image is visible
     });
 
     // Function to observe an image
@@ -163,7 +168,7 @@ $(document).ready(function() {
 
                         // **Show the first 3 images immediately**
                         if (index < 3) { // Show first 3 images immediately
-                            $article.find('img').removeClass('img-hidden').addClass('fade-in');
+                            $article.find('img').removeClass('img-hidden').addClass('fade-in fadeInSlideUp');
                             console.log('Displayed first image immediately:', project.title);
                         }
                     }
@@ -181,9 +186,7 @@ $(document).ready(function() {
                     // Initialize Masonry
                     $grid.masonry({
                         itemSelector: '.project',
-                        // columnWidth: '.grid-sizer',
                         columnWidth: '.grid-sizer',
-
                         percentPosition: true,
                         gutter: 10,
                         isFitWidth: true
@@ -203,7 +206,6 @@ $(document).ready(function() {
             });
 
             // Set up filter buttons after projects are loaded
-            // Removed setupFilters call from here
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.error('Failed to load projects:', textStatus, errorThrown);
             $('.grid').append('<p class="error">Failed to load projects. Please try again later.</p>');
@@ -216,8 +218,6 @@ $(document).ready(function() {
         $('.filters').append(`<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`);
         console.log('Added filter button for category:', category);
     }
-
-
 
     // Initiate dynamic loading
     setupFilterButtons(); // Initialize filter button event handlers immediately
