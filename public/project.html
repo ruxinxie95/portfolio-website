@@ -27,34 +27,13 @@
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js" defer></script>
 </head>
 <body>
-    <!-- Header Section -->
-    <div>class="container
-        <header id="masthead" class="site-header" role="banner">
-            <div class="site-branding">
-                <h1 class="site-title">
-                    <a href="/index.html" rel="home" class="bling-text">Ruxin <span class="rotating-x">X</span>ie</a>
-                </h1>
-                <p class="site-description">Research Associate at Princeton University</p>
-    
-                <!-- "Stop me" Button and Message Container -->
-                <div class="stop-me-section">
-                    <a href="#" id="stop-button">Stop me</a>
-                    <p id="message"></p> <!-- Message container -->
-                    
-                    <!-- Dark Mode Toggle -->
-                    <div class="dark-mode-toggle">
-                        <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
-                    </div>
-                </div>
-            </div>
-        </header>
-    </div>
-
+    <!-- Header and Footer Placeholder -->
+    <div id="header-footer-placeholder"></div>
 
     <!-- Content Area for Project -->
     <div id="page" class="transition-fade">
         <div class="project-content">
-                        <div class="project-images" id="project-images">
+            <div class="project-images" id="project-images">
                 <!-- Images will be dynamically inserted here -->
             </div>
             <div class="project-info">
@@ -62,7 +41,6 @@
                 <h2 id="project-title">Loading...</h2>
                 <p id="project-description">Please wait while the project details are loaded.</p>
             </div>
-
         </div>
     </div>
 
@@ -74,12 +52,12 @@
         <a class="lightbox-next">&#10095;</a> <!-- Next Button -->
     </div>
 
-    <!-- Footer Section -->
-    <footer id="colophon" class="site-footer" role="contentinfo">
-        <div class="site-info">
-            &copy; <span id="current-year"></span> Ruxin Xie.
-        </div>
-    </footer>
+    <!-- Load Combined Header and Footer -->
+    <script>
+        $(function() {
+            $("#header-footer-placeholder").load("/partials/header-footer.html");
+        });
+    </script>
 
     <!-- Link to Common JavaScript File -->
     <script src="/js/main.js" defer></script>

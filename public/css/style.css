@@ -60,6 +60,7 @@ header .container{
     font-size: 1em;
     text-decoration: none;
     transition: color 0.3s, text-decoration 0.3s;
+    text-align: left;
 }
 
 .coordinates-link:hover {
@@ -183,7 +184,7 @@ header .container{
 
 .dark-mode #stop-button {
     border-color: #f0f0f0;
-    color: #f0f0f0;
+    color: #bbbbbb;
 }
 
 .dark-mode .dark-mode-toggle {
@@ -205,7 +206,7 @@ header .container{
 }
 
 .dark-mode .coordinates-link {
-    color: #f0f0f0;
+    color: #bbbbbb;
 }
 
 .dark-mode .coordinates-link:hover {
