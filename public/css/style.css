@@ -22,6 +22,12 @@ header {
 header .container{
     width: 100%;
 }
+/* Restrict the content inside header */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px; /* Optional: Adjust padding if needed */
+}
 
 .site-title a {
     font-size: 0.9em;
@@ -49,7 +55,7 @@ header .container{
 }
 
 .coordinates-link {
-    color: #333;
+    color: #777777;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     font-size: 1em;
     text-decoration: none;
@@ -118,7 +124,7 @@ header .container{
 
 /* ------------------- Filter Buttons Styles ------------------- */
 .filters {
-    text-align: center;
+    text-align: left;
     margin-bottom: 10px;
 }
 
@@ -126,10 +132,10 @@ header .container{
     padding: 10px;
     background: none;
     border: none;
-    color: #333;
+    color: #777777;
     margin: 0 5px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.8em;
     position: relative;
     transition: color 0.3s;
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -166,13 +172,13 @@ header .container{
 .dark-mode .site-description,
 .dark-mode .filter-button,
 .dark-mode .social-icons .icon {
-    color: #f0f0f0;
+    color: #bbbbbb;
 }
 
 .dark-mode .filter-button:hover,
 .dark-mode .filter-button.active,
 .dark-mode .social-icons .icon:hover {
-    color: #bbb;
+    color: #888888;
 }
 
 .dark-mode #stop-button {
@@ -183,7 +189,7 @@ header .container{
 .dark-mode .dark-mode-toggle {
     cursor: pointer;
     font-size: 1em;
-    color: #f0f0f0;
+    color: #bbbbbb;
     display: inline-block;
 }
 
@@ -195,7 +201,7 @@ header .container{
 }
 
 .dark-mode header .site-title a:hover {
-    color: #bbb;
+    color: #888888;
 }
 
 .dark-mode .coordinates-link {
@@ -203,7 +209,7 @@ header .container{
 }
 
 .dark-mode .coordinates-link:hover {
-    color: #bbb;
+    color: #888888;
 }
 
 /* ------------------- Bling Text and Rotating X ------------------- */
@@ -314,13 +320,14 @@ a:not(.project-link):hover::after {
 
 /* ------------------- Stop Button Styles ------------------- */
 #stop-button {
-    position: relative;
+    font-size: 1em;
+    display: inline-block; /* Ensures button doesn't take up full width */
+    text-align: left; /* Aligns text to the left */
+    margin-left: 0; /* Ensures no extra left margin */
     color: inherit;
     text-decoration: none;
     cursor: pointer;
-    margin: 100px;
 }
-
 #stop-button::after {
     content: '';
     position: absolute;
