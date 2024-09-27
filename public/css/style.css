@@ -68,20 +68,23 @@ header .container{
 }
 
 .grid {
-    margin: 0 auto;
     position: relative;
     width: 100% !important;
 }
 
 .grid-sizer {
-    width: 33.333%; /* 3 columns */
+    width: calc(33.333% - 6.66px); /* 3 columns */
 }
 
 .project {
-    background-color: #fff;
-    width: 33.333%; /* 3 columns */
-    margin-bottom: 8px; 
+    margin-bottom: 10px;
 
+    background-color: #fff;
+    width: calc(33.333% - 6.66px); /* 3 columns */
+
+    /* margin-bottom: 5px;  */
+    /* margin-top: 5px; */
+    /* padding:0 5px; */
     overflow: hidden;
     transition: opacity 0.4s ease;
 }
@@ -341,6 +344,7 @@ a:not(.project-link):hover::after {
 }
 
 .project img {
+    display: block;
     width: 100%;
     height: auto;
     opacity: 0; /* Initial state */
@@ -351,17 +355,14 @@ a:not(.project-link):hover::after {
     opacity: 1;
 }
 
-.project:hover img {
-    transform: scale(1.05);
-}
 
 .project-info {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(20, 20, 20); /* Semi-transparent overlay */
+    right: 0;
+    bottom: 0; 
+    background-color: rgb(20, 20, 20); 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -372,8 +373,14 @@ a:not(.project-link):hover::after {
     opacity: 0;
     transition: opacity 0.3s ease;
     text-align: center;
-    padding: 20px;
+
 }
+
+
+.project:hover .project-info {
+    opacity: 1;
+}
+
 
 .project:hover .project-info {
     opacity: 1;
