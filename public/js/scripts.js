@@ -18,7 +18,7 @@ $(document).ready(function() {
     const debouncedLayout = debounce(function() {
         if ($grid.data('masonry')) { // Check if Masonry is initialized
             $grid.masonry('layout');
-            console.log('Debounced Masonry layout called.');
+            // console.log('Debounced Masonry layout called.');
         }
     }, 100);
 
@@ -57,14 +57,14 @@ $(document).ready(function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log('Image is intersecting:', entry.target); // Debugging log
+                // console.log('Image is intersecting:', entry.target); 
 
                 // Remove the observer for the current target to prevent repeated triggers
                 observer.unobserve(entry.target);
 
                 // Add both 'fade-in' and 'fadeInSlideUp' classes to trigger CSS transitions
                 $(entry.target).removeClass('img-hidden').addClass('fade-in fadeInSlideUp');
-                console.log('Added fade-in and fadeInSlideUp class to:', entry.target); // Debugging log
+                // console.log('Added fade-in and fadeInSlideUp class to:', entry.target); 
 
                 // Ensure the animation happens even on page refresh or fast loading
                 setTimeout(function() {
@@ -74,7 +74,7 @@ $(document).ready(function() {
                 // Once the transition completes, trigger Masonry layout
                 $(entry.target).on('transitionend', function() {
                     debouncedLayout();
-                    console.log('Transition ended for:', entry.target); // Debugging log
+                    // console.log('Transition ended for:', entry.target); 
                 });
             }
         });
@@ -86,7 +86,7 @@ $(document).ready(function() {
     function observeImage(img) {
         if (img.length) { // Ensure the jQuery object has elements
             observer.observe(img[0]);  // Ensure the DOM element is passed
-            console.log('Observing image:', img[0]); // Debugging log
+            // console.log('Observing image:', img[0]);
         } else {
             console.warn('No image found to observe.');
         }
@@ -103,13 +103,13 @@ $(document).ready(function() {
     // Dynamic Project Loading
     function loadProjects() {
         $.getJSON('/api/getProjects', function(projects) { // Updated API endpoint here
-            console.log(`Fetched ${projects.length} project(s) from the server.`);
+            // console.log(`Fetched ${projects.length} project(s) from the server.`);
 
             // **Sort projects numerically by 'id' in ascending order**
             projects.sort(function(a, b) {
                 return a.id - b.id;
             });
-            console.log('Projects sorted numerically by id.');
+            // console.log('Projects sorted numerically by id.');
 
             // Array to keep track of asynchronous image load checks
             let imageChecks = [];
@@ -161,7 +161,7 @@ $(document).ready(function() {
 
                         // Append to grid
                         $grid.append($article);
-                        console.log('Appended project:', project.title); // Debugging log
+                        // console.log('Appended project:', project.title); 
 
                         // Observe the image for reveal
                         observeImage($article.find('img'));
@@ -169,7 +169,7 @@ $(document).ready(function() {
                         // **Show the first 3 images immediately**
                         if (index < 3) { // Show first 3 images immediately
                             $article.find('img').removeClass('img-hidden').addClass('fade-in fadeInSlideUp');
-                            console.log('Displayed first image immediately:', project.title);
+                            // console.log('Displayed first image immediately:', project.title);
                         }
                     }
                     // If the image doesn't exist, do nothing (skip appending)
@@ -181,7 +181,7 @@ $(document).ready(function() {
 
                 // Wait for all images to load
                 $grid.imagesLoaded(function() {
-                    console.log('All images have been loaded.');
+                    // console.log('All images have been loaded.');
 
                     // Initialize Masonry
                     $grid.masonry({
@@ -195,10 +195,10 @@ $(document).ready(function() {
                     // Once Masonry has completed layout, make the grid visible
                     $grid.on('layoutComplete', function() {
                         $grid.addClass('is-loaded');
-                        console.log('Masonry layout complete.');
+                        // console.log('Masonry layout complete.');
                     });
 
-                    console.log('Masonry initialized after projects loaded.');
+                    // console.log('Masonry initialized after projects loaded.');
 
                     // Optionally, trigger Masonry layout in case some images are already in viewport
                     debouncedLayout();
@@ -207,7 +207,7 @@ $(document).ready(function() {
 
             // Set up filter buttons after projects are loaded
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error('Failed to load projects:', textStatus, errorThrown);
+            // console.error('Failed to load projects:', textStatus, errorThrown);
             $('.grid').append('<p class="error">Failed to load projects. Please try again later.</p>');
         });
     }
@@ -216,7 +216,7 @@ $(document).ready(function() {
     function addFilterButton(category) {
         var categoryClass = category.toLowerCase().replace(/\s+/g, '-');
         $('.filters').append(`<button data-filter=".${categoryClass}" class="filter-button">${category}</button>`);
-        console.log('Added filter button for category:', category);
+        // console.log('Added filter button for category:', category);
     }
 
     // Initiate dynamic loading

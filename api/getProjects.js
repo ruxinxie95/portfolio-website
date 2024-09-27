@@ -24,12 +24,12 @@ module.exports = async function handler(req, res) {
         for (const folder of projectFolders) {
             const projectJsonPath = path.join(projectsDir, folder, 'project.json');
             const imagesDirPath = path.join(projectsDir, folder, 'images');
-            console.log(`Processing folder: ${folder}`);
+            // console.log(`Processing folder: ${folder}`);
 
             try {
                 const data = await fs.readFile(projectJsonPath, 'utf8');
                 const projectData = JSON.parse(data);
-                console.log(`Loaded project.json for ${folder}:`, projectData);
+                // console.log(`Loaded project.json for ${folder}:`, projectData);
 
                 const requiredFields = ['id', 'title', 'categories', 'year', 'location', 'description'];
                 const hasAllFields = requiredFields.every(field => field in projectData);
@@ -37,7 +37,7 @@ module.exports = async function handler(req, res) {
                 if (hasAllFields) {
                     if (!projectData.folder) {
                         projectData.folder = folder;
-                        console.log(`Added 'folder' field to project "${folder}":`, projectData.folder);
+                        // console.log(`Added 'folder' field to project "${folder}":`, projectData.folder);
                     }
 
                     // Scan the images folder and include image filenames
@@ -45,7 +45,7 @@ module.exports = async function handler(req, res) {
                         const imageFiles = await fs.readdir(imagesDirPath);
                         const validImageFiles = imageFiles.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
                         projectData.images = validImageFiles;
-                        console.log(`Found ${validImageFiles.length} image(s) for project "${folder}":`, validImageFiles);
+                        // console.log(`Found ${validImageFiles.length} image(s) for project "${folder}":`, validImageFiles);
                     } catch (err) {
                         console.warn(`Images folder not found or empty for project: ${folder}`);
                         projectData.images = [];  // No images found
@@ -58,7 +58,7 @@ module.exports = async function handler(req, res) {
                 }
             } catch (err) {
                 if (err.code === 'ENOENT') {
-                    console.warn(`project.json not found for project: ${folder}`);
+                    // console.warn(`project.json not found for project: ${folder}`);
                 } else {
                     console.error(`Error processing project "${folder}":`, err);
                 }
@@ -67,7 +67,7 @@ module.exports = async function handler(req, res) {
 
         console.log(`Total projects loaded: ${projects.length}`);
         projects.sort((a, b) => a.id - b.id);
-        console.log('Projects sorted numerically by id:', projects.map(p => p.id));
+        // console.log('Projects sorted numerically by id:', projects.map(p => p.id));
 
         if (projects.length === 0) {
             console.warn('No valid projects found.');

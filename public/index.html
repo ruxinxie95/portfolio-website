@@ -29,11 +29,50 @@
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js" defer></script>
     <!-- Include Masonry -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js" defer></script>
+
+    <!-- **New Deferred Inline Script to Load Header and Footer Separately** -->
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ensure jQuery is available
+            if (typeof jQuery !== "undefined") {
+                console.log("jQuery is loaded.");
+
+                // Load Header
+                $("#header-placeholder").load("partials/header.html", function(response, status, xhr) {
+                    if (status === "error") {
+                        console.error("Failed to load header.html:", xhr.status, xhr.statusText);
+                        $("#header-placeholder").html("<p>Failed to load header. Please try again later.</p>");
+                    } else {
+                        console.log("header.html loaded successfully!");
+                    }
+
+                    // Load Main.js after the header is loaded
+                    const script = document.createElement('script');
+                    script.src = "/js/main.js";
+                    script.defer = true;
+                    document.body.appendChild(script);
+                });
+
+                // Load Footer
+                $("#footer-placeholder").load("partials/footer.html", function(response, status, xhr) {
+                    if (status === "error") {
+                        console.error("Failed to load footer.html:", xhr.status, xhr.statusText);
+                        $("#footer-placeholder").html("<p>Failed to load footer. Please try again later.</p>");
+                    } else {
+                        console.log("footer.html loaded successfully!");
+                    }
+                });
+
+            } else {
+                console.error("jQuery is not loaded. Cannot load header and footer.");
+            }
+        });
+    </script>
 </head>
 
 <body>
-    <!-- Header and Footer Placeholder -->
-    <div id="header-footer-placeholder"></div>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
     
     <!-- Filter Buttons -->
     <div class="container">
@@ -57,16 +96,10 @@
         </div>
     </div>
 
-    <!-- Load Combined Header and Footer -->
-    <script>
-        $(function() {
-            $("#header-footer-placeholder").load("/partials/header-footer.html");
-        });
-    </script>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
-    <!-- Link to Common JavaScript File -->
-    <script src="/js/main.js" defer></script>
-    <!-- Link to Homepage-specific JavaScript File -->
+    <!-- Load Common JavaScript Files -->
     <script src="/js/scripts.js" defer></script>
 </body>
 </html>

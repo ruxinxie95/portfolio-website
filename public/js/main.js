@@ -5,18 +5,19 @@ $(document).ready(function() {
     // Apply Dark Mode on Page Load
     if (localStorage.getItem('darkMode') === 'enabled') {
         $('body').addClass('dark-mode');
-        $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun'); // Update icon to sun
+        // Use event delegation-compatible selector
+        $(document).find('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun'); // Update icon to sun
     }
 
-    // Dark Mode Toggle Functionality
-    $('.dark-mode-toggle').on('click', function() {
+    // Dark Mode Toggle Functionality using Event Delegation
+    $(document).on('click', '.dark-mode-toggle', function() {
         $('body').toggleClass('dark-mode'); // Toggle dark mode
 
         if ($('body').hasClass('dark-mode')) {
-            $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun');
+            $(this).find('i').removeClass('fa-moon').addClass('fa-sun');
             localStorage.setItem('darkMode', 'enabled'); // Save to localStorage
         } else {
-            $('.dark-mode-toggle i').removeClass('fa-sun').addClass('fa-moon');
+            $(this).find('i').removeClass('fa-sun').addClass('fa-moon');
             localStorage.setItem('darkMode', 'disabled'); // Save to localStorage
         }
     });
@@ -47,6 +48,7 @@ $(document).ready(function() {
     
     updateMessage();  // Update the message immediately based on stored click count
 
+    // Attach click event using direct selector as 'stop-button' is static
     stopButton.on('click', function(event) {
         event.preventDefault(); // Prevent default <a> behavior
         clickCount++;
