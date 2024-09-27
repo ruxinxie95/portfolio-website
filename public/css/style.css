@@ -49,15 +49,22 @@ header .container{
 /* ------------------- Footer Styles ------------------- */
 .site-footer {
     padding: 20px;
-    text-align: center;
+    /* text-align: center; */
     background-color: #ffffff;
     transition: background-color 0.5s, color 0.5s; /* Smooth transition for dark mode */
+}
+/* Align footer content inside the container */
+.site-footer .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px; /* Optional: Adjust padding if needed */
+    text-align: left; /* Align text to the left */
 }
 
 .coordinates-link {
     color: #777777;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 1em;
+    font-size: 0.8em;
     text-decoration: none;
     transition: color 0.3s, text-decoration 0.3s;
     text-align: left;
@@ -65,6 +72,14 @@ header .container{
 
 .coordinates-link:hover {
     color: #555;
+}
+/* Dark mode adjustment */
+.dark-mode .coordinates-link {
+    color: #bbbbbb;
+}
+
+.dark-mode .coordinates-link:hover {
+    color: #888888;
 }
 
 /* ------------------- Project Grid and Item Styles ------------------- */
@@ -205,13 +220,7 @@ header .container{
     color: #888888;
 }
 
-.dark-mode .coordinates-link {
-    color: #bbbbbb;
-}
 
-.dark-mode .coordinates-link:hover {
-    color: #888888;
-}
 
 /* ------------------- Bling Text and Rotating X ------------------- */
 .bling-text {

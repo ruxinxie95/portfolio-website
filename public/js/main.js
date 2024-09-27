@@ -5,19 +5,18 @@ $(document).ready(function() {
     // Apply Dark Mode on Page Load
     if (localStorage.getItem('darkMode') === 'enabled') {
         $('body').addClass('dark-mode');
-        // Use event delegation-compatible selector
-        $(document).find('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun'); // Update icon to sun
+        $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun'); // Update icon to sun
     }
 
-    // Dark Mode Toggle Functionality using Event Delegation
-    $(document).on('click', '.dark-mode-toggle', function() {
+    // Dark Mode Toggle Functionality
+    $('.dark-mode-toggle').on('click', function() {
         $('body').toggleClass('dark-mode'); // Toggle dark mode
 
         if ($('body').hasClass('dark-mode')) {
-            $(this).find('i').removeClass('fa-moon').addClass('fa-sun');
+            $('.dark-mode-toggle i').removeClass('fa-moon').addClass('fa-sun');
             localStorage.setItem('darkMode', 'enabled'); // Save to localStorage
         } else {
-            $(this).find('i').removeClass('fa-sun').addClass('fa-moon');
+            $('.dark-mode-toggle i').removeClass('fa-sun').addClass('fa-moon');
             localStorage.setItem('darkMode', 'disabled'); // Save to localStorage
         }
     });
@@ -48,11 +47,25 @@ $(document).ready(function() {
     
     updateMessage();  // Update the message immediately based on stored click count
 
-    // Attach click event using direct selector as 'stop-button' is static
     stopButton.on('click', function(event) {
         event.preventDefault(); // Prevent default <a> behavior
         clickCount++;
         sessionStorage.setItem('clickCount', clickCount); // Save click count to sessionStorage
         updateMessage();
+    });
+
+    // Add a click listener to the "Ruxin Xie" link to reset the Stop me button
+    $('.site-title a').on('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // Reset sessionStorage and clickCount
+        sessionStorage.removeItem('clickCount');
+        clickCount = 0;
+
+        // Reset the message and button
+        updateMessage();
+
+        // Optionally, redirect to the home page if that's the intended behavior
+        window.location.href = '/index.html'; // Redirect to homepage
     });
 });
