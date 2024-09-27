@@ -1,0 +1,93 @@
+/* ------------------- Header Styles ------------------- */
+header {
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+header .container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px; /* Optional padding */
+}
+
+/* Ensure .site-branding uses flexbox for alignment */
+.site-branding {
+    position: relative;
+    width: 100%; /* Takes full width of the 1000px container */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distributes elements between left and right */
+}
+
+/* Site Title */
+.site-title a {
+    font-size: 1.2em; /* Increased for better visibility */
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-title a:hover {
+    color: #555;
+}
+
+/* Site Description (if used) */
+.site-description {
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    font-size: 1.5em; /* Adjust icon size */
+    cursor: pointer;
+    color: #777; /* Default color */
+    transition: color 0.3s;
+    /* No need for absolute positioning since we're using flexbox */
+}
+
+.dark-mode-toggle:hover {
+    color: #555;
+}
+
+/* Stop Me Section */
+.stop-me-section {
+    display: flex;
+    align-items: center;
+}
+
+#stop-button {
+    margin-right: 10px; /* Space between button and message */
+    font-size: 1em;
+    display: inline-block; /* Ensures button doesn't take up full width */
+    text-align: left; /* Aligns text to the left */
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative; /* For ::after pseudo-element */
+}
+
+#stop-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease-in-out;
+    transform: translateY(-50%);
+}
+
+#stop-button:hover::after {
+    width: 100%;
+}
+
+#message {
+    font-size: 0.9em;
+    color: #666;
+}

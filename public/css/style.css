@@ -413,3 +413,36 @@ a:not(.project-link):hover::after {
 .grid.is-loaded {
     opacity: 1;
 }
+
+
+/* Ensure .site-branding is relative so we can position the dark mode toggle inside it */
+.site-branding {
+    position: relative;
+    display: inline-block; /* To keep it aligned with the site title */
+}
+
+/* Position the dark mode toggle icon absolutely within .site-branding */
+.dark-mode-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: 1.5em; /* Adjust icon size as needed */
+    color: #777; /* Adjust the color if necessary */
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+/* Adjust hover state for better UX */
+.dark-mode-toggle:hover {
+    color: #555;
+}
+
+/* Adjust for dark mode */
+.dark-mode .dark-mode-toggle {
+    color: #bbbbbb;
+}
+
+.dark-mode .dark-mode-toggle:hover {
+    color: #888888;
+}
