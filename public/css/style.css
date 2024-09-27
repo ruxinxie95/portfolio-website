@@ -17,7 +17,10 @@ header {
     background-color: #fff;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    text-align: center;
+    text-align: left;
+}
+header .container{
+    width: 100%;
 }
 
 .site-title a {
@@ -58,10 +61,16 @@ header {
 }
 
 /* ------------------- Project Grid and Item Styles ------------------- */
+.container{
+    max-width: 1000px;
+    margin: 0 auto;
+    
+}
+
 .grid {
     margin: 0 auto;
     position: relative;
-    width: 85% !important;
+    width: 100% !important;
 }
 
 .grid-sizer {
@@ -71,7 +80,8 @@ header {
 .project {
     background-color: #fff;
     width: 33.333%; /* 3 columns */
-    margin-bottom: 10px; 
+    margin-bottom: 8px; 
+
     overflow: hidden;
     transition: opacity 0.4s ease;
 }

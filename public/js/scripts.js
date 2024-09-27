@@ -188,7 +188,7 @@ $(document).ready(function() {
                         itemSelector: '.project',
                         columnWidth: '.grid-sizer',
                         percentPosition: true,
-                        gutter: 10,
+                        // gutter: 10,
                         isFitWidth: true
                     });
 
