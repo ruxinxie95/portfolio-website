@@ -19,23 +19,31 @@ header {
     border-bottom: 1px solid #ddd;
     text-align: left;
 }
-header .container{
-    width: 100%;
-}
-/* Restrict the content inside header */
+
+/* Consolidated .container definition */
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px; /* Optional: Adjust padding if needed */
+    padding: 0 20px; /* Retain the padding */
+    position: relative; /* Ensure it's positioned relative */
 }
 
+/* Site Title */
 .site-title a {
-    font-size: 0.9em;
-    font-weight: normal;
-    color: #333;
+    font-family: Courier, monospace;
+    font-size: 0.8em;
+    font-weight: lighter;
+
     text-decoration: none;
     transition: color 0.3s;
 }
+
+/* More Specific Selector */
+.site-header .site-title a {
+    color: #3f3f3f; /* New desired color */
+}
+
+
 
 .site-title a:hover {
     color: #555;
@@ -46,6 +54,61 @@ header .container{
     color: #666;
 }
 
+/* ------------------- Dark Mode Styles ------------------- */
+.dark-mode {
+    background-color: #000; /* Pure black background */
+    color: #f0f0f0;
+}
+
+.dark-mode .site-title a {
+    color: #bbbbbb; /* New dark mode color */
+}
+
+/* Rest of your dark mode styles */
+.dark-mode .coordinates-link {
+    color: #bbbbbb;
+}
+
+.dark-mode .coordinates-link:hover {
+    color: #888888;
+}
+
+.dark-mode .dark-mode-toggle {
+    color: #bbbbbb;
+}
+
+.dark-mode .dark-mode-toggle:hover {
+    color: #888888;
+}
+
+.dark-mode header,
+.dark-mode .site-footer {
+    background-color: #000;
+    border-bottom-color: #444;
+    color: #f0f0f0;
+}
+
+.dark-mode header .site-title a:hover {
+    color: #888888;
+}
+
+/* ------------------- Dark Mode Toggle ------------------- */
+.dark-mode-toggle {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 1em; /* Adjust icon size as needed */
+    color: #777; /* Adjust the color if necessary */
+    padding: 5px;
+    transition: color 0.3s;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.dark-mode-toggle:hover {
+    color: #555;
+}
+
 /* ------------------- Footer Styles ------------------- */
 .site-footer {
     padding: 20px;
@@ -53,6 +116,7 @@ header .container{
     background-color: #ffffff;
     transition: background-color 0.5s, color 0.5s; /* Smooth transition for dark mode */
 }
+
 /* Align footer content inside the container */
 .site-footer .container {
     max-width: 1000px;
@@ -73,6 +137,7 @@ header .container{
 .coordinates-link:hover {
     color: #555;
 }
+
 /* Dark mode adjustment */
 .dark-mode .coordinates-link {
     color: #bbbbbb;
@@ -83,12 +148,6 @@ header .container{
 }
 
 /* ------------------- Project Grid and Item Styles ------------------- */
-.container{
-    max-width: 1000px;
-    margin: 0 auto;
-    
-}
-
 .grid {
     position: relative;
     width: 100% !important;
@@ -100,13 +159,8 @@ header .container{
 
 .project {
     margin-bottom: 10px;
-
     background-color: #fff;
     width: calc(33.333% - 6.66px); /* 3 columns */
-
-    /* margin-bottom: 5px;  */
-    /* margin-top: 5px; */
-    /* padding:0 5px; */
     overflow: hidden;
     transition: opacity 0.4s ease;
 }
@@ -173,63 +227,7 @@ header .container{
     width: calc(100% + 10px);
 }
 
-/* ------------------- Dark Mode Styles ------------------- */
-.dark-mode {
-    background-color: #000; /* Pure black background */
-    color: #f0f0f0;
-}
-
-.dark-mode .grid,
-.dark-mode .project {
-    background-color: #000;
-}
-
-.dark-mode .site-title a,
-.dark-mode .site-description,
-.dark-mode .filter-button,
-.dark-mode .social-icons .icon {
-    color: #bbbbbb;
-}
-
-.dark-mode .filter-button:hover,
-.dark-mode .filter-button.active,
-.dark-mode .social-icons .icon:hover {
-    color: #888888;
-}
-
-.dark-mode #stop-button {
-    border-color: #f0f0f0;
-    color: #bbbbbb;
-}
-
-.dark-mode .dark-mode-toggle {
-    cursor: pointer;
-    font-size: 1em;
-    color: #bbbbbb;
-    display: inline-block;
-}
-
-.dark-mode header,
-.dark-mode .site-footer {
-    background-color: #000;
-    border-bottom-color: #444;
-    color: #f0f0f0;
-}
-
-.dark-mode header .site-title a:hover {
-    color: #888888;
-}
-
-
-
 /* ------------------- Bling Text and Rotating X ------------------- */
-.bling-text {
-    font-family: Courier, monospace;
-    font-size: 2em;
-    font-weight: bold;
-    color: #d30707;
-}
-
 .bling-text .rotating-x {
     display: inline-block;
     animation: rotateX 2s linear infinite;
@@ -372,7 +370,6 @@ a:not(.project-link):hover::after {
     opacity: 1;
 }
 
-
 .project-info {
     position: absolute;
     top: 0;
@@ -390,14 +387,7 @@ a:not(.project-link):hover::after {
     opacity: 0;
     transition: opacity 0.3s ease;
     text-align: center;
-
 }
-
-
-.project:hover .project-info {
-    opacity: 1;
-}
-
 
 .project:hover .project-info {
     opacity: 1;
@@ -412,37 +402,4 @@ a:not(.project-link):hover::after {
 /* Visible state for the grid */
 .grid.is-loaded {
     opacity: 1;
-}
-
-
-/* Ensure .site-branding is relative so we can position the dark mode toggle inside it */
-/* .site-branding {
-    position: relative;
-    display: inline-block; 
-} */
-
-/* Position the dark mode toggle icon absolutely within .site-branding */
-.dark-mode-toggle {
-    position:fixed;
-    top: 0;
-    right:0;
-    cursor: pointer;
-    font-size: 1em; /* Adjust icon size as needed */
-    color: #777; /* Adjust the color if necessary */
-    padding: 5px;
-    transition: color 0.3s;
-}
-
-/* Adjust hover state for better UX */
-.dark-mode-toggle:hover {
-    color: #555;
-}
-
-/* Adjust for dark mode */
-.dark-mode .dark-mode-toggle {
-    color: #bbbbbb;
-}
-
-.dark-mode .dark-mode-toggle:hover {
-    color: #888888;
 }
