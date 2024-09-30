@@ -1,12 +1,12 @@
 {
     "id": 1,
-    "title": "Project One",
+    "title": "Timberlyn",
     "categories": [
-        "Design",
-        "Photography"
+        "Computational Design",
+        "Architecture"
     ],
-    "year": 2023,
-    "location": "New York",
+    "year": 2024,
+    "location": "Bethel, NY",
     "description": "A brief description of Project One.",
     "folder": "project1"
 }

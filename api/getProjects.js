@@ -17,7 +17,7 @@ module.exports = async function handler(req, res) {
 
         const files = await fs.readdir(projectsDir, { withFileTypes: true });
         const projectFolders = files.filter(file => file.isDirectory()).map(dir => dir.name);
-        console.log(`Found ${projectFolders.length} project folder(s):`, projectFolders);
+        // console.log(`Found ${projectFolders.length} project folder(s):`, projectFolders);
 
         const projects = [];
 
@@ -65,7 +65,7 @@ module.exports = async function handler(req, res) {
             }
         }
 
-        console.log(`Total projects loaded: ${projects.length}`);
+        // console.log(`Total projects loaded: ${projects.length}`);
         projects.sort((a, b) => a.id - b.id);
         // console.log('Projects sorted numerically by id:', projects.map(p => p.id));
 
