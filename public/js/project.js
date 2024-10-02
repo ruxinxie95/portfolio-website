@@ -71,7 +71,7 @@ $(document).ready(function() {
 
     // Function to initialize lightbox
     function initializeLightbox() {
-        console.log("Initializing lightbox");
+        // console.log("Initializing lightbox");
         const images = $('.lightbox-trigger');
         const lightbox = $('#lightbox');
         const lightboxImg = $('#lightbox-img');
@@ -81,7 +81,7 @@ $(document).ready(function() {
         let currentIndex = -1; // To track the current image
 
         function openLightbox(index) {
-            console.log("Opening lightbox for image index:", index);
+            // console.log("Opening lightbox for image index:", index);
             const img = images.eq(index);
             lightboxImg.attr('src', img.attr('src'));
             lightboxImg.attr('alt', img.attr('alt'));

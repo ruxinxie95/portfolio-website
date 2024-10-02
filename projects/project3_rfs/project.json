@@ -1,0 +1,11 @@
+{
+    "id": 3,
+    "title": "Project One",
+    "categories": [
+        "Design"
+    ],
+    "year": 2023,
+    "location": "New York",
+    "description": "A brief description of Project One.",
+    "folder": "project3_rfs"
+}

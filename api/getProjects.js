@@ -17,7 +17,6 @@ module.exports = async function handler(req, res) {
 
         const files = await fs.readdir(projectsDir, { withFileTypes: true });
         const projectFolders = files.filter(file => file.isDirectory()).map(dir => dir.name);
-        // console.log(`Found ${projectFolders.length} project folder(s):`, projectFolders);
 
         const projects = [];
 
@@ -45,7 +44,6 @@ module.exports = async function handler(req, res) {
                         const imageFiles = await fs.readdir(imagesDirPath);
                         const validImageFiles = imageFiles.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
                         projectData.images = validImageFiles;
-                        // console.log(`Found ${validImageFiles.length} image(s) for project "${folder}":`, validImageFiles);
                     } catch (err) {
                         console.warn(`Images folder not found or empty for project: ${folder}`);
                         projectData.images = [];  // No images found

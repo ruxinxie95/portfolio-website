@@ -6,18 +6,12 @@ import re
 template = {
     "id": 0,  # Placeholder; will be overwritten with folder number
     "title": "",
-    "categories": [],
+    "categories": [],  # This field will not be modified if already present
     "year": "",
     "location": "",
     "description": "",
-    "folder": ""
+    "folder": ""  # This will be updated with the folder name
 }
-
-# List of fields to remove from project.json files
-fields_to_remove = ["images"]  # Add any fields you want to remove here
-
-# List of valid categories (optional)
-valid_categories = ["Design", "Photography", "Architecture", "Digital Fabrication"]  # Update as needed
 
 # Get the current working directory where the script is located
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -54,10 +48,10 @@ def update_project_json(project_folder):
     else:
         print(f"Warning: project.json not found at {project_json_path}. Creating a new one based on the template.")
 
-    # Update the project_data with fields from the template, but don't overwrite existing content except 'id'
+    # Update the project_data with fields from the template, but don't overwrite existing content except 'id' and 'folder'
     for key, value in template.items():
-        if key != 'id' and key not in project_data:
-            project_data[key] = value  # Add the missing key from the template
+        if key != 'id' and key != 'folder' and key not in project_data:
+            project_data[key] = value  # Add missing keys from the template, but don't overwrite existing values
 
     # Overwrite the 'id' field if a valid project_id was extracted
     if project_id is not None:
@@ -70,28 +64,8 @@ def update_project_json(project_folder):
         print(f"Updating 'folder' field in {project_json_path} to match the folder name.")
         project_data['folder'] = folder_name
 
-    # Validate and clean categories
-    if 'categories' in project_data and isinstance(project_data['categories'], list):
-        cleaned_categories = []
-        for category in project_data['categories']:
-            # Remove any unwanted characters or fix typos
-            clean_category = category.strip()
-            # Optionally, enforce valid categories
-            if clean_category in valid_categories:
-                cleaned_categories.append(clean_category)
-            else:
-                print(f"Warning: Invalid category '{clean_category}' in {project_json_path}. It will be removed.")
-        project_data['categories'] = cleaned_categories
-    else:
-        # Assign default categories if none are present
-        project_data['categories'] = ["Design", "Photography"]
-        print(f"Assigned default categories to {project_json_path}.")
-
-    # Remove specified fields if they exist in project_data
-    for field in fields_to_remove:
-        if field in project_data:
-            del project_data[field]
-            print(f"Removed field '{field}' from {project_json_path}")
+    # Do NOT modify the categories field, if it's already present in the project_data
+    # No need to check or assign default categories if the field exists.
 
     # Write the updated project_data back to the file
     try:

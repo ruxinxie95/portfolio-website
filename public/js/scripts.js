@@ -171,6 +171,7 @@ $(document).ready(function() {
                         percentPosition: true,
                         gutter: 10,
                         isFitWidth: true,
+                        horizontalOrder: true,
                         originLeft: true,
                         originTop: true
                     });

@@ -389,6 +389,13 @@ a:not(.project-link):hover::after {
     text-align: center;
 }
 
+.project-info h2 {
+    font-size: 1.3em; /* Adjust the value as needed */
+    font-weight:normal;
+    color: #ffffff;
+}
+
+
 .project:hover .project-info {
     opacity: 1;
 }
