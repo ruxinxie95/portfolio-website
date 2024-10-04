@@ -4,8 +4,10 @@
   "description": "Ruxin Xie's Portfolio Website",
   "main": "index.js",
   "scripts": {
-    "start": "vercel dev",
-    "build": "echo 'No build step required'",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "projecttemp": "python projecttemp.py"
   },
   "engines": {
@@ -13,5 +15,17 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "next": "^14.2.14",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.14"
+  }
 }

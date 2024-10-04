@@ -362,7 +362,7 @@ a:not(.project-link):hover::after {
     display: block;
     width: 100%;
     height: auto;
-    opacity: 0; /* Initial state */
+    opacity: 1; /* Initial state */
     transition: opacity 0.5s ease-out;
 }
 
@@ -410,3 +410,4 @@ a:not(.project-link):hover::after {
 .grid.is-loaded {
     opacity: 1;
 }
+

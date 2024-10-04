@@ -137,6 +137,7 @@ $(document).ready(function() {
 
                     // Path to cover image
                     var coverImagePath = `/projects/${project.folder}/images/cover.jpg`;
+                    console.log('Loading image from:', coverImagePath);
 
                     // Create project element with 'img-hidden' class
                     var $article = $(`
@@ -155,7 +156,9 @@ $(document).ready(function() {
                     $grid.append($article);
 
                     // Observe the image for reveal
-                    observeImage($article.find('img'));
+                    // observeImage($article.find('img'));
+                    $article.find('img').removeClass('img-hidden').addClass('fade-in fadeInSlideUp');
+
 
                     // **Show the first 3 images immediately**
                     if (index < 3) { // Show first 3 images immediately
