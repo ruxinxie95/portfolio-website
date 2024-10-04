@@ -1,27 +1,41 @@
 // pages/index.js
+
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
+import Masonry from 'react-masonry-css';
+import { useEffect, useState } from 'react';
+import styles from '../components/Project.module.css'; // Import the CSS module
 
 export async function getServerSideProps() {
     try {
+        // Fetch data from your API endpoint
         const res = await fetch(`http://localhost:3000/api/getProjects`);
-        const projects = await res.json();
-        console.log('Fetched projects:', projects); // Add this line
 
+        // Check if the response is ok (status code 200-299)
+        if (!res.ok) {
+            throw new Error(`Failed to fetch projects: ${res.status} ${res.statusText}`);
+        }
+
+        const projects = await res.json();
+
+        // Validate the data
         if (!projects || !Array.isArray(projects)) {
             throw new Error('Invalid project data received');
         }
 
+        // Return the projects as props
         return {
             props: {
                 projects,
             },
         };
     } catch (error) {
-        console.error('Failed to fetch projects:', error);
+        console.error('Error fetching projects:', error);
+
+        // In case of an error, return an empty projects array
         return {
             props: {
                 projects: [],
@@ -31,6 +45,41 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ projects = [] }) {
+    const [categories, setCategories] = useState([]);
+    const [activeFilter, setActiveFilter] = useState('*');
+    const [filteredProjects, setFilteredProjects] = useState(projects);
+
+    useEffect(() => {
+        const categorySet = new Set();
+        projects.forEach(project => {
+            project.categories.forEach(cat => categorySet.add(cat));
+        });
+        setCategories(Array.from(categorySet));
+    }, [projects]);
+
+    useEffect(() => {
+        if (activeFilter === '*') {
+            setFilteredProjects(projects);
+        } else {
+            const filterClass = activeFilter.startsWith('.') ? activeFilter.substring(1) : activeFilter;
+            setFilteredProjects(
+                projects.filter(project =>
+                    project.categories
+                        .map(cat => cat.toLowerCase().replace(/\s+/g, '-'))
+                        .includes(filterClass)
+                )
+            );
+        }
+    }, [activeFilter, projects]);
+
+    // Define responsive breakpoints for Masonry
+    const breakpointColumnsObj = {
+        default: 3,
+        1200: 3,
+        1024: 2,
+        768: 1
+    };
+
     return (
         <>
             <Head>
@@ -42,32 +91,77 @@ export default function Home({ projects = [] }) {
             <Header />
 
             <div className="container">
-                {projects.length > 0 ? (
-                    <div className="grid is-loaded">
-                        {projects.map((project) => (
-                            <article key={project.id} className={`project ${project.categories.map(cat => cat.toLowerCase().replace(/\s+/g, '-')).join(' ')}`}>
+                {/* Filter Buttons */}
+                <div className="filters">
+                    <button
+                        data-filter="*"
+                        className={`filterButton ${activeFilter === '*' ? 'active' : ''}`}
+                        onClick={() => setActiveFilter('*')}
+                    >
+                        All
+                    </button>
+                    {categories.map((category, index) => {
+                        const filterClass = category.toLowerCase().replace(/\s+/g, '-');
+                        return (
+                            <button
+                                key={index}
+                                data-filter={`.${filterClass}`}
+                                className={`filterButton ${activeFilter === `.${filterClass}` ? 'active' : ''}`}
+                                onClick={() => setActiveFilter(`.${filterClass}`)}
+                            >
+                                {category}
+                            </button>
+                        );
+                    })}
+                </div>
+
+                {filteredProjects.length > 0 ? (
+                    <Masonry
+                        breakpointCols={breakpointColumnsObj}
+                        className={styles.myMasonryGrid}
+                        columnClassName={styles.myMasonryGridColumn}
+                    >
+                        {filteredProjects.map((project) => (
+                            <article
+                                key={project.id}
+                                className={`${styles.project} ${project.categories.map(cat => cat.toLowerCase().replace(/\s+/g, '-')).join(' ')}`}
+                            >
                                 <Link href={`/project/${project.id}`}>
-                                    <Image
-                                        src={`/projects/${project.folder}/images/cover.jpg`}
-                                        alt={project.title}
-                                        width={300}
-                                        height={200}
-                                        className="project-image"
-                                    />
-                                    <div className="project-info">
-                                        <h2>{project.title}</h2>
-                                        <p>{project.year} | {project.location}</p>
+                                    <div className={styles.projectLink}>
+                                        <Image
+                                            src={`/projects/${project.folder}/images/cover.jpg`}
+                                            alt={`Cover image for project ${project.title}`}
+                                            width={800}  // Replace with actual image width
+                                            height={600} // Replace with actual image height
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            className={styles.projectImage}
+                                        />
+                                        <div className={styles.projectInfo}>
+                                            <h2>{project.title}</h2>
+                                            <p>{project.year} | {project.location}</p>
+                                        </div>
                                     </div>
                                 </Link>
                             </article>
                         ))}
-                    </div>
+                    </Masonry>
                 ) : (
                     <p>No projects found.</p>
                 )}
             </div>
 
             <Footer />
+
+            {/* Include additional global styles if necessary */}
+            <style jsx global>{`
+                /* Ensure the container centers correctly */
+                .container {
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    padding: 0 20px;
+                    position: relative;
+                }
+            `}</style>
         </>
     );
 }

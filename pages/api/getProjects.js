@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         // Check if the projects directory exists
         try {
             await fs.access(projectsDir);
-            console.log('Projects directory exists.');
+            // console.log('Projects directory exists.');
         } catch (err) {
             console.error('Projects directory does not exist:', err);
             return res.status(500).json({ error: 'Projects directory not found.' });

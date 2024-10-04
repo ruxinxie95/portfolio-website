@@ -10,6 +10,8 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     padding: 0;
     transition: background-color 0.5s, color 0.5s; /* Smooth transition for dark mode */
+    background-color: #fff; /* Default light mode background */
+    color: #000; /* Default light mode text color */
 }
 
 /* ------------------- Header Styles ------------------- */
@@ -33,17 +35,10 @@ header {
     font-family: Courier, monospace;
     font-size: 0.8em;
     font-weight: lighter;
-
     text-decoration: none;
     transition: color 0.3s;
-}
-
-/* More Specific Selector */
-.site-header .site-title a {
     color: #3f3f3f; /* New desired color */
 }
-
-
 
 .site-title a:hover {
     color: #555;
@@ -145,86 +140,6 @@ header {
 
 .dark-mode .coordinates-link:hover {
     color: #888888;
-}
-
-/* ------------------- Project Grid and Item Styles ------------------- */
-.grid {
-    position: relative;
-    width: 100% !important;
-}
-
-.grid-sizer {
-    width: calc(33.333% - 6.66px); /* 3 columns */
-}
-
-.project {
-    margin-bottom: 10px;
-    background-color: #fff;
-    width: calc(33.333% - 6.66px); /* 3 columns */
-    overflow: hidden;
-    transition: opacity 0.4s ease;
-}
-
-/* Hidden Class for Filtering */
-.hidden {
-    display: none;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1200px) {
-    .grid-sizer,
-    .project {
-        width: 33.333%; /* 3 columns remain on medium screens */
-    }
-}
-
-@media (max-width: 1024px) {
-    .grid-sizer,
-    .project {
-        width: 50%; /* 2 columns on medium screens */
-    }
-}
-
-@media (max-width: 768px) {
-    .grid-sizer,
-    .project {
-        width: 100%; /* 1 column on small screens */
-    }
-}
-
-/* ------------------- Filter Buttons Styles ------------------- */
-.filters {
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-.filter-button {
-    padding: 10px;
-    background: none;
-    border: none;
-    color: #777777;
-    margin: 0 5px;
-    cursor: pointer;
-    font-size: 0.8em;
-    position: relative;
-    transition: color 0.3s;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-}
-
-.filter-button:hover,
-.filter-button.active {
-    color: #555;
-}
-
-.filter-button.active::after {
-    content: '';
-    position: absolute;
-    left: -5px;
-    right: -5px;
-    bottom: 50%;
-    height: 1px;
-    background-color: #333;
-    width: calc(100% + 10px);
 }
 
 /* ------------------- Bling Text and Rotating X ------------------- */
