@@ -13,30 +13,33 @@ export async function getServerSideProps(context) {
     const { id } = context.params;
 
     try {
-        // Construct the path to the specific project's project.json
-        const projectJsonPath = path.join(process.cwd(), 'public', 'projects', `project${id}`, 'project.json');
-        
-        // Check if project.json exists
-        await fs.access(projectJsonPath);
+        const projectsDir = path.join(process.cwd(), 'public', 'projects');
+        const files = await fs.readdir(projectsDir, { withFileTypes: true });
+        const projectFolders = files.filter(file => file.isDirectory()).map(dir => dir.name);
 
-        // Read and parse project.json
-        const projectData = JSON.parse(await fs.readFile(projectJsonPath, 'utf8'));
+        let projectData = null;
 
-        // Ensure required fields exist
-        const requiredFields = ['id', 'title', 'categories', 'year', 'location', 'description'];
-        const hasAllFields = requiredFields.every(field => field in projectData);
-
-        if (!hasAllFields) {
-            throw new Error(`Project ${id} is missing required fields.`);
+        for (const folder of projectFolders) {
+            const projectJsonPath = path.join(projectsDir, folder, 'project.json');
+            try {
+                const data = await fs.readFile(projectJsonPath, 'utf8');
+                const currentProject = JSON.parse(data);
+                if (currentProject.id.toString() === id.toString()) {
+                    projectData = currentProject;
+                    projectData.folder = folder; // Store the actual folder name
+                    break;
+                }
+            } catch (err) {
+                console.warn(`project.json not found or invalid for project: ${folder}`);
+            }
         }
 
-        // Ensure 'folder' field is present
-        if (!projectData.folder) {
-            projectData.folder = `project${id}`;
+        if (!projectData) {
+            return { notFound: true };
         }
 
         // Read images from the images directory
-        const imagesDirPath = path.join(process.cwd(), 'public', 'projects', projectData.folder, 'images');
+        const imagesDirPath = path.join(projectsDir, projectData.folder, 'images', 'compressed');
         let imageFiles = [];
         try {
             const imageFilesRaw = await fs.readdir(imagesDirPath);
@@ -118,7 +121,10 @@ export default function ProjectPage({ project }) {
                         )}
                     </div>
                     <div className="project-info">
-                        <Link href="/" className="back-button">← Back to Projects</Link>
+
+                        <Link href="/" className="back-button">
+                            ← Back to Projects
+                        </Link>
                         <h2>{project.title}</h2>
                         <p>{project.year} | {project.location}</p>
                         <p>{project.description}</p>

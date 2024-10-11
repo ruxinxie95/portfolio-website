@@ -1,3 +1,4 @@
+//public/js/project.js
 $(document).ready(function() {
     // Update the footer with the current year
     $('#current-year').text(new Date().getFullYear());
