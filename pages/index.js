@@ -9,7 +9,6 @@ import Masonry from 'react-masonry-css';
 import { useEffect, useState } from 'react';
 import styles from '../components/Project.module.css'; // Import the CSS module
 
-
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -76,8 +75,6 @@ export async function getServerSideProps() {
     }
 }
 
-
-
 export default function Home({ projects = [] }) {
     const [categories, setCategories] = useState([]);
     const [activeFilter, setActiveFilter] = useState('*');
@@ -124,13 +121,14 @@ export default function Home({ projects = [] }) {
 
             <Header />
 
-            <div className="container">
+            <div className={styles.container}>
                 {/* Filter Buttons */}
-                <div className="filters">
+                <div className={styles.filters}>
                     <button
                         data-filter="*"
-                        className={`filterButton ${activeFilter === '*' ? 'active' : ''}`}
+                        className={`${styles.filterButton} ${activeFilter === '*' ? styles.active : ''}`}
                         onClick={() => setActiveFilter('*')}
+                        aria-pressed={activeFilter === '*' ? 'true' : 'false'}
                     >
                         All
                     </button>
@@ -140,8 +138,9 @@ export default function Home({ projects = [] }) {
                             <button
                                 key={index}
                                 data-filter={`.${filterClass}`}
-                                className={`filterButton ${activeFilter === `.${filterClass}` ? 'active' : ''}`}
+                                className={`${styles.filterButton} ${activeFilter === `.${filterClass}` ? styles.active : ''}`}
                                 onClick={() => setActiveFilter(`.${filterClass}`)}
+                                aria-pressed={activeFilter === `.${filterClass}` ? 'true' : 'false'}
                             >
                                 {category}
                             </button>

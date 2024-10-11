@@ -1,4 +1,12 @@
 /* components/Project.module.css */
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
 .myMasonryGrid {
     display: flex;
     margin-left: -20px; /* gutter size offset */
@@ -62,24 +70,45 @@
     opacity: 1;
 }
 
+/* Updated Filter Styles */
 .filters {
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Updated to match previous style */
 }
 
 .filterButton {
-    padding: 10px 15px;
-    margin-right: 10px;
-    background-color: #f0f0f0;
+    padding: 10px; /* Changed from 10px 15px to 10px */
+    margin: 0 5px; /* Changed from margin-right: 10px to match previous */
+    background: none; /* Changed from background-color: #f0f0f0 to none */
     border: none;
-    border-radius: 5px;
+    color: #777777; /* Set color to match previous */
     cursor: pointer;
-    transition: background-color 0.3s;
     font-size: 0.8em;
+    position: relative;
+    transition: color 0.3s;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-.filterButton.active,
-.filterButton:hover {
-    background-color: #ddd;
+.filterButton:hover,
+.filterButton.active {
+    color: #555; /* Changed from background-color to color */
 }
+
+.active::after {
+    content: '';
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    bottom: 50%;
+    height: 1px;
+    background-color: #333;
+    width: calc(100% + 10px);
+}
+
+/* Optional: Adjust the filter button focus state for accessibility */
+.filterButton:focus {
+    outline: none;
+    color: #555;
+}
+
+/* ... Rest of your existing styles ... */
