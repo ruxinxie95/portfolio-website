@@ -9,33 +9,64 @@ import Masonry from 'react-masonry-css';
 import { useEffect, useState } from 'react';
 import styles from '../components/Project.module.css'; // Import the CSS module
 
+import fs from 'fs/promises';
+import path from 'path';
+
 export async function getServerSideProps() {
     try {
-        // Fetch data from your API endpoint
-        const res = await fetch(`http://localhost:3000/api/getProjects`);
+        const projectsDir = path.join(process.cwd(), 'public/projects');
+        const files = await fs.readdir(projectsDir, { withFileTypes: true });
+        const projectFolders = files.filter(file => file.isDirectory()).map(dir => dir.name);
 
-        // Check if the response is ok (status code 200-299)
-        if (!res.ok) {
-            throw new Error(`Failed to fetch projects: ${res.status} ${res.statusText}`);
+        const projects = [];
+
+        for (const folder of projectFolders) {
+            const projectJsonPath = path.join(projectsDir, folder, 'project.json');
+            const imagesDirPath = path.join(projectsDir, folder, 'images', 'compressed');
+
+            try {
+                const data = await fs.readFile(projectJsonPath, 'utf8');
+                const projectData = JSON.parse(data);
+
+                const requiredFields = ['id', 'title', 'categories', 'year', 'location', 'description'];
+                const hasAllFields = requiredFields.every(field => field in projectData);
+
+                if (hasAllFields) {
+                    if (!projectData.folder) {
+                        projectData.folder = folder;
+                    }
+
+                    try {
+                        const imageFiles = await fs.readdir(imagesDirPath);
+                        const validImageFiles = imageFiles.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
+                        projectData.images = validImageFiles;
+                    } catch (err) {
+                        console.warn(`Compressed images folder not found or empty for project: ${folder}`);
+                        projectData.images = [];
+                    }
+
+                    projects.push(projectData);
+                } else {
+                    const missing = requiredFields.filter(field => !(field in projectData));
+                    console.warn(`Project "${folder}" is missing required fields: ${missing.join(', ')}`);
+                }
+            } catch (err) {
+                if (err.code === 'ENOENT') {
+                    console.warn(`project.json not found for project: ${folder}`);
+                } else {
+                    console.error(`Error processing project "${folder}":`, err);
+                }
+            }
         }
 
-        const projects = await res.json();
-
-        // Validate the data
-        if (!projects || !Array.isArray(projects)) {
-            throw new Error('Invalid project data received');
-        }
-
-        // Return the projects as props
+        projects.sort((a, b) => a.id - b.id);
         return {
             props: {
                 projects,
             },
         };
-    } catch (error) {
-        console.error('Error fetching projects:', error);
-
-        // In case of an error, return an empty projects array
+    } catch (err) {
+        console.error('Error reading projects directory:', err);
         return {
             props: {
                 projects: [],
@@ -43,6 +74,8 @@ export async function getServerSideProps() {
         };
     }
 }
+
+
 
 export default function Home({ projects = [] }) {
     const [categories, setCategories] = useState([]);

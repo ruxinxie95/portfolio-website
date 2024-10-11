@@ -1,10 +1,12 @@
+//pages/api/getProjects.js
 const fs = require('fs').promises;
 const path = require('path');
 
 export default async function handler(req, res) {
     try {
         // Update the path to point to the 'public' directory
-        const projectsDir = path.join(process.cwd(), 'public/projects');
+        const projectsDir = path.join(process.cwd(), 'public', 'projects');
+
         console.log(`Scanning projects directory: ${projectsDir}`);
 
         // Check if the projects directory exists
