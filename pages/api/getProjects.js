@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
         for (const folder of projectFolders) {
             const projectJsonPath = path.join(projectsDir, folder, 'project.json');
-            const imagesDirPath = path.join(projectsDir, folder, 'images');
+            const imagesDirPath = path.join(projectsDir, folder, 'images', 'compressed'); // Updated path
 
             try {
                 const data = await fs.readFile(projectJsonPath, 'utf8');
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
                         const validImageFiles = imageFiles.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
                         projectData.images = validImageFiles;
                     } catch (err) {
-                        console.warn(`Images folder not found or empty for project: ${folder}`);
+                        console.warn(`Compressed images folder not found or empty for project: ${folder}`);
                         projectData.images = [];
                     }
 

@@ -129,13 +129,14 @@ export default function Home({ projects = [] }) {
                                 <Link href={`/project/${project.id}`}>
                                     <div className={styles.projectLink}>
                                         <Image
-                                            src={`/projects/${project.folder}/images/cover.jpg`}
+                                            src={`/projects/${project.folder}/images/compressed/cover.jpg`}
                                             alt={`Cover image for project ${project.title}`}
                                             width={800}  // Replace with actual image width
                                             height={600} // Replace with actual image height
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             className={styles.projectImage}
                                         />
+                                        
                                         <div className={styles.projectInfo}>
                                             <h2>{project.title}</h2>
                                             <p>{project.year} | {project.location}</p>

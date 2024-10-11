@@ -106,7 +106,7 @@ $(document).ready(function() {
 
             // Array to keep track of image existence checks
             let imageChecks = projects.map(project => {
-                let coverImagePath = `/projects/${project.folder}/images/cover.jpg`;
+                let coverImagePath = `/projects/${project.folder}/images/compressed/cover.jpg`;
                 return new Promise((resolve) => {
                     let img = new Image();
                     img.src = coverImagePath;

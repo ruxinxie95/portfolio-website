@@ -105,7 +105,7 @@ export default function ProjectPage({ project }) {
                             project.images.map((image, index) => (
                                 <div key={index} className="project-image-wrapper">
                                     <Image
-                                        src={`/projects/${project.folder}/images/${image}`}
+                                        src={`/projects/${project.folder}/images/compressed/${image}`}
                                         alt={`${project.title} Image ${index + 1}`}
                                         width={600}
                                         height={400}
