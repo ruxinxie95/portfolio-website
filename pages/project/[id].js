@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
         }
 
         // Read images from the images directory
-        const imagesDirPath = path.join(projectsDir, projectData.folder, 'images', 'compressed');
+        const imagesDirPath = path.join(projectsDir, projectData.folder, 'images');
         let imageFiles = [];
         try {
             const imageFilesRaw = await fs.readdir(imagesDirPath);
@@ -108,7 +108,7 @@ export default function ProjectPage({ project }) {
                             project.images.map((image, index) => (
                                 <div key={index} className="project-image-wrapper">
                                     <Image
-                                        src={`/projects/${project.folder}/images/compressed/${image}`}
+                                        src={`/projects/${project.folder}/images/${image}`}
                                         alt={`${project.title} Image ${index + 1}`}
                                         width={600}
                                         height={400}
