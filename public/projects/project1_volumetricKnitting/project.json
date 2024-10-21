@@ -1,14 +1,14 @@
 {
   "project_title": "Volumetric Knitting",
-  "project_year": 2020,
+  "project_year": "2020",
   "categories": [
     "Prototype",
     "Textile",
     "Light-weight"
   ],
-  "softwares/machinary": "",
-  "material": "",
-  "id": 1,
+  "softwares/machinery": "",
+  "material": "Nylastic",
+  "id": "1",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 600 Independent Study",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -25,10 +25,10 @@
   "students": "",
   "structureal_engineers": "",
   "architects": "",
-  "my_role": "Independent study: Learn, program, run the knitting machine. Meanwhile collaborate with confidential industrial design input over iterative design reviews. ",
+  "my_role": "Independent study: Learn, program, run the knitting machine. Meanwhile collaborate with confidential industrial design input over iterative design reviews.",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project1_volumetricKnitting"

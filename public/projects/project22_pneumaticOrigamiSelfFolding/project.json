@@ -1,15 +1,15 @@
 {
   "project_title": "Pneumatic Origami Self Folding",
-  "project_year": 2021,
+  "project_year": "2021",
   "categories": [
     "Pnuematic",
     "Prototype",
     "Light-weight",
     "Computational Design"
   ],
-  "softwares/machinary": "Sketches, Rhino",
+  "softwares/machinery": "Sketches, Rhino",
   "material": "Foam Board, Polyethylene Porches, Air",
-  "id": 22,
+  "id": "22",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 709 Advanced Prototyping",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -28,8 +28,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project22_pneumaticOrigamiSelfFolding"

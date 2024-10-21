@@ -1,13 +1,13 @@
 {
   "project_title": "Animation and Architecture",
-  "project_year": 2018,
+  "project_year": "2018",
   "categories": [
     "Architecture",
     "Concept"
   ],
-  "softwares/machinary": "ZBrush, Adobe Premiere",
+  "softwares/machinery": "ZBrush, Adobe Premiere",
   "material": "",
-  "id": 16,
+  "id": "16",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 509 Animation and Architecture",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -26,8 +26,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project16_animationAndArchitecture"

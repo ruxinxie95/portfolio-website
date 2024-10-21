@@ -1,14 +1,14 @@
 {
   "project_title": "TriByte",
-  "project_year": 2020,
+  "project_year": "2020",
   "categories": [
     "Prototype",
     "Robotic Fabrication",
     "Ceramic"
   ],
-  "softwares/machinary": "",
+  "softwares/machinery": "",
   "material": "",
-  "id": 11,
+  "id": "11",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 700 Practicum",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -27,8 +27,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project11_triByte"

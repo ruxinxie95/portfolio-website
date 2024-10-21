@@ -1,15 +1,15 @@
 {
   "project_title": "Light Leak",
-  "project_year": 2020,
+  "project_year": "2020",
   "categories": [
     "Interactive",
     "Lighitng",
     "Prototype",
     "Computational Design"
   ],
-  "softwares/machinary": "",
+  "softwares/machinery": "",
   "material": "",
-  "id": 10,
+  "id": "10",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 700 Practicum",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -28,8 +28,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project10_lightLeak"

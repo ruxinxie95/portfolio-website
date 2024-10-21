@@ -1,13 +1,13 @@
 {
   "project_title": "The Observatory",
-  "project_year": 2023,
+  "project_year": "2023",
   "categories": [
     "Architecture",
     "Technology Campus"
   ],
-  "softwares/machinary": "BIM",
+  "softwares/machinery": "BIM",
   "material": "",
-  "id": 24,
+  "id": "24",
   "location": "Cupertino, CA",
   "course": "",
   "affliation": "Gensler",
@@ -26,8 +26,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project24_theObservatory"

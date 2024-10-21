@@ -1,13 +1,13 @@
 {
   "project_title": "Google Store",
-  "project_year": 2023,
+  "project_year": "2023",
   "categories": [
     "Architecture",
     "Concept"
   ],
-  "softwares/machinary": "Rhino",
+  "softwares/machinery": "Rhino",
   "material": "",
-  "id": 26,
+  "id": "26",
   "location": "Confidential",
   "course": "",
   "affliation": "Gensler",
@@ -26,8 +26,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project26_googleStore"

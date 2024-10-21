@@ -1,6 +1,6 @@
 {
-  "project_title": "Topology Optimized Building Envelope ",
-  "project_year": 2021,
+  "project_title": "Topology Optimized Building Envelope",
+  "project_year": "2021",
   "categories": [
     "Prototype",
     "Robotic Fabrication",
@@ -8,9 +8,9 @@
     "Geometry",
     "Architecture"
   ],
-  "softwares/machinary": "",
+  "softwares/machinery": "",
   "material": "",
-  "id": 5,
+  "id": "5",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 707 Material Engagement\nARCH 702 Robotic Engagement",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -27,10 +27,10 @@
   "students": "Ben Lawson, Christopher Humphrey,Colleen Ludwig, Gabrielle Clune, Mackenzie Bruce, Mehdi Shirvani, Ruxin Xie, Sarah Nail",
   "structureal_engineers": "",
   "architects": "",
-  "my_role": "prototyping, revising, fabricating structural brackets and flooring. ",
+  "my_role": "prototyping, revising, fabricating structural brackets and flooring.",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "1. https://www.instagram.com/p/C2dXWz1OEoJ/?img_index=1",
   "dedication": "",
   "folder": "project5_topologyOptimizedBuildingEnvelope"

@@ -1,13 +1,13 @@
 {
   "project_title": "Architecture {AI}",
-  "project_year": 2018,
+  "project_year": "2018",
   "categories": [
     "Architecture",
     "Concept"
   ],
-  "softwares/machinary": "ZBrush, Model Making",
+  "softwares/machinery": "ZBrush, Model Making",
   "material": "",
-  "id": 18,
+  "id": "18",
   "location": "Ann Arbor, MI, USA",
   "course": "Arch 662 Thesis",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -21,13 +21,13 @@
   "instructor": "Matias del Campo, Sandra Manninger",
   "construction_assistants": "",
   "researchers": "",
-  "students": "Roberto Corpus, Tianci Liang, Ruxin Xie\n",
+  "students": "Roberto Corpus, Tianci Liang, Ruxin Xie",
   "structureal_engineers": "",
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project18_architecture{AI}"

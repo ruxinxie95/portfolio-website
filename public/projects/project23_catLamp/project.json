@@ -1,13 +1,13 @@
 {
   "project_title": "Cat Lamp",
-  "project_year": 2023,
+  "project_year": "2023",
   "categories": [
     "Ceramic",
     "Lighting"
   ],
-  "softwares/machinary": "Eazao M500 Ceramic 3D Printer\ncustomized Gcode generator C# script",
+  "softwares/machinery": "Eazao M500 Ceramic 3D Printer\ncustomized Gcode generator C# script",
   "material": "",
-  "id": 23,
+  "id": "23",
   "location": "San Jose, CA",
   "course": "",
   "affliation": "",
@@ -26,8 +26,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project23_catLamp"

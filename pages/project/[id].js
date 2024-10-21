@@ -73,18 +73,26 @@ export default function ProjectPage({ project }) {
         return <div>Loading...</div>;
     }
 
+    // Helper function to only show non-empty values
+    const displayInfo = (label, value) => {
+        if (!value) return null;
+        return (
+            <div className="project-info-item">
+                <strong>{label}</strong>
+                <p>{value}</p>
+                <hr /> {/* Line separator */}
+            </div>
+        );
+    };
+
     return (
         <>
             <Head>
-            <meta charSet="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>{`${project.title} - Ruxin Xie`}</title>
-
-                {/* Removed dynamic favicon link from Head */}
-                {/* Styles are already included globally in _document.js */}
+                <meta charSet="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>{`${project.title} - Ruxin Xie`}</title>
             </Head>
 
-            {/* Add the dynamic favicon using next/script */}
             <Script
                 id="dynamic-favicon"
                 strategy="afterInteractive"
@@ -94,7 +102,7 @@ export default function ProjectPage({ project }) {
                             const link = document.createElement('link');
                             link.rel = 'icon';
                             link.type = 'image/png';
-                            link.href = '/icons/${encodeURIComponent(project.folder)}/favicon.png'; // Assuming each project has its own favicon
+                            link.href = '/icons/${encodeURIComponent(project.folder)}/favicon.png';
                             document.head.appendChild(link);
                         })();
                     `,
@@ -119,6 +127,7 @@ export default function ProjectPage({ project }) {
 
             <div className="container">
                 <div className="project-content">
+                    {/* Project Images */}
                     <div className="project-images">
                         {project.images.length > 0 ? (
                             project.images.map((image, index) => (
@@ -134,21 +143,62 @@ export default function ProjectPage({ project }) {
                                             e.target.src = '/images/default-image.jpg';
                                         }}
                                     />
+                                    {/* Display description only under the first image */}
+                                    {index === 0 && (
+                                        <p className="project-description">
+                                            {project.description}
+                                        </p>
+                                    )}
                                 </div>
                             ))
                         ) : (
                             <p>No images available for this project.</p>
                         )}
                     </div>
-                    <div className="project-info">
 
+                    {/* Project Info (without the description) */}
+                    <div className="project-info">
                         <Link href="/" className="back-button">
                             ← Back to Projects
                         </Link>
+                        
                         <h2>{project.title}</h2>
-                        <p>{project.year} | {project.location}</p>
-                        <p>{project.description}</p>
-                        {/* Add more project details as needed */}
+
+                        {displayInfo('Year', project.year)}
+                        {displayInfo('Location', project.location)}
+                        {displayInfo('Status', project.status)}
+                        {displayInfo('Material', project.material)}
+                        {displayInfo('Software/Machinery', project["softwares/machinery"])}
+                        {displayInfo('Affiliation', project.affliation)}
+                        {displayInfo('Course', project.course)}
+                        {displayInfo('Team', project.students)}
+                        {displayInfo('Role', project.my_role)}
+
+                        {/* Display clickable publications */}
+                        {project.publications.length > 0 && (
+                            <div className="project-publications">
+                                <h4>Publications:</h4>
+                                <ul>
+                                    {project.publications.map((pub, index) => (
+                                        <li key={index}>
+                                            <a href={pub.url} target="_blank" rel="noopener noreferrer">
+                                                {pub.text}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <hr />
+                            </div>
+                        )}
+
+                        {/* Dedication message */}
+                        {project.dedication && (
+                            <div className="project-dedication">
+                                <h4>Dedication:</h4>
+                                <p>{project.dedication}</p>
+                                <hr />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

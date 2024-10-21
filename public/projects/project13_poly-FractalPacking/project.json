@@ -1,12 +1,12 @@
 {
   "project_title": "Poly-Fractal Packing",
-  "project_year": 2021,
+  "project_year": "2021",
   "categories": [
     "Computational Design"
   ],
-  "softwares/machinary": "",
+  "softwares/machinery": "",
   "material": "",
-  "id": 13,
+  "id": "13",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 703 Virtual Engagement",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -25,8 +25,8 @@
   "architects": "",
   "my_role": "rhino python coding",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project13_poly-FractalPacking"

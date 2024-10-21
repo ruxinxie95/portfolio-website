@@ -1,6 +1,6 @@
 {
   "project_title": "Engage",
-  "project_year": 2020,
+  "project_year": "2020",
   "categories": [
     "Prototyle",
     "Installation",
@@ -8,9 +8,9 @@
     "Light-weight",
     "Interactive"
   ],
-  "softwares/machinary": "",
+  "softwares/machinery": "",
   "material": "",
-  "id": 7,
+  "id": "7",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 509 Engage",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -27,10 +27,10 @@
   "students": "Interactive design: Gowri Saini Balasubramaniam, Allison Booth, Patrick Mark Brautigan,, Antonia Deller, Marco Nieto\nStructure design: Carl Uwe Eppinger, Malcolm Brom\nTextile design: Amlin Iqbal Eshita, Natalie Leonard, Haley Mayes, Karan Nashine, Jiayue Qin, Rachel Skof, Adithi Vellimana, Ryan Wang, Ruxin Xie, Le Yang, Renqing Yang, Yaxin Zheng",
   "structureal_engineers": "",
   "architects": "",
-  "my_role": "Prototype / programming using springFORM 2 the textile , final assembly ",
+  "my_role": "Prototype / programming using springFORM 2 the textile , final assembly",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "1Textile programming: springFORM developed by Prof. Sean Ahlquist",
   "dedication": "",
   "folder": "project7_engage"

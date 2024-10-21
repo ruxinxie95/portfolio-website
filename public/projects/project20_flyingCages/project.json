@@ -1,13 +1,13 @@
 {
   "project_title": "Flying Cages",
-  "project_year": 2016,
+  "project_year": "2016",
   "categories": [
     "Architecture",
     "Concept"
   ],
-  "softwares/machinary": "Sketches, Rhino, Adobe Suite",
+  "softwares/machinery": "Sketches, Rhino, Adobe Suite",
   "material": "",
-  "id": 20,
+  "id": "20",
   "location": "Dawa County, Panjin, Liaoning, China",
   "course": "",
   "affliation": "Xiamen University",
@@ -26,8 +26,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project20_flyingCages"

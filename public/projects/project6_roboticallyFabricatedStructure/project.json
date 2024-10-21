@@ -1,14 +1,14 @@
 {
   "project_title": "Robotically Fabricated Structure",
-  "project_year": 2021,
+  "project_year": "2021",
   "categories": [
     "Robotic Fabrication",
     "Computational Design",
     "Architecture"
   ],
-  "softwares/machinary": "",
+  "softwares/machinery": "",
   "material": "",
-  "id": 6,
+  "id": "6",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 708 Systems Engagement",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -27,8 +27,8 @@
   "architects": "",
   "my_role": "computational designer work with designers and fabricators. \n brings a napkin sketch to programed digital definition",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "https://www.archdaily.com/985542/robotically-fabricated-structure-adel-design-research-plus-university-of-michigan-taubman-college-of-architecture-and-urban-planning",
   "dedication": "",
   "folder": "project6_roboticallyFabricatedStructure"

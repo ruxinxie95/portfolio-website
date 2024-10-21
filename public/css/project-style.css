@@ -14,24 +14,14 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 150px; /* Adjust to make sure it's below the header */
+    margin-top: 10px; /* Adjust to make sure it's below the header */
     padding: 20px;
     flex-direction: row; /* Images on the left, text on the right */
     overflow: visible; /* No internal scrolling */
     height: auto; /* Allow the content to grow naturally */
 }
 
-/* Remove duplicate .project-content definition */
-.project-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 20px; /* Increase margin-top to account for the height of the fixed header */
-    padding: 20px;
-    overflow: hidden;
-    flex-direction: row;
-    height: auto; /* Ensure height adjusts dynamically */
-}
+
 
 /* Project Info - Simplified */
 .project-info {
@@ -45,8 +35,45 @@
     background-color: transparent; /* Ensure background doesn't hide text */
     padding: 0;
     opacity: 1; 
-    color: #000000; /* Bright red for debugging */
+    color: #333; /* Bright red for debugging */
     height: auto; /* Remove any height restrictions */
+    text-align: left; /* Explicitly set the text alignment to left */
+}
+
+/* Project Info Item */
+.project-info-item {
+    margin-bottom: 10px;
+    display: flex; /* Flex to handle spacing and alignment */
+    flex-direction: column; /* Stack the label and value */
+    align-items: flex-start; /* Ensure content is aligned to the left */
+    text-align: left; /* Text explicitly aligned left */
+    width: 100%; /* Ensure items take the full width */
+}
+
+.project-info-item strong {
+    display: block;
+    margin-bottom: 5px; /* Add space between key and value */
+    text-align: left; /* Ensure text is aligned left */
+}
+
+.project-info-item p {
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-align: left; /* Ensure paragraph text is aligned left */
+    width: 100%; /* Ensure full width is utilized */
+}
+
+/* Line separator for full width inside project-info */
+.project-info-item hr {
+    border: none;
+    border-top: 1px solid #000; /* Thin black line in light mode */
+    margin: 5px 0;
+    width: 100%; /* Full width of the project-info area */
+}
+
+
+body.dark-mode .project-info-item hr {
+    border-top: 1px solid #ffffff; /* Separator also becomes white in dark mode */
 }
 
 .project-info.dark-mode {
@@ -221,4 +248,16 @@ body.dark-mode .project-info {
         max-width: none; /* Remove max-width for smaller screens */
         max-height: 100%; /* Allow full height on small screens */
     }
+}
+
+/* Description styling under the first image */
+.project-description {
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-top: 10px; /* Space between image and description */
+    color: #333; /* Dark color in light mode */
+}
+
+body.dark-mode .project-description {
+    color: #ffffff; /* White text in dark mode */
 }

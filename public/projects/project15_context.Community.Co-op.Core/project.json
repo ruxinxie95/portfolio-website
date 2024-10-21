@@ -1,13 +1,13 @@
 {
   "project_title": "Context. Community. Co-op. Core",
-  "project_year": 2019,
+  "project_year": "2019",
   "categories": [
     "Architecture",
     "Concept"
   ],
-  "softwares/machinary": "Sketches, Rhino, Model Making, Adobe Suite",
+  "softwares/machinery": "Sketches, Rhino, Model Making, Adobe Suite",
   "material": "",
-  "id": 15,
+  "id": "15",
   "location": "Detroit, MI, USA",
   "course": "ARCH 572 System Studio",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -26,8 +26,8 @@
   "architects": "",
   "my_role": "",
   "awards": "This project was nominated to be exhibited in the 2019 Taubman College Student Show.",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project15_context.Community.Co-op.Core"

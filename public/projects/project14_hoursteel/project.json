@@ -1,14 +1,14 @@
 {
   "project_title": "Hoursteel",
-  "project_year": 2020,
+  "project_year": "2020",
   "categories": [
     "Interactive",
     "Computational Design",
     "Lighting"
   ],
-  "softwares/machinary": "Software: Rhino + Grasshopper\nMachine: Waterjet cut\nLighting: Circuit Playground Bluefruit\nProgramming: CircuitPython",
+  "softwares/machinery": "Software: Rhino + Grasshopper\nMachine: Waterjet cut\nLighting: Circuit Playground Bluefruit\nProgramming: CircuitPython",
   "material": "24G mild steel",
-  "id": 14,
+  "id": "14",
   "location": "Ann Arbor, MI, USA",
   "course": "ARCH 700 Practicum",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -27,8 +27,8 @@
   "architects": "",
   "my_role": "",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "",
   "dedication": "",
   "folder": "project14_hoursteel"

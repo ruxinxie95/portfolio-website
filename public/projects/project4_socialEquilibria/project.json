@@ -1,15 +1,15 @@
 {
   "project_title": "Social Equilibria",
-  "project_year": 2021,
+  "project_year": "2021",
   "categories": [
     "Prototyle",
     "Installation",
     "Textile",
     "Light-weight"
   ],
-  "softwares/machinary": "",
+  "softwares/machinery": "",
   "material": "GFRP, Monofilament, Hytrel",
-  "id": 4,
+  "id": "4",
   "location": "Forte Marghera, Venice, Italy",
   "course": "",
   "affliation": "Taubman College,\nUniversity of Michigan",
@@ -26,10 +26,10 @@
   "students": "Yi-Chin Lee, Maria Redoutey, Ruxin Xie",
   "structureal_engineers": "",
   "architects": "",
-  "my_role": "prototyping, revising, fabricating structural brackets and flooring. ",
+  "my_role": "prototyping, revising, fabricating structural brackets and flooring.",
   "awards": "",
-  "publications": "",
-  "social_media": "",
+  "publications": [],
+  "social_media": [],
   "reference": "Ahlquist, Sean. \"Lab: Sociomaterial Architectures.\" Labiennale, 2021. https://www.labiennale.org/en/architecture/2021/how-will-we-play-together/sean-ahlquist-lab-sociomaterial-architectures-university-michigan.",
   "dedication": "",
   "folder": "project4_socialEquilibria"

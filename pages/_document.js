@@ -13,8 +13,6 @@ export default function Document() {
                 <link
                     rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-                    integrity="sha512-dymNQjHh5PjQ++o7CJhKnEwVfD6UquXKmjJyluQFhVz4e4kN4ZOkLzK1v4aOqYFfgrky1vcL9RYoK/5Iu6Z9BA=="
-                    crossOrigin="anonymous"
                     referrerPolicy="no-referrer"
                 />
             </Head>
