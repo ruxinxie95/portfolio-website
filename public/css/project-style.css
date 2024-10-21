@@ -1,4 +1,4 @@
-/* project-style.css */
+/*public/css/project-style.css*/
 
 /* ------------------- Project Page Specific Styles ------------------- */
 
@@ -39,8 +39,8 @@
     position: sticky;
     top: 20px;
     align-self: flex-start;
-    font-family: 'Courier', monospace;
-    font-size: 16px;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Update the font family */
+    font-size: 0.8em; /* Update the font size */
     line-height: 1.6;
     background-color: transparent; /* Ensure background doesn't hide text */
     padding: 0;

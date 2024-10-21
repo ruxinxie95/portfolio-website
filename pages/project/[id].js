@@ -1,5 +1,3 @@
-// pages/project/[id].js
-
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -8,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import path from 'path';
 import fs from 'fs/promises';
+import Script from 'next/script';
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
@@ -24,6 +23,10 @@ export async function getServerSideProps(context) {
             try {
                 const data = await fs.readFile(projectJsonPath, 'utf8');
                 const currentProject = JSON.parse(data);
+
+                // Sanitize project title
+                currentProject.title = typeof currentProject.title === 'string' ? currentProject.title : String(currentProject.title);
+
                 if (currentProject.id.toString() === id.toString()) {
                     projectData = currentProject;
                     projectData.folder = folder; // Store the actual folder name
@@ -56,7 +59,7 @@ export async function getServerSideProps(context) {
             },
         };
     } catch (error) {
-        console.error(`Error fetching project ${id}:`, error);
+        console.error(`Error fetching project ${id}:`, error.message);
         return {
             notFound: true,
         };
@@ -73,31 +76,44 @@ export default function ProjectPage({ project }) {
     return (
         <>
             <Head>
-                <meta charSet="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>{project.title} - Ruxin Xie</title>
+            <meta charSet="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{`${project.title} - Ruxin Xie`}</title>
 
-                {/* Pre-Apply Dark Mode to Prevent Flicker */}
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            (function() {
-                                if (localStorage.getItem('darkMode') === 'enabled') {
-                                    document.body.classList.add('dark-mode');
-                                }
-                            })();
-                        `,
-                    }}
-                ></script>
-
-                {/* Dynamic Favicon (Optional, if used in project pages) */}
-                <link id="dynamic-favicon" rel="icon" type="image/png" href="/icons/favicon1.png" />
-
-                {/* Include Font Awesome */}
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-
-                {/* Note: Styles are already included globally in _document.js */}
+                {/* Removed dynamic favicon link from Head */}
+                {/* Styles are already included globally in _document.js */}
             </Head>
+
+            {/* Add the dynamic favicon using next/script */}
+            <Script
+                id="dynamic-favicon"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        (function() {
+                            const link = document.createElement('link');
+                            link.rel = 'icon';
+                            link.type = 'image/png';
+                            link.href = '/icons/${encodeURIComponent(project.folder)}/favicon.png'; // Assuming each project has its own favicon
+                            document.head.appendChild(link);
+                        })();
+                    `,
+                }}
+            />
+
+            <Script
+                id="dark-mode-script"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        (function() {
+                            if (localStorage.getItem('darkMode') === 'enabled') {
+                                document.body.classList.add('dark-mode');
+                            }
+                        })();
+                    `,
+                }}
+            />
 
             <Header />
 
@@ -108,11 +124,15 @@ export default function ProjectPage({ project }) {
                             project.images.map((image, index) => (
                                 <div key={index} className="project-image-wrapper">
                                     <Image
-                                        src={`/projects/${project.folder}/images/${image}`}
+                                        src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
                                         alt={`${project.title} Image ${index + 1}`}
                                         width={600}
                                         height={400}
                                         className="project-image"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = '/images/default-image.jpg';
+                                        }}
                                     />
                                 </div>
                             ))
