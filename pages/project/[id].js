@@ -1,3 +1,5 @@
+// pages/project/[id].js
+
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -25,7 +27,7 @@ export async function getServerSideProps(context) {
                 const currentProject = JSON.parse(data);
 
                 // Sanitize project title
-                currentProject.title = typeof currentProject.title === 'string' ? currentProject.title : String(currentProject.title);
+                currentProject.project_title = typeof currentProject.project_title === 'string' ? currentProject.project_title : String(currentProject.project_title);
 
                 if (currentProject.id.toString() === id.toString()) {
                     projectData = currentProject;
@@ -73,24 +75,68 @@ export default function ProjectPage({ project }) {
         return <div>Loading...</div>;
     }
 
-    // Helper function to only show non-empty values
-    const displayInfo = (label, value) => {
+    // Helper function to display information based on data type
+    const displayInfo = (label, value, keyProp) => {
         if (!value) return null;
+
+        // Handle arrays
+        if (Array.isArray(value)) {
+            if (value.length === 0) return null;
+            return (
+                <div key={keyProp} className="project-info-item">
+                    <strong>{label}:</strong>
+                    <ul>
+                        {value.map((item, index) => (
+                            <li key={index}>{item}</li>
+                        ))}
+                    </ul>
+                    <hr /> {/* Line separator */}
+                </div>
+            );
+        }
+
+        // Handle strings and other types
+        if (typeof value === 'string' && value.trim() === '') return null;
+
         return (
-            <div className="project-info-item">
-                <strong>{label}</strong>
+            <div key={keyProp} className="project-info-item">
+                <strong>{label}:</strong>
                 <p>{value}</p>
                 <hr /> {/* Line separator */}
             </div>
         );
     };
 
+    // Mapping of project keys to display labels
+    const infoFields = [
+        { label: 'Year', key: 'project_year' },
+        { label: 'Location', key: 'location' },
+        { label: 'Status', key: 'status' },
+        { label: 'Exhibition', key: 'exhibition' },
+        { label: 'Architects', key: 'architects' },
+        { label: 'Client', key: 'client' },
+        { label: 'Affiliation', key: 'affliation' }, // Ensure this matches your JSON key
+        { label: 'Course', key: 'course' },
+        { label: 'Team', key: 'students' },
+        { label: 'Role', key: 'my_role' },
+        { label: 'Designer', key: 'designer' },
+        { label: 'Supervisor', key: 'supervisor' },
+        { label: 'Lead Investigators', key: 'lead_investigators' },
+        { label: 'Construction Assistants', key: 'construction_assistants' },
+        { label: 'Researchers', key: 'researchers' },
+        { label: 'Structural Engineers', key: 'structureal_engineers' },
+        { label: 'Material', key: 'material' },
+        { label: 'Software/Machinery', key: 'softwares/machinery' },
+        { label: 'Awards', key: 'awards' },
+        { label: 'Reference', key: 'reference' },
+    ];
+
     return (
         <>
             <Head>
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>{`${project.title} - Ruxin Xie`}</title>
+                <title>{`${project.project_title} - Ruxin Xie`}</title>
             </Head>
 
             <Script
@@ -134,7 +180,7 @@ export default function ProjectPage({ project }) {
                                 <div key={index} className="project-image-wrapper">
                                     <Image
                                         src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
-                                        alt={`${project.title} Image ${index + 1}`}
+                                        alt={`${project.project_title} Image ${index + 1}`}
                                         width={600}
                                         height={400}
                                         className="project-image"
@@ -144,7 +190,7 @@ export default function ProjectPage({ project }) {
                                         }}
                                     />
                                     {/* Display description only under the first image */}
-                                    {index === 0 && (
+                                    {index === 0 && project.description && (
                                         <p className="project-description">
                                             {project.description}
                                         </p>
@@ -162,22 +208,15 @@ export default function ProjectPage({ project }) {
                             ← Back to Projects
                         </Link>
                         
-                        <h2>{project.title}</h2>
+                        <h2 className="project-title">{project.project_title}</h2>
 
-                        {displayInfo('Year', project.year)}
-                        {displayInfo('Location', project.location)}
-                        {displayInfo('Status', project.status)}
-                        {displayInfo('Material', project.material)}
-                        {displayInfo('Software/Machinery', project["softwares/machinery"])}
-                        {displayInfo('Affiliation', project.affliation)}
-                        {displayInfo('Course', project.course)}
-                        {displayInfo('Team', project.students)}
-                        {displayInfo('Role', project.my_role)}
+
+                        {infoFields.map(({ label, key }) => displayInfo(label, project[key], key))}
 
                         {/* Display clickable publications */}
-                        {project.publications.length > 0 && (
-                            <div className="project-publications">
-                                <h4>Publications:</h4>
+                        {project.publications && project.publications.length > 0 && (
+                            <div className="project-info-item project-publications">
+                                <strong>Publications:</strong>
                                 <ul>
                                     {project.publications.map((pub, index) => (
                                         <li key={index}>
@@ -190,11 +229,28 @@ export default function ProjectPage({ project }) {
                                 <hr />
                             </div>
                         )}
+                       
+                        {/* Display social media links */}
+                        {project.social_media && project.social_media.length > 0 && (
+                            <div className="project-info-item project-social-media">
+                                <strong>Social Media:</strong>
+                                <ul>
+                                    {project.social_media.map((social, index) => (
+                                        <li key={index}>
+                                            <a href={social.url} target="_blank" rel="noopener noreferrer">
+                                                {social.platform}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <hr />
+                            </div>
+                        )}
 
                         {/* Dedication message */}
-                        {project.dedication && (
-                            <div className="project-dedication">
-                                <h4>Dedication:</h4>
+                        {project.dedication && project.dedication.trim() !== '' && (
+                            <div className="project-info-item project-dedication">
+                                <strong>Dedication:</strong>
                                 <p>{project.dedication}</p>
                                 <hr />
                             </div>
@@ -205,5 +261,5 @@ export default function ProjectPage({ project }) {
 
             <Footer />
         </>
-    );
+    )
 }

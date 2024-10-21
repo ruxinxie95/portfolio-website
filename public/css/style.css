@@ -285,34 +285,9 @@ a:not(.project-link):hover::after {
     opacity: 1;
 }
 
-.project-info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; 
-    background-color: rgb(20, 20, 20); 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 0.75em;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    text-align: center;
-}
-
-.project-info h2 {
-    font-size: 1.3em; /* Adjust the value as needed */
-    font-weight:normal;
-    color: #ffffff;
-}
-
 
 .project:hover .project-info {
-    opacity: 1;
+    opacity: 0.2;
 }
 
 /* Initially hide the grid */

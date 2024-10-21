@@ -163,7 +163,7 @@
                                             <div className={styles.projectLink}>
                                                 <Image
                                                     src={`/projects/${project.folder}/images/cover.jpg`}
-                                                    alt={`Cover image for project ${project.title}`}
+                                                    alt={`Cover image for project ${project.project_title}`}
                                                     width={800}  // Replace with actual image width
                                                     height={600} // Replace with actual image height
                                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -171,7 +171,7 @@
                                                 />
                                                 
                                                 <div className={styles.projectInfo}>
-                                                    <h2>{project.title}</h2>
+                                                    <h2>{project.project_title}</h2>
                                                     <p>{project.year} | {project.location}</p>
                                                 </div>
                                             </div>

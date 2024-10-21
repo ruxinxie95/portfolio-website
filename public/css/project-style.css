@@ -1,4 +1,4 @@
-/*public/css/project-style.css*/
+/* public/css/project-style.css */
 
 /* ------------------- Project Page Specific Styles ------------------- */
 
@@ -21,8 +21,6 @@
     height: auto; /* Allow the content to grow naturally */
 }
 
-
-
 /* Project Info - Simplified */
 .project-info {
     width: 20%; /* Should be set correctly */
@@ -35,9 +33,22 @@
     background-color: transparent; /* Ensure background doesn't hide text */
     padding: 0;
     opacity: 1; 
-    color: #333; /* Bright red for debugging */
+    color: #333; /* Dark text color */
     height: auto; /* Remove any height restrictions */
     text-align: left; /* Explicitly set the text alignment to left */
+}
+
+/* Styling for the project title */
+.project-title {
+    color: #333; /* Replace with your desired color code */
+    font-size: 1.4em; /* Adjust the font size if needed */
+    font-weight: bold; /* Optional: Make the title bold */
+    width: 100%; /* Ensure items take the full width */
+}
+
+.back-button{
+    width: 100%; /* Ensure items take the full width */
+
 }
 
 /* Project Info Item */
@@ -48,6 +59,7 @@
     align-items: flex-start; /* Ensure content is aligned to the left */
     text-align: left; /* Text explicitly aligned left */
     width: 100%; /* Ensure items take the full width */
+    white-space: pre-line;
 }
 
 .project-info-item strong {
@@ -61,6 +73,7 @@
     margin-bottom: 5px;
     text-align: left; /* Ensure paragraph text is aligned left */
     width: 100%; /* Ensure full width is utilized */
+    white-space: pre-line; /* Render \n as line breaks */
 }
 
 /* Line separator for full width inside project-info */
@@ -70,7 +83,6 @@
     margin: 5px 0;
     width: 100%; /* Full width of the project-info area */
 }
-
 
 body.dark-mode .project-info-item hr {
     border-top: 1px solid #ffffff; /* Separator also becomes white in dark mode */
@@ -94,7 +106,45 @@ body.dark-mode .project-info {
 
 .project-info a:hover {
     color: #ff886f; /* Lighter accent on hover */
-    text-decoration: underline;
+    text-decoration: underline; /* Add underline on hover */
+    /* Ensure no strike-through is applied */
+    text-decoration-line: underline;
+}
+
+/* Specific Styles for Publications and Social Media */
+.project-publications ul,
+.project-social-media ul {
+    padding-left: 20px; /* Indent list items */
+    margin: 0; /* Remove default margins */
+    list-style-type: disc; /* Use disc bullets */
+}
+
+.project-publications li,
+.project-social-media li {
+    word-wrap: break-word; /* Allow long words or URLs to wrap */
+    overflow-wrap: break-word; /* Fallback for better browser support */
+}
+
+/* Style Links in Publications and Social Media */
+.project-publications a,
+.project-social-media a {
+    color: #333; /* Same as p text in light mode */
+    text-decoration: underline; /* Underline to indicate clickable */
+    font-size: 0.9em; /* Match the font size of other text */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.project-publications a:hover,
+.project-social-media a:hover {
+    color: #ff6f61; /* Accent color on hover */
+    text-decoration: underline; /* Keep underline on hover */
+    /* Remove any strike-through if previously applied */
+    text-decoration-line: underline;
+}
+
+/* Remove any global hover strike-throughs */
+.project-info a:hover {
+    text-decoration-line: underline; /* Ensure only underline is applied */
 }
 
 /* Project Images */
@@ -256,8 +306,45 @@ body.dark-mode .project-info {
     line-height: 1.6;
     margin-top: 10px; /* Space between image and description */
     color: #333; /* Dark color in light mode */
+    white-space: pre-line; /* Render \n as line breaks */
 }
 
 body.dark-mode .project-description {
     color: #ffffff; /* White text in dark mode */
+    white-space: pre-line;
+}
+
+/* Additional Styles for Publications and Social Media */
+.project-publications ul,
+.project-social-media ul {
+    padding-left: 20px; /* Indent list items */
+    margin: 0; /* Remove default margins */
+    list-style-type: disc; /* Use disc bullets */
+}
+
+.project-publications li,
+.project-social-media li {
+    word-wrap: break-word; /* Allow long words or URLs to wrap */
+    overflow-wrap: break-word; /* Fallback for better browser support */
+}
+
+.project-publications a,
+.project-social-media a {
+    color: #333; /* Same as p text in light mode */
+    text-decoration: underline; /* Underline to indicate clickable */
+    font-size: 0.9em; /* Match the font size of other text */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.project-publications a:hover,
+.project-social-media a:hover {
+    color: #ff6f61; /* Accent color on hover */
+    text-decoration: underline; /* Keep underline on hover */
+    /* Ensure no strike-through is applied */
+    text-decoration-line: underline;
+}
+
+/* Remove any global hover strike-throughs */
+.project-info a:hover {
+    text-decoration-line: underline; /* Ensure only underline is applied */
 }
