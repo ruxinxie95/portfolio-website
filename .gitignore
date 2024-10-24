@@ -19,3 +19,6 @@ yarn-error.log*
 
 # Environment Variables
 .env
+
+# Ignore all MP4 files in the projects folder
+public/projects/**/*.mp4
