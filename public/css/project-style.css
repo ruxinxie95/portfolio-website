@@ -1,5 +1,4 @@
-/* public/css/project-style.css */
-
+/*public/css/project-style.css*/
 /* ------------------- Project Page Specific Styles ------------------- */
 
 /* Restricting page width to 1000px */
@@ -14,8 +13,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 10px; /* Adjust to make sure it's below the header */
-    padding: 20px;
+    margin-top: 40px; /* Adjust to make sure it's below the header */
+    /* padding: 20px; */
     flex-direction: row; /* Images on the left, text on the right */
     overflow: visible; /* No internal scrolling */
     height: auto; /* Allow the content to grow naturally */
@@ -23,21 +22,41 @@
 
 /* Project Info - Simplified */
 .project-info {
-    width: 20%; /* Should be set correctly */
-    position: sticky;
-    top: 20px;
+    width: 20%; /* Ensure the width is appropriate */
+    position: sticky; /* Use sticky positioning */
+    top: 20px; /* Stick to the top when scrolling */
     align-self: flex-start;
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Update the font family */
-    font-size: 0.8em; /* Update the font size */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Font settings */
+    font-size: 0.8em;
     line-height: 1.6;
-    background-color: transparent; /* Ensure background doesn't hide text */
+    background-color: transparent;
     padding: 0;
     opacity: 1; 
-    color: #333; /* Dark text color */
-    height: auto; /* Remove any height restrictions */
-    text-align: left; /* Explicitly set the text alignment to left */
+    color: #333;
+    height: auto; /* Allow height to adjust based on content */
+    text-align: left;
+    overflow-y: auto; /* Add vertical scroll within project-info */
+    max-height: calc(100vh - 40px); /* Limit height to fit within the viewport */
+    margin-bottom: 20px; /* Add some margin at the bottom */
+    scroll-behavior: smooth; /* Smooth scrolling behavior */
+}
+/* Custom subtle scrollbar styling */
+.project-info::-webkit-scrollbar {
+    width: 6px; /* Narrow scrollbar width */
 }
 
+.project-info::-webkit-scrollbar-thumb {
+    background-color: rgba(154, 154, 154, 0.1); /* Subtle dark scrollbar thumb */
+    border-radius: 3px; /* Rounded scrollbar thumb */
+}
+
+.project-info::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(154, 154, 154, 0.4); /* Slightly darker on hover */
+}
+
+.project-info::-webkit-scrollbar-track {
+    background-color: transparent; /* Transparent track for subtle effect */
+}
 /* Styling for the project title */
 .project-title {
     color: #333; /* Replace with your desired color code */
@@ -48,7 +67,6 @@
 
 .back-button{
     width: 100%; /* Ensure items take the full width */
-
 }
 
 /* Project Info Item */
@@ -79,13 +97,13 @@
 /* Line separator for full width inside project-info */
 .project-info-item hr {
     border: none;
-    border-top: 1px solid #000; /* Thin black line in light mode */
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Lighter black line with reduced opacity */
     margin: 5px 0;
     width: 100%; /* Full width of the project-info area */
 }
 
 body.dark-mode .project-info-item hr {
-    border-top: 1px solid #ffffff; /* Separator also becomes white in dark mode */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Lighter white line in dark mode */
 }
 
 .project-info.dark-mode {
@@ -107,8 +125,6 @@ body.dark-mode .project-info {
 .project-info a:hover {
     color: #ff886f; /* Lighter accent on hover */
     text-decoration: underline; /* Add underline on hover */
-    /* Ensure no strike-through is applied */
-    text-decoration-line: underline;
 }
 
 /* Specific Styles for Publications and Social Media */
@@ -138,8 +154,6 @@ body.dark-mode .project-info {
 .project-social-media a:hover {
     color: #ff6f61; /* Accent color on hover */
     text-decoration: underline; /* Keep underline on hover */
-    /* Remove any strike-through if previously applied */
-    text-decoration-line: underline;
 }
 
 /* Remove any global hover strike-throughs */
@@ -158,13 +172,6 @@ body.dark-mode .project-info {
     gap: 20px;
 }
 
-/* Ensure the overall page can scroll */
-#page {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-bottom: 20px; /* Ensure there's padding at the bottom for easier scrolling */
-}
-
 /* Ensure images scale properly and fit within the allocated width */
 .project-images img {
     width: 100%;
@@ -175,7 +182,7 @@ body.dark-mode .project-info {
 }
 
 .project-images img:hover {
-    transform: scale(1.02);
+    transform: scale(1.006);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
@@ -202,6 +209,7 @@ body.dark-mode .project-info {
 }
 
 /* Lightbox Styles */
+/* Lightbox Styles */
 
 /* Lightbox Container */
 .lightbox {
@@ -212,28 +220,28 @@ body.dark-mode .project-info {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: #000; /* Change to solid black */
+    overflow: hidden; /* Prevent content overflow */
+    background-color: rgba(0, 0, 0, 0.9); /* Slight transparency for background */
 }
 
 /* Lightbox Container Active State */
 .lightbox.active {
-    display: flex; /* Show the lightbox as a flex container */
+    display: flex; /* Flexbox for centering */
     justify-content: center; /* Horizontal centering */
     align-items: center; /* Vertical centering */
 }
 
 /* Lightbox Content (Image) */
 .lightbox-content {
-    max-width: 90%; /* Ensure the image doesn't overflow horizontally */
-    max-height: 90%; /* Ensure the image doesn't overflow vertically */
+    max-width: 90vw; /* Scale image responsively with viewport width */
+    max-height: 90vh; /* Scale image responsively with viewport height */
     border-radius: 8px;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    animation: zoom 0.6s;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
-/* Close Button in Lightbox */
+/* Adjust close button */
 .lightbox-close {
     position: absolute;
     top: 20px;
@@ -248,58 +256,69 @@ body.dark-mode .project-info {
 .lightbox-close:hover,
 .lightbox-close:focus {
     color: #bbb;
-    text-decoration: none;
 }
 
 /* Lightbox Navigation Buttons */
 .lightbox-prev,
 .lightbox-next {
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -50px;
+    position: absolute; /* Position relative to the lightbox container */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust to center */
+    padding: 10px; /* Padding for clickable area */
     color: white;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px; /* Adjust as needed */
     cursor: pointer;
     user-select: none;
-    transition: color 0.3s;
-    border-radius: 0 3px 3px 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1002; /* Ensure it's above the lightbox content */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%; /* Circular buttons */
+    width: 50px; /* Reasonable size */
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
 }
 
 .lightbox-prev {
-    left: 10px;
-    border-radius: 3px 0 0 3px;
+    left: 20px;
 }
 
 .lightbox-next {
-    right: 10px;
-    border-radius: 3px 0 0 3px;
+    right: 20px;
 }
 
 .lightbox-prev:hover,
 .lightbox-next:hover {
-    color: #bbb;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Animation */
-@keyframes zoom {
-    from {transform: scale(0)}
-    to {transform: scale(1)}
-}
-
-/* Lightbox Responsive */
-@media only screen and (max-width: 700px){
+/* Responsive behavior */
+@media (max-width: 700px) {
     .lightbox-content {
-        width: 100%;
-        max-width: none; /* Remove max-width for smaller screens */
-        max-height: 100%; /* Allow full height on small screens */
+        width: 100%; /* Full width for smaller screens */
+        height: auto; /* Maintain aspect ratio */
+        max-width: none;
+        max-height: none;
     }
 }
 
+/* Disable scale-up effect for lightbox images */
+.lightbox-content:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
+}
+
+.lightbox-prev:before,
+.lightbox-next:before {
+    content: ''; /* Empty content to avoid rendering issues */
+}
 /* Description styling under the first image */
 .project-description {
     font-size: 0.9em;
@@ -314,37 +333,11 @@ body.dark-mode .project-description {
     white-space: pre-line;
 }
 
-/* Additional Styles for Publications and Social Media */
-.project-publications ul,
-.project-social-media ul {
-    padding-left: 20px; /* Indent list items */
-    margin: 0; /* Remove default margins */
-    list-style-type: disc; /* Use disc bullets */
-}
 
-.project-publications li,
-.project-social-media li {
-    word-wrap: break-word; /* Allow long words or URLs to wrap */
-    overflow-wrap: break-word; /* Fallback for better browser support */
-}
-
-.project-publications a,
-.project-social-media a {
-    color: #333; /* Same as p text in light mode */
-    text-decoration: underline; /* Underline to indicate clickable */
-    font-size: 0.9em; /* Match the font size of other text */
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-.project-publications a:hover,
-.project-social-media a:hover {
-    color: #ff6f61; /* Accent color on hover */
-    text-decoration: underline; /* Keep underline on hover */
-    /* Ensure no strike-through is applied */
-    text-decoration-line: underline;
-}
-
-/* Remove any global hover strike-throughs */
-.project-info a:hover {
-    text-decoration-line: underline; /* Ensure only underline is applied */
+.artist-name {
+    font-size: 0.8em; /* Adjust font size */
+    color: #555; /* Change the color to a softer tone */
+    text-align: left; /* Left align the text below the image */
+    margin-top: 5px; /* Add some space between the image and the text */
+    display: block; /* Ensure it takes up a full line */
 }

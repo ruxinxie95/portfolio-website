@@ -17,7 +17,7 @@ body {
 /* ------------------- Header Styles ------------------- */
 header {
     background-color: #fff;
-    padding: 10px;
+    padding: 0px;
     border-bottom: 1px solid #ddd;
     text-align: left;
 }
@@ -26,7 +26,7 @@ header {
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px; /* Retain the padding */
+    padding: 5px; /* Retain the padding */
     position: relative; /* Ensure it's positioned relative */
 }
 
@@ -116,7 +116,7 @@ header {
 .site-footer .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px; /* Optional: Adjust padding if needed */
+    padding: 0px; /* Optional: Adjust padding if needed */
     text-align: left; /* Align text to the left */
 }
 
@@ -285,7 +285,6 @@ a:not(.project-link):hover::after {
     opacity: 1;
 }
 
-
 .project:hover .project-info {
     opacity: 0.2;
 }
@@ -300,4 +299,60 @@ a:not(.project-link):hover::after {
 .grid.is-loaded {
     opacity: 1;
 }
+/* Style for the footer container */
+.site-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+/* Back to Top Button */
+.back-to-top {
+    background-color: transparent; /* Remove background color */
+    color: #000000; /* Same color as coordinates */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8em;
+    text-decoration: none;
+    border: none; /* Remove border */
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s, text-decoration 0.3s;
+    padding: 0; /* Remove any unwanted padding */
+}
+
+.back-to-top::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 2px;
+    background-color: currentColor; /* Matches the current text color */
+    transition: width 0.3s ease-in-out;
+    transform: translateY(-50%);
+}
+
+.back-to-top:hover {
+    color: #555; /* Same hover effect as coordinates */
+}
+
+.back-to-top:hover::after {
+    width: 100%; /* Animate the strikethrough */
+}
+.back-to-top:hover {
+    color: #555; /* Same hover effect as coordinates */
+    text-decoration:none; /* Same underline effect */
+}
+
+
+@media (max-width: 700px) {
+    .back-to-top {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .site-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,3 +1,4 @@
+//components/Header.js
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -58,8 +59,7 @@ const Header = () => {
         }
     };
 
-    const resetStopMe = (event) => {
-        event.preventDefault();
+    const resetStopMe = () => {
         sessionStorage.removeItem('clickCount');
         setClickCount(0); // Reset the click count
     };
@@ -68,7 +68,7 @@ const Header = () => {
         <div className="container">
             <header id="masthead" className="site-header" role="banner">
                 <h1 className="site-title">
-                    <Link href="/" rel="home" className="bling-text" onClick={resetStopMe}>
+                    <Link href="/" onClick={resetStopMe} className="bling-text">
                         Ruxin <span className="rotating-x">X</span>ie
                     </Link>
                 </h1>

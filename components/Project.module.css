@@ -3,26 +3,26 @@
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0px;
     position: relative;
 }
 
 .myMasonryGrid {
     display: flex;
-    margin-left: -20px; /* gutter size offset */
     width: 1000px; /* Ensure the grid fits within the container */
     margin: 0 auto; /* Center the grid within the container */
 }
 
 .myMasonryGridColumn {
-    padding-left: 20px; /* gutter size */
+    padding-left: 5px; /* gutter size */
+    padding-right: 5px; /* gutter size */
+
     background-clip: padding-box;
 }
 
 .project {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: #fff;
-    border-radius: 5px;
     overflow: hidden;
     position: relative; /* For project-info positioning */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -31,25 +31,25 @@
 }
 
 .project:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
 }
 
 .projectLink {
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 5px;
+
 }
 
 .projectImage {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 5px;
+
 }
 
 .projectInfo {
-    padding: 10px;
+    padding: 0px;
     background-color: rgba(20, 20, 20, 0.8);
     color: white;
     position: absolute;
@@ -57,6 +57,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    margin: 0px;
     opacity: 0;
     display: flex;
     flex-direction: column;
@@ -64,6 +65,13 @@
     align-items: center;
     transition: opacity 0.3s ease;
     text-align: center;
+    font-size: 0.8em;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.projectInfo h2 {
+    font-weight: 400; /* Lighter stroke, less bold */
+    font-size: 1.5em; /* Adjust size as needed */
 }
 
 .project:hover .projectInfo {
@@ -77,8 +85,8 @@
 }
 
 .filterButton {
-    padding: 10px; /* Changed from 10px 15px to 10px */
-    margin: 0 5px; /* Changed from margin-right: 10px to match previous */
+    padding: 5px; /* Changed from 10px 15px to 10px */
+    margin: 0 10px; /* Changed from margin-right: 10px to match previous */
     background: none; /* Changed from background-color: #f0f0f0 to none */
     border: none;
     color: #777777; /* Set color to match previous */
@@ -97,12 +105,12 @@
 .active::after {
     content: '';
     position: absolute;
-    left: -5px;
-    right: -5px;
+    left: 0px;
+    right: 0px;
     bottom: 50%;
     height: 1px;
     background-color: #333;
-    width: calc(100% + 10px);
+    width: calc(100%);
 }
 
 /* Optional: Adjust the filter button focus state for accessibility */
