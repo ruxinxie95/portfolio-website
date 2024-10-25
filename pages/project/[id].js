@@ -79,7 +79,7 @@ export default function ProjectPage({ project }) {
         return <div>Loading...</div>;
     }
 
-    // Mapping of project keys to display labels
+    // Define infoFields array within the component, excluding 'description'
     const infoFields = [
         { label: 'Year', key: 'project_year' },
         { label: 'Location', key: 'location' },
@@ -103,6 +103,31 @@ export default function ProjectPage({ project }) {
         { label: 'Awards', key: 'awards' },
         { label: 'Reference', key: 'reference' },
     ];
+
+    // Function to group grid images based on labels (e.g., grid1, grid2)
+    const groupGridImages = () => {
+        const gridGroups = {};
+        project.images.forEach(image => {
+            const gridMatch = image.match(/grid(\d+)_img\d+/); // Updated regex with underscore
+            if (gridMatch) {
+                const gridGroup = gridMatch[1];
+                if (!gridGroups[gridGroup]) {
+                    gridGroups[gridGroup] = [];
+                }
+                gridGroups[gridGroup].push(image);
+            }
+        });
+        return gridGroups;
+    };
+
+    const gridGroups = groupGridImages();
+
+
+    // Identify the cover image explicitly named 'cover'
+    const coverImage = project.images.find(img => img.includes('cover'));
+
+    // Exclude the cover image and any images containing 'grid' from the remaining images
+    const remainingNonGridImages = project.images.filter(img => img !== coverImage && !img.includes('grid'));
 
     return (
         <>
@@ -133,25 +158,43 @@ export default function ProjectPage({ project }) {
 
             <div className="container">
                 <div className="project-content">
-                    {/* Project Images */}
                     <div className="project-images">
-                        {project.images.length > 0 ? (
-                            <>
-                                {project.images.map((image, index) => (
-                                    <div key={index} className="project-image-wrapper">
+                        {/* Cover Image */}
+
+                        {coverImage && (
+                            <div className="cover-image-wrapper">
+                                <Lightbox images={[`/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(coverImage)}`]} />
+                                <p className="artist-name">© {project.imageMetadata[coverImage]?.artist || 'Unknown Artist'}</p>
+                            </div>
+                        )}
+                        {/* Project Description */}
+                        {project.description && (
+                            <div className="project-description">
+                                {project.description}
+                            </div>
+                        )}
+
+                        {/* Grid Images */}
+                        {Object.keys(gridGroups).map((gridGroup, index) => (
+                            <div key={`grid-${gridGroup}-${index}`} className={`grid-container grid-${gridGroup}`}>
+                                {gridGroups[gridGroup].map((image, i) => (
+                                    <div key={i} className={`grid-image-${gridGroups[gridGroup].length}`}>
                                         <Lightbox images={[`/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`]} />
-                                        <p className="artist-name">
-                                            @{project.imageMetadata[image]?.artist || 'Unknown Artist'}
-                                        </p>
                                     </div>
                                 ))}
-                            </>
-                        ) : (
-                            <p>No images available for this project.</p>
-                        )}
+                            </div>
+                        ))}
+
+                        {/* Remaining non-grid images */}
+                        {remainingNonGridImages.map((image, index) => (
+                            <div key={index} className="project-image-wrapper">
+                                <Lightbox images={[`/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`]} />
+                                <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                            </div>
+                        ))}
                     </div>
 
-                    {/* Project Info */}
+                    {/* Render the ProjectInfo component */}
                     <ProjectInfo project={project} infoFields={infoFields} />
                 </div>
             </div>
