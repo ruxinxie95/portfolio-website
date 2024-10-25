@@ -1,3 +1,4 @@
+/*public/css/project-style.css
 /* ------------------- Project Page Specific Styles ------------------- */
 
 /* Restricting page width to 1000px */
@@ -313,46 +314,73 @@ body.dark-mode .project-description {
 }
 
 /* Lightbox Styles */
-
-/* Lightbox Container */
+/* Lightbox active container */
 .lightbox {
-    display: none; /* Hidden by default */
+    display: flex; /* Flex layout to split into sections */
+    justify-content: space-between; /* Space between the sections */
+    align-items: center; /* Vertically align everything */
     position: fixed;
     z-index: 1001;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Prevent content overflow */
-    background-color: rgba(0, 0, 0, 0.9); /* Slight transparency for background */
+    background-color: rgba(0, 0, 0, 0.9); /* Dark background */
+    overflow: hidden;
 }
 
-/* Lightbox Container Active State */
-.lightbox.active {
-    display: flex; /* Flexbox for centering */
-    justify-content: center; /* Horizontal centering */
-    align-items: center; /* Vertical centering */
+/* Lightbox extra sections for prev and next */
+.lightbox-extra {
+    flex: 1; /* Take up space on either side */
+    display: flex;
+    justify-content: center;
+    align-items:self-end;
+    cursor: pointer;
+}
+.lightbox-prev {
+    left: 10px; /* 10px from the left edge of the screen */
 }
 
-/* Lightbox Content (Image) */
+.lightbox-next {
+    right: 10px; /* 10px from the right edge of the screen */
+}
+
+/* Lightbox prev/next arrows */
+.lightbox-prev,
+.lightbox-next {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+/* Center image wrapper */
+.lightbox-image-wrapper {
+    flex: 3; /* Allow the image section to take more space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .lightbox-content {
-    max-width: 90vw; /* Scale image responsively with viewport width */
-    max-height: 90vh; /* Scale image responsively with viewport height */
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    animation: zoom 0.6s;
-    transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
-/* Lightbox Image */
-.lightbox-content img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Adjust close button */
+/* Close button */
 .lightbox-close {
     position: absolute;
     top: 20px;
@@ -364,69 +392,6 @@ body.dark-mode .project-description {
     transition: color 0.3s;
 }
 
-.lightbox-close:hover,
-.lightbox-close:focus {
+.lightbox-close:hover {
     color: #bbb;
-}
-
-/* Lightbox Navigation Buttons */
-.lightbox-prev,
-.lightbox-next {
-    position: absolute; /* Position relative to the lightbox container */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust to center */
-    padding: 10px; /* Padding for clickable area */
-    color: white;
-    font-weight: bold;
-    font-size: 40px; /* Adjust as needed */
-    cursor: pointer;
-    user-select: none;
-    z-index: 1002; /* Ensure it's above the lightbox content */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    border-radius: 50%; /* Circular buttons */
-    width: 50px; /* Reasonable size */
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-.lightbox-prev {
-    left: 20px;
-}
-
-.lightbox-next {
-    right: 20px;
-}
-
-.lightbox-prev:hover,
-.lightbox-next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Responsive behavior */
-@media (max-width: 700px) {
-    .lightbox-content {
-        width: 100%; /* Full width for smaller screens */
-        height: auto; /* Maintain aspect ratio */
-        max-width: none;
-        max-height: none;
-    }
-}
-
-/* Disable scale-up effect for lightbox images */
-.lightbox-content:hover {
-    transform: none !important;
-    box-shadow: none !important;
-}
-
-.lightbox-prev:hover,
-.lightbox-next:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
-}
-
-.lightbox-prev:before,
-.lightbox-next:before {
-    content: ''; /* Empty content to avoid rendering issues */
 }

@@ -257,6 +257,9 @@ export default function ProjectPage({ project }) {
                                 onNext={goNext}
                             />
                         )}
+
+
+
                     </div>
 
                     {/* Render the ProjectInfo component */}

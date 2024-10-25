@@ -90,7 +90,7 @@ header {
 /* ------------------- Dark Mode Toggle ------------------- */
 .dark-mode-toggle {
     position: absolute;
-    top: 0px;
+    top: 80px;
     right: 20px;
     cursor: pointer;
     font-size: 1em; /* Adjust icon size as needed */

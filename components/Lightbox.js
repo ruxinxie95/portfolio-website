@@ -1,8 +1,8 @@
 // components/Lightbox.js
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 export default function Lightbox({ images, currentImage, onClose, onPrev, onNext }) {
-  // Handle "Escape" key to close the lightbox and arrow keys for navigation
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -17,9 +17,7 @@ export default function Lightbox({ images, currentImage, onClose, onPrev, onNext
     };
 
     document.addEventListener('keydown', handleKeyDown);
-
-    // Prevent background scrolling when lightbox is open
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -29,20 +27,26 @@ export default function Lightbox({ images, currentImage, onClose, onPrev, onNext
 
   if (!currentImage) return null;
 
-  return (
+  const lightboxContent = (
     <div className="lightbox active" onClick={onClose}>
-      <span className="lightbox-close" onClick={onClose}>
-        &times;
-      </span>
+      <span className="lightbox-close" onClick={onClose}>&times;</span>
+
+      {/* Left Section: Previous arrow */}
+      <div className="lightbox-extra lightbox-extra-prev" onClick={(e) => { e.stopPropagation(); onPrev(); }}>
+        <a className="lightbox-prev">&#10094;</a>
+      </div>
+
+      {/* Center Section: Image */}
       <div className="lightbox-image-wrapper" onClick={(e) => e.stopPropagation()}>
         <img src={currentImage} className="lightbox-content" alt="Enlarged view" />
       </div>
-      <a className="lightbox-prev" onClick={(e) => { e.stopPropagation(); onPrev(); }}>
-        &#10094;
-      </a>
-      <a className="lightbox-next" onClick={(e) => { e.stopPropagation(); onNext(); }}>
-        &#10095;
-      </a>
+
+      {/* Right Section: Next arrow */}
+      <div className="lightbox-extra lightbox-extra-next" onClick={(e) => { e.stopPropagation(); onNext(); }}>
+        <a className="lightbox-next">&#10095;</a>
+      </div>
     </div>
   );
+
+  return createPortal(lightboxContent, document.body); // Render the lightbox at the top level of the DOM
 }
