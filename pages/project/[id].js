@@ -27,12 +27,11 @@ export async function getServerSideProps(context) {
                 const data = await fs.readFile(projectJsonPath, 'utf8');
                 const currentProject = JSON.parse(data);
 
-                // Sanitize project title
                 currentProject.project_title = typeof currentProject.project_title === 'string' ? currentProject.project_title : String(currentProject.project_title);
 
                 if (currentProject.id.toString() === id.toString()) {
                     projectData = currentProject;
-                    projectData.folder = folder; // Store the actual folder name
+                    projectData.folder = folder;
                     break;
                 }
             } catch (err) {
@@ -44,7 +43,6 @@ export async function getServerSideProps(context) {
             return { notFound: true };
         }
 
-        // Read images and metadata using imageUtils
         const imagesDirPath = path.join(projectsDir, projectData.folder, 'images');
         let imageFiles = [];
         let imageMetadata = {};
@@ -80,7 +78,6 @@ export default function ProjectPage({ project }) {
         return <div>Loading...</div>;
     }
 
-    // Define infoFields array within the component, excluding 'description'
     const infoFields = [
         { label: 'Year', key: 'project_year' },
         { label: 'Location', key: 'location' },
@@ -105,11 +102,12 @@ export default function ProjectPage({ project }) {
         { label: 'Reference', key: 'reference' },
     ];
 
-    // Function to group grid images based on labels (e.g., grid1, grid2)
     const groupGridImages = () => {
         const gridGroups = {};
         project.images.forEach(image => {
-            const gridMatch = image.match(/grid(\d+)_img\d+/); // Updated regex with underscore
+
+            const gridMatch = image.match(/grid(-?\d+)_img\d+/);
+
             if (gridMatch) {
                 const gridGroup = gridMatch[1];
                 if (!gridGroups[gridGroup]) {
@@ -122,25 +120,18 @@ export default function ProjectPage({ project }) {
     };
 
     const gridGroups = groupGridImages();
-
-    // Identify the cover image explicitly named 'cover'
     const coverImage = project.images.find(img => img.includes('cover'));
-
-    // Exclude the cover image and any images containing 'grid' from the remaining images
     const remainingNonGridImages = project.images.filter(img => img !== coverImage && !img.includes('grid'));
 
-    // State for Lightbox
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Combine all images into a single array for Lightbox
     const allImages = [
         coverImage,
         ...Object.values(gridGroups).flat(),
         ...remainingNonGridImages,
-    ].filter(Boolean); // Remove any undefined or null values
+    ].filter(Boolean);
 
-    // Handlers to open and close Lightbox
     const openLightbox = (index) => {
         setCurrentImageIndex(index);
         setIsLightboxOpen(true);
@@ -160,6 +151,25 @@ export default function ProjectPage({ project }) {
         );
     };
 
+    // Track the current index incrementally without rendering it
+    let currentIndex = 1; // Start after cover image
+    const grid1Index = currentIndex;
+    currentIndex += gridGroups['1']?.length || 0;
+
+    const firstImageIndex = currentIndex;
+    currentIndex += 1;
+
+    const grid2Index = currentIndex;
+    currentIndex += gridGroups['2']?.length || 0;
+
+    const secondImageIndex = currentIndex;
+    currentIndex += 1;
+
+    const grid3Index = currentIndex;
+    currentIndex += gridGroups['3']?.length || 0;
+
+    const remainingImagesStartIndex = currentIndex;
+
     return (
         <>
             <Head>
@@ -168,77 +178,113 @@ export default function ProjectPage({ project }) {
                 <title>{`${project.project_title} - Ruxin Xie`}</title>
             </Head>
 
-            {/* Load dark mode script before interactive */}
-            <Script
-                src="/js/darkMode.js"
-                strategy="beforeInteractive"
-            />
-
-            {/* Load favicon script after interactive and set the favicon */}
-            <Script
-                src="/js/favicon.js"
-                strategy="afterInteractive"
-                onLoad={() => {
-                    if (window.setFavicon) {
-                        window.setFavicon(project.folder);
-                    }
-                }}
-            />
+            <Script src="/js/darkMode.js" strategy="beforeInteractive" />
+            <Script src="/js/favicon.js" strategy="afterInteractive" onLoad={() => {
+                if (window.setFavicon) window.setFavicon(project.folder);
+            }} />
 
             <Header />
 
             <div className="container">
                 <div className="project-content">
                     <div className="project-images">
-                        {/* Cover Image */}
                         {coverImage && (
                             <div className="cover-image-wrapper">
                                 <img
                                     src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(coverImage)}`}
                                     alt="Cover"
                                     className="cover-image"
-                                    onClick={() => openLightbox(0)} // Assuming coverImage is the first image
+                                    onClick={() => openLightbox(0)}
                                 />
                                 <p className="artist-name">© {project.imageMetadata[coverImage]?.artist || 'Unknown Artist'}</p>
                             </div>
                         )}
-                        {/* Project Description */}
+
                         {project.description && (
                             <div className="project-description">
                                 {project.description}
                             </div>
                         )}
 
-                        {/* Grid Images */}
-                        {Object.keys(gridGroups).map((gridGroup, groupIndex) => (
-                            <div key={`grid-${gridGroup}-${groupIndex}`} className={`grid-container grid-${gridGroup}`}>
-                                {gridGroups[gridGroup].map((image, imageIndex) => {
-                                    // Calculate the global index for the image
-                                    const globalIndex = 1 + Object.values(gridGroups).slice(0, groupIndex).flat().length + imageIndex;
-                                    return (
-                                        <div key={imageIndex} className={`grid-image-${gridGroups[gridGroup].length}`}>
-                                            <img
-                                                src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
-                                                alt={`Grid ${gridGroup} Image ${imageIndex + 1}`}
-                                                className="grid-image"
-                                                onClick={() => openLightbox(globalIndex)}
-                                            />
-                                            <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
-                                        </div>
-                                    );
-                                })}
+                        {gridGroups['1'] && (
+                            <div key="grid-1" className="grid-container grid-1">
+                                {gridGroups['1'].map((image, imageIndex) => (
+                                    <div key={imageIndex} className="grid-image-2">
+                                        <img
+                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                            alt={`Grid 1 Image ${imageIndex + 1}`}
+                                            className="grid-image"
+                                            onClick={() => openLightbox(grid1Index + imageIndex)}
+                                        />
+                                        <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        )}
 
-                        {/* Remaining non-grid images */}
-                        {remainingNonGridImages.map((image, index) => {
-                            // Calculate the global index for the image
-                            const globalIndex = 1 + Object.values(gridGroups).flat().length + index;
+                        {remainingNonGridImages[0] && (
+                            <div className="project-image-wrapper">
+                                <img
+                                    src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(remainingNonGridImages[0])}`}
+                                    alt="Project Image 1"
+                                    className="project-image"
+                                    onClick={() => openLightbox(firstImageIndex)}
+                                />
+                                <p className="artist-name">© {project.imageMetadata[remainingNonGridImages[0]]?.artist || 'Unknown Artist'}</p>
+                            </div>
+                        )}
+
+                        {gridGroups['2'] && (
+                            <div key="grid-2" className="grid-container grid-2">
+                                {gridGroups['2'].map((image, imageIndex) => (
+                                    <div key={imageIndex} className="grid-image-2">
+                                        <img
+                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                            alt={`Grid 2 Image ${imageIndex + 1}`}
+                                            className="grid-image"
+                                            onClick={() => openLightbox(grid2Index + imageIndex)}
+                                        />
+                                        <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {remainingNonGridImages[1] && (
+                            <div className="project-image-wrapper">
+                                <img
+                                    src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(remainingNonGridImages[1])}`}
+                                    alt="Project Image 2"
+                                    className="project-image"
+                                    onClick={() => openLightbox(secondImageIndex)}
+                                />
+                                <p className="artist-name">© {project.imageMetadata[remainingNonGridImages[1]]?.artist || 'Unknown Artist'}</p>
+                            </div>
+                        )}
+
+                        {gridGroups['3'] && (
+                            <div key="grid-3" className="grid-container grid-3">
+                                {gridGroups['3'].map((image, imageIndex) => (
+                                    <div key={imageIndex} className="grid-image-2">
+                                        <img
+                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                            alt={`Grid 3 Image ${imageIndex + 1}`}
+                                            className="grid-image"
+                                            onClick={() => openLightbox(grid3Index + imageIndex)}
+                                        />
+                                        <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {remainingNonGridImages.slice(2).map((image, index) => {
+                            const globalIndex = remainingImagesStartIndex + index;
                             return (
                                 <div key={index} className="project-image-wrapper">
                                     <img
                                         src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
-                                        alt={`Project Image ${index + 1}`}
+                                        alt={`Project Image ${index + 3}`}
                                         className="project-image"
                                         onClick={() => openLightbox(globalIndex)}
                                     />
@@ -246,28 +292,41 @@ export default function ProjectPage({ project }) {
                                 </div>
                             );
                         })}
-
-                        {/* Lightbox Component */}
-                        {isLightboxOpen && (
-                            <Lightbox
-                                images={allImages.map((img) => `/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(img)}`)}
-                                currentImage={allImages[currentImageIndex] ? `/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(allImages[currentImageIndex])}` : null}
-                                onClose={closeLightbox}
-                                onPrev={goPrev}
-                                onNext={goNext}
-                            />
+                        {gridGroups['-1'] && (
+                            <div className="grid-container grid--1">
+                                {gridGroups['-1'].map((image, imageIndex) => (
+                                    <div key={imageIndex} className="grid-image-2">
+                                        <img
+                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                            alt={`Grid -1 Image ${imageIndex + 1}`}
+                                            className="grid-image"
+                                            onClick={() => openLightbox(remainingImagesStartIndex + imageIndex)}
+                                        />
+                                        <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                                    </div>
+                                ))}
+                            </div>
                         )}
 
 
 
                     </div>
 
-                    {/* Render the ProjectInfo component */}
                     <ProjectInfo project={project} infoFields={infoFields} />
                 </div>
             </div>
 
             <Footer />
+
+            {isLightboxOpen && (
+                <Lightbox
+                    images={allImages.map((img) => `/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(img)}`)}
+                    currentImage={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(allImages[currentImageIndex])}`}
+                    onClose={closeLightbox}
+                    onPrev={goPrev}
+                    onNext={goNext}
+                />
+            )}
         </>
     );
 }
