@@ -1,80 +1,48 @@
 // components/Lightbox.js
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-export default function Lightbox({ images }) {
-  const [currentImage, setCurrentImage] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openLightbox = (image) => {
-    setCurrentImage(image);
-    setIsOpen(true);
-  };
-
-  const closeLightbox = () => {
-    setIsOpen(false);
-    setCurrentImage(null);
-  };
-
-  const prevImage = () => {
-    const currentIndex = images.indexOf(currentImage);
-    const prevIndex = (currentIndex === 0 ? images.length : currentIndex) - 1;
-    setCurrentImage(images[prevIndex]);
-  };
-
-  const nextImage = () => {
-    const currentIndex = images.indexOf(currentImage);
-    const nextIndex = (currentIndex + 1) % images.length;
-    setCurrentImage(images[nextIndex]);
-  };
-
-  // Handle "Escape" key to close the lightbox
+export default function Lightbox({ images, currentImage, onClose, onPrev, onNext }) {
+  // Handle "Escape" key to close the lightbox and arrow keys for navigation
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape' && isOpen) {
-        closeLightbox();
+      if (event.key === 'Escape') {
+        onClose();
+      }
+      if (event.key === 'ArrowLeft') {
+        onPrev();
+      }
+      if (event.key === 'ArrowRight') {
+        onNext();
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
 
+    // Prevent background scrolling when lightbox is open
+    document.body.style.overflow = 'hidden';
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
     };
-  }, [isOpen]); // Add "isOpen" as a dependency to trigger effect when lightbox is open
+  }, [onClose, onPrev, onNext]);
+
+  if (!currentImage) return null;
 
   return (
-    <>
-      {images.map((image, index) => (
-        <img
-          key={index}
-          src={`/projects/${image}`}
-          alt={`Project Image ${index + 1}`}
-          className="project-image"
-          onClick={() => openLightbox(image)}
-        />
-      ))}
-
-      {isOpen && (
-        <div className="lightbox active">
-          <span className="lightbox-close" onClick={closeLightbox}>
-            &times;
-          </span>
-          <div className="lightbox-image-wrapper">
-            <img
-              src={`/projects/${currentImage}`}
-              className="lightbox-content"
-              alt="Enlarged view"
-            />
-          </div>
-          <a className="lightbox-prev" onClick={prevImage}>
-              &#10094; {/* This should display the previous arrow symbol */}
-          </a>
-          <a className="lightbox-next" onClick={nextImage}>
-              &#10095; {/* This should display the next arrow symbol */}
-          </a>
-
-        </div>
-      )}
-    </>
+    <div className="lightbox active" onClick={onClose}>
+      <span className="lightbox-close" onClick={onClose}>
+        &times;
+      </span>
+      <div className="lightbox-image-wrapper" onClick={(e) => e.stopPropagation()}>
+        <img src={currentImage} className="lightbox-content" alt="Enlarged view" />
+      </div>
+      <a className="lightbox-prev" onClick={(e) => { e.stopPropagation(); onPrev(); }}>
+        &#10094;
+      </a>
+      <a className="lightbox-next" onClick={(e) => { e.stopPropagation(); onNext(); }}>
+        &#10095;
+      </a>
+    </div>
   );
 }

@@ -9,6 +9,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import Script from 'next/script';
 import { getImagesAndMetadata } from '../../lib/imageUtils';
+import { useState } from 'react';
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
@@ -122,12 +123,42 @@ export default function ProjectPage({ project }) {
 
     const gridGroups = groupGridImages();
 
-
     // Identify the cover image explicitly named 'cover'
     const coverImage = project.images.find(img => img.includes('cover'));
 
     // Exclude the cover image and any images containing 'grid' from the remaining images
     const remainingNonGridImages = project.images.filter(img => img !== coverImage && !img.includes('grid'));
+
+    // State for Lightbox
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Combine all images into a single array for Lightbox
+    const allImages = [
+        coverImage,
+        ...Object.values(gridGroups).flat(),
+        ...remainingNonGridImages,
+    ].filter(Boolean); // Remove any undefined or null values
+
+    // Handlers to open and close Lightbox
+    const openLightbox = (index) => {
+        setCurrentImageIndex(index);
+        setIsLightboxOpen(true);
+    };
+
+    const closeLightbox = () => setIsLightboxOpen(false);
+
+    const goPrev = () => {
+        setCurrentImageIndex((prevIndex) =>
+            prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+        );
+    };
+
+    const goNext = () => {
+        setCurrentImageIndex((prevIndex) =>
+            prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
+        );
+    };
 
     return (
         <>
@@ -160,10 +191,14 @@ export default function ProjectPage({ project }) {
                 <div className="project-content">
                     <div className="project-images">
                         {/* Cover Image */}
-
                         {coverImage && (
                             <div className="cover-image-wrapper">
-                                <Lightbox images={[`/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(coverImage)}`]} />
+                                <img
+                                    src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(coverImage)}`}
+                                    alt="Cover"
+                                    className="cover-image"
+                                    onClick={() => openLightbox(0)} // Assuming coverImage is the first image
+                                />
                                 <p className="artist-name">© {project.imageMetadata[coverImage]?.artist || 'Unknown Artist'}</p>
                             </div>
                         )}
@@ -175,23 +210,53 @@ export default function ProjectPage({ project }) {
                         )}
 
                         {/* Grid Images */}
-                        {Object.keys(gridGroups).map((gridGroup, index) => (
-                            <div key={`grid-${gridGroup}-${index}`} className={`grid-container grid-${gridGroup}`}>
-                                {gridGroups[gridGroup].map((image, i) => (
-                                    <div key={i} className={`grid-image-${gridGroups[gridGroup].length}`}>
-                                        <Lightbox images={[`/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`]} />
-                                    </div>
-                                ))}
+                        {Object.keys(gridGroups).map((gridGroup, groupIndex) => (
+                            <div key={`grid-${gridGroup}-${groupIndex}`} className={`grid-container grid-${gridGroup}`}>
+                                {gridGroups[gridGroup].map((image, imageIndex) => {
+                                    // Calculate the global index for the image
+                                    const globalIndex = 1 + Object.values(gridGroups).slice(0, groupIndex).flat().length + imageIndex;
+                                    return (
+                                        <div key={imageIndex} className={`grid-image-${gridGroups[gridGroup].length}`}>
+                                            <img
+                                                src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                                alt={`Grid ${gridGroup} Image ${imageIndex + 1}`}
+                                                className="grid-image"
+                                                onClick={() => openLightbox(globalIndex)}
+                                            />
+                                            <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         ))}
 
                         {/* Remaining non-grid images */}
-                        {remainingNonGridImages.map((image, index) => (
-                            <div key={index} className="project-image-wrapper">
-                                <Lightbox images={[`/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`]} />
-                                <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
-                            </div>
-                        ))}
+                        {remainingNonGridImages.map((image, index) => {
+                            // Calculate the global index for the image
+                            const globalIndex = 1 + Object.values(gridGroups).flat().length + index;
+                            return (
+                                <div key={index} className="project-image-wrapper">
+                                    <img
+                                        src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                        alt={`Project Image ${index + 1}`}
+                                        className="project-image"
+                                        onClick={() => openLightbox(globalIndex)}
+                                    />
+                                    <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                                </div>
+                            );
+                        })}
+
+                        {/* Lightbox Component */}
+                        {isLightboxOpen && (
+                            <Lightbox
+                                images={allImages.map((img) => `/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(img)}`)}
+                                currentImage={allImages[currentImageIndex] ? `/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(allImages[currentImageIndex])}` : null}
+                                onClose={closeLightbox}
+                                onPrev={goPrev}
+                                onNext={goNext}
+                            />
+                        )}
                     </div>
 
                     {/* Render the ProjectInfo component */}

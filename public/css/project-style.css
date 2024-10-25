@@ -285,7 +285,7 @@ body.dark-mode .project-description {
     font-size: 0.8em; /* Adjust font size */
     color: #555; /* Change the color to a softer tone */
     text-align: left; /* Left align the text below the image */
-    margin-top: 0px; /* Add some space between the image and the text */
+    margin-top: 5px; /* Add some space between the image and the text */
     display: block; /* Ensure it takes up a full line */
     visibility: visible !important;
 }
