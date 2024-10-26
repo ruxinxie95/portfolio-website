@@ -1,5 +1,3 @@
-// pages/index.js
-
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,11 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Masonry from 'react-masonry-css';
 import { useEffect, useState } from 'react';
-import styles from '../components/Project.module.css'; // Import the CSS module
+import styles from '../components/Project.module.css';
 
 import fs from 'fs/promises';
 import path from 'path';
-
 
 export async function getServerSideProps() {
     try {
@@ -23,7 +20,7 @@ export async function getServerSideProps() {
 
         for (const folder of projectFolders) {
             const projectJsonPath = path.join(projectsDir, folder, 'project.json');
-            const imagesDirPath = path.join(projectsDir, folder, 'images');
+            const s3BaseUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/projects/${encodeURIComponent(folder)}/images`;
 
             try {
                 const data = await fs.readFile(projectJsonPath, 'utf8');
@@ -38,20 +35,17 @@ export async function getServerSideProps() {
                     }
 
                     try {
-                        const imageFiles = await fs.readdir(imagesDirPath);
+                        const imageFiles = await fs.readdir(path.join(projectsDir, folder, 'images'));
                         const validImageFiles = imageFiles.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
-                        projectData.images = validImageFiles;
+                        projectData.images = validImageFiles.map(file => `${s3BaseUrl}/${encodeURIComponent(file)}`);
 
-                        // Check if cover.jpg exists, else use default
-                        if (!validImageFiles.includes('cover.jpg')) {
-                            projectData.coverImage = '/default-cover.jpg'; // Ensure you have this image in public/
-                        } else {
-                            projectData.coverImage = `/projects/${encodeURIComponent(folder)}/images/cover.jpg`;
-                        }
+                        projectData.coverImage = validImageFiles.includes('cover.jpg')
+                            ? `${s3BaseUrl}/cover.jpg`
+                            : '/default-cover.jpg'; // Fallback if cover.jpg is not present
                     } catch (err) {
                         console.warn(`Images folder not found or empty for project: ${folder}`);
                         projectData.images = [];
-                        projectData.coverImage = '/default-cover.jpg'; // Fallback
+                        projectData.coverImage = '/default-cover.jpg';
                     }
 
                     projects.push(projectData);
@@ -84,7 +78,6 @@ export async function getServerSideProps() {
     }
 }
 
-
 export default function Home({ projects = [] }) {
     const [categories, setCategories] = useState([]);
     const [activeFilter, setActiveFilter] = useState('*');
@@ -113,7 +106,6 @@ export default function Home({ projects = [] }) {
         }
     }, [activeFilter, projects]);
 
-    // Define responsive breakpoints for Masonry
     const breakpointColumnsObj = {
         default: 3,
         1200: 3,
@@ -132,7 +124,6 @@ export default function Home({ projects = [] }) {
             <Header />
 
             <div className={styles.container}>
-                {/* Filter Buttons */}
                 <div className={styles.filters}>
                     <button
                         data-filter="*"
@@ -196,8 +187,6 @@ export default function Home({ projects = [] }) {
             </div>
 
             <Footer />
-
-
         </>
     );
 }

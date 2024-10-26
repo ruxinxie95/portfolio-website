@@ -1,0 +1,39 @@
+{
+  "project_title": "Robotically Fabricated Structure",
+  "project_year": "2021",
+  "categories": [
+    "Robotics",
+    "Computational Design",
+    "Architecture"
+  ],
+  "tool_box": "Rhino, Grasshopper \n(2)KUKA KR60 6-Axis Industrial Robot",
+  "material": "Timber 2x4",
+  "id": "06",
+  "location": "Ann Arbor, MI, USA",
+  "course": "ARCH 708 Systems Engagement",
+  "affiliation": "Taubman College\nUniversity of Michigan",
+  "client": "",
+  "exhibition": "",
+  "status": "Built",
+  "description": "RFS is a robotically fabricated timber pavilion that explores responsible and precise methods contributing to sustainable and low-carbon construction outlooks. This structure is designed with the help of custom algorithms developed specifically for this project and built through state-of-the-art human-robot collaborative construction. RFS employs bespoke prefabricated timber sub-assemblies manufactured from regionally sourced short 2x4 dimensional lumber and utilizes industrial robotic arms to process and assemble elements into intricately layered modules. After fabrication, modules are transported to the site, where human workers move each sub-assembly into place and attach them together to form the pavilion. The integrated digital design and construction process for RFS is a novel approach to considering issues of material use, labor, and the environment to create intelligent and resourceful architecture with striking expressive qualities. RFS is situated in the Matthaei Botanical Gardens in Ann Arbor, Michigan; it is designed for public engagement, acting as a defined gathering point located within the framework of a public conservatory while still maintaining an open-air condition.",
+  "designer": "",
+  "supervisor": "",
+  "lead_investigator": "Arash Adel",
+  "instructor": "",
+  "construction_assistant": "Abdallah Kamhawi \nTharanesh Varadharajan \nAli Fahmy \nElliot Smithberger \nQian Li \nNadim Hajj Ahmad \nJoshua Powell \nIvan Gort-Cabeza de Vaca",
+  "researcher": "Ben Lawson \nRyan Craney \nSarah Nail \nGabrielle Clune \nAndrew Hoover \nJuliette Zidek",
+  "student": "Ruxin Xie \nDaniel Ruan \nXinran Li \nJingwen Song \nMehdi Shirvani \nMackenzie Bruce \nChris Humphrey",
+  "structural_engineer": "Robert Silman Associates Structural Engineers \n(Nat Oppenheimer \nOmid Oliyan \nJustin Den Herder \nPaul Evans)",
+  "my_role": "computational designer work with designers and fabricators. \n brings a napkin sketch to programed digital definition",
+  "awards": [],
+  "publications": [],
+  "social_media": [
+    {
+      "text": "ArchDaily",
+      "url": "https://www.archdaily.com/985542/robotically-fabricated-structure-adel-design-research-plus-university-of-michigan-taubman-college-of-architecture-and-urban-planning"
+    }
+  ],
+  "reference": "",
+  "dedication": "",
+  "folder": "project06_roboticallyFabricatedStructure"
+}

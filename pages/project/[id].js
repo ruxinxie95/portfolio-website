@@ -1,4 +1,3 @@
-// pages/project/[id].js
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -13,6 +12,7 @@ import { useState } from 'react';
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
+    const s3BaseUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/projects`;
 
     try {
         const projectsDir = path.join(process.cwd(), 'public', 'projects');
@@ -49,7 +49,7 @@ export async function getServerSideProps(context) {
 
         try {
             const { imageFiles: fetchedImages, imageMetadata: fetchedMetadata } = await getImagesAndMetadata(imagesDirPath);
-            imageFiles = fetchedImages;
+            imageFiles = fetchedImages.map(file => `${s3BaseUrl}/${encodeURIComponent(projectData.folder)}/images/${encodeURIComponent(file)}`);
             imageMetadata = fetchedMetadata;
         } catch (err) {
             console.warn(`Images folder not found or empty for project ${id}:`, err);
@@ -105,7 +105,6 @@ export default function ProjectPage({ project }) {
     const groupGridImages = () => {
         const gridGroups = {};
         project.images.forEach(image => {
-
             const gridMatch = image.match(/grid(-?\d+)_img\d+/);
 
             if (gridMatch) {
@@ -151,8 +150,7 @@ export default function ProjectPage({ project }) {
         );
     };
 
-    // Track the current index incrementally without rendering it
-    let currentIndex = 1; // Start after cover image
+    let currentIndex = 1;
     const grid1Index = currentIndex;
     currentIndex += gridGroups['1']?.length || 0;
 
@@ -191,7 +189,7 @@ export default function ProjectPage({ project }) {
                         {coverImage && (
                             <div className="cover-image-wrapper">
                                 <img
-                                    src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(coverImage)}`}
+                                    src={coverImage}
                                     alt="Cover"
                                     className="cover-image"
                                     onClick={() => openLightbox(0)}
@@ -211,7 +209,7 @@ export default function ProjectPage({ project }) {
                                 {gridGroups['1'].map((image, imageIndex) => (
                                     <div key={imageIndex} className="grid-image-2">
                                         <img
-                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                            src={image}
                                             alt={`Grid 1 Image ${imageIndex + 1}`}
                                             className="grid-image"
                                             onClick={() => openLightbox(grid1Index + imageIndex)}
@@ -225,7 +223,7 @@ export default function ProjectPage({ project }) {
                         {remainingNonGridImages[0] && (
                             <div className="project-image-wrapper">
                                 <img
-                                    src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(remainingNonGridImages[0])}`}
+                                    src={remainingNonGridImages[0]}
                                     alt="Project Image 1"
                                     className="project-image"
                                     onClick={() => openLightbox(firstImageIndex)}
@@ -239,7 +237,7 @@ export default function ProjectPage({ project }) {
                                 {gridGroups['2'].map((image, imageIndex) => (
                                     <div key={imageIndex} className="grid-image-2">
                                         <img
-                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                            src={image}
                                             alt={`Grid 2 Image ${imageIndex + 1}`}
                                             className="grid-image"
                                             onClick={() => openLightbox(grid2Index + imageIndex)}
@@ -253,7 +251,7 @@ export default function ProjectPage({ project }) {
                         {remainingNonGridImages[1] && (
                             <div className="project-image-wrapper">
                                 <img
-                                    src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(remainingNonGridImages[1])}`}
+                                    src={remainingNonGridImages[1]}
                                     alt="Project Image 2"
                                     className="project-image"
                                     onClick={() => openLightbox(secondImageIndex)}
@@ -267,7 +265,7 @@ export default function ProjectPage({ project }) {
                                 {gridGroups['3'].map((image, imageIndex) => (
                                     <div key={imageIndex} className="grid-image-2">
                                         <img
-                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                            src={image}
                                             alt={`Grid 3 Image ${imageIndex + 1}`}
                                             className="grid-image"
                                             onClick={() => openLightbox(grid3Index + imageIndex)}
@@ -283,7 +281,7 @@ export default function ProjectPage({ project }) {
                             return (
                                 <div key={index} className="project-image-wrapper">
                                     <img
-                                        src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
+                                        src={image}
                                         alt={`Project Image ${index + 3}`}
                                         className="project-image"
                                         onClick={() => openLightbox(globalIndex)}
@@ -292,24 +290,6 @@ export default function ProjectPage({ project }) {
                                 </div>
                             );
                         })}
-                        {gridGroups['-1'] && (
-                            <div className="grid-container grid--1">
-                                {gridGroups['-1'].map((image, imageIndex) => (
-                                    <div key={imageIndex} className="grid-image-2">
-                                        <img
-                                            src={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(image)}`}
-                                            alt={`Grid -1 Image ${imageIndex + 1}`}
-                                            className="grid-image"
-                                            onClick={() => openLightbox(remainingImagesStartIndex + imageIndex)}
-                                        />
-                                        <p className="artist-name">© {project.imageMetadata[image]?.artist || 'Unknown Artist'}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-
-
                     </div>
 
                     <ProjectInfo project={project} infoFields={infoFields} />
@@ -320,8 +300,8 @@ export default function ProjectPage({ project }) {
 
             {isLightboxOpen && (
                 <Lightbox
-                    images={allImages.map((img) => `/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(img)}`)}
-                    currentImage={`/projects/${encodeURIComponent(project.folder)}/images/${encodeURIComponent(allImages[currentImageIndex])}`}
+                    images={allImages}
+                    currentImage={allImages[currentImageIndex]}
                     onClose={closeLightbox}
                     onPrev={goPrev}
                     onNext={goNext}
@@ -330,3 +310,4 @@ export default function ProjectPage({ project }) {
         </>
     );
 }
+    
