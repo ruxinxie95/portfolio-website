@@ -3,10 +3,10 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-      domains: ['aws-storage-projects.s3.us-east-2.amazonaws.com'], // Add your S3 domain here
+    domains: ['aws-storage-projects.s3.us-east-2.amazonaws.com'], // S3 bucket domain
   },
   env: {
-      AWS_BUCKET_NAME: 'aws-storage-projects', // Make sure this matches your bucket name
-      AWS_REGION: 'us-east-2', // Make sure this matches your S3 region
+    AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
+    AWS_REGION: process.env.AWS_REGION,
   },
 };
