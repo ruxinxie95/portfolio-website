@@ -1,3 +1,4 @@
+//pages/project/[id].js
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -12,63 +13,55 @@ import { useState } from 'react';
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
-    const s3BaseUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/projects`;
+    const projectsDir = path.join(process.cwd(), 'public', 'projects');
+    const files = await fs.readdir(projectsDir, { withFileTypes: true });
+    const projectFolders = files.filter(file => file.isDirectory()).map(dir => dir.name);
+
+    let projectData = null;
+    let folder = '';
+
+    for (const projFolder of projectFolders) {
+        const projectJsonPath = path.join(projectsDir, projFolder, 'project.json');
+        try {
+            const data = await fs.readFile(projectJsonPath, 'utf8');
+            const currentProject = JSON.parse(data);
+
+            if (currentProject.id.toString() === id.toString()) {
+                projectData = currentProject;
+                folder = projFolder; // Set folder when project is found
+                break;
+            }
+        } catch (err) {
+            console.warn(`project.json not found or invalid for project: ${projFolder}`);
+        }
+    }
+
+    if (!projectData) {
+        return { notFound: true };
+    }
+
+    const s3BaseUrl = `https://aws-storage-projects.s3.us-east-2.amazonaws.com/projects/${encodeURIComponent(folder)}/images`;
+
+    const imagesDirPath = path.join(projectsDir, folder, 'images');
+    let imageFiles = [];
+    let imageMetadata = {};
 
     try {
-        const projectsDir = path.join(process.cwd(), 'public', 'projects');
-        const files = await fs.readdir(projectsDir, { withFileTypes: true });
-        const projectFolders = files.filter(file => file.isDirectory()).map(dir => dir.name);
-
-        let projectData = null;
-
-        for (const folder of projectFolders) {
-            const projectJsonPath = path.join(projectsDir, folder, 'project.json');
-            try {
-                const data = await fs.readFile(projectJsonPath, 'utf8');
-                const currentProject = JSON.parse(data);
-
-                currentProject.project_title = typeof currentProject.project_title === 'string' ? currentProject.project_title : String(currentProject.project_title);
-
-                if (currentProject.id.toString() === id.toString()) {
-                    projectData = currentProject;
-                    projectData.folder = folder;
-                    break;
-                }
-            } catch (err) {
-                console.warn(`project.json not found or invalid for project: ${folder}`);
-            }
-        }
-
-        if (!projectData) {
-            return { notFound: true };
-        }
-
-        const imagesDirPath = path.join(projectsDir, projectData.folder, 'images');
-        let imageFiles = [];
-        let imageMetadata = {};
-
-        try {
-            const { imageFiles: fetchedImages, imageMetadata: fetchedMetadata } = await getImagesAndMetadata(imagesDirPath);
-            imageFiles = fetchedImages.map(file => `${s3BaseUrl}/${encodeURIComponent(projectData.folder)}/images/${encodeURIComponent(file)}`);
-            imageMetadata = fetchedMetadata;
-        } catch (err) {
-            console.warn(`Images folder not found or empty for project ${id}:`, err);
-        }
-
-        projectData.images = imageFiles;
-        projectData.imageMetadata = imageMetadata;
-
-        return {
-            props: {
-                project: projectData,
-            },
-        };
-    } catch (error) {
-        console.error(`Error fetching project ${id}:`, error.message);
-        return {
-            notFound: true,
-        };
+        const { imageFiles: fetchedImages, imageMetadata: fetchedMetadata } = await getImagesAndMetadata(imagesDirPath);
+        imageFiles = fetchedImages.map(file => `${s3BaseUrl}/${encodeURIComponent(file)}`);
+        imageMetadata = fetchedMetadata;
+    } catch (err) {
+        console.warn(`Images folder not found or empty for project ${id}:`, err);
     }
+
+    projectData.images = imageFiles;
+    projectData.imageMetadata = imageMetadata;
+
+    return {
+        props: {
+            project: projectData,
+        },
+    };
 }
 
 export default function ProjectPage({ project }) {

@@ -1,3 +1,4 @@
+//pages/index.js
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -20,7 +21,7 @@ export async function getServerSideProps() {
 
         for (const folder of projectFolders) {
             const projectJsonPath = path.join(projectsDir, folder, 'project.json');
-            const s3BaseUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/projects/${encodeURIComponent(folder)}/images`;
+            const s3BaseUrl = `https://aws-storage-projects.s3.us-east-2.amazonaws.com/projects/${encodeURIComponent(folder)}/images`;
 
             try {
                 const data = await fs.readFile(projectJsonPath, 'utf8');
@@ -163,6 +164,7 @@ export default function Home({ projects = [] }) {
                                 <Link href={`/project/${project.id}`}>
                                     <div className={styles.projectLink}>
 
+  
                                         <Image
                                             src={project.coverImage}
                                             alt={`Cover image for project ${project.project_title}`}
@@ -170,7 +172,9 @@ export default function Home({ projects = [] }) {
                                             height={600}
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             className={styles.projectImage}
+                                            unoptimized
                                         />
+
                                         
                                         <div className={styles.projectInfo}>
                                             <h2>{project.project_title}</h2>
