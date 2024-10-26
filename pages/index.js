@@ -1,4 +1,3 @@
-//pages/index.js
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,47 +6,51 @@ import Link from 'next/link';
 import Masonry from 'react-masonry-css';
 import { useEffect, useState } from 'react';
 import styles from '../components/Project.module.css';
+import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
 
-import fs from 'fs/promises';
-import path from 'path';
+const s3 = new S3Client({ region: process.env.AWS_REGION });
 
 export async function getServerSideProps() {
-    try {
-        const projectsDir = path.join(process.cwd(), 'public/projects');
-        const files = await fs.readdir(projectsDir, { withFileTypes: true });
-        const projectFolders = files.filter(file => file.isDirectory()).map(dir => dir.name);
+    const bucketName = process.env.AWS_BUCKET_NAME;
+    const projects = [];
 
-        const projects = [];
+    try {
+        const command = new ListObjectsV2Command({
+            Bucket: bucketName,
+            Prefix: 'projects/',
+            Delimiter: '/',
+        });
+
+        const data = await s3.send(command);
+        const projectFolders = data.CommonPrefixes.map(prefix => prefix.Prefix.split('/')[1]);
 
         for (const folder of projectFolders) {
-            const projectJsonPath = path.join(projectsDir, folder, 'project.json');
-            const s3BaseUrl = `https://aws-storage-projects.s3.us-east-2.amazonaws.com/projects/${encodeURIComponent(folder)}/images`;
+            const projectJsonUrl = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/projects/${encodeURIComponent(folder)}/project.json`;
+            console.log(`Fetching JSON from: ${projectJsonUrl}`); // Log the URL to validate
 
             try {
-                const data = await fs.readFile(projectJsonPath, 'utf8');
-                const projectData = JSON.parse(data);
+                const response = await fetch(projectJsonUrl);
+                if (!response.ok) {
+                    console.warn(`Failed to fetch JSON data for ${folder} (status: ${response.status})`);
+                    continue;
+                }
 
+                const projectData = await response.json();
                 const requiredFields = ['id', 'project_title', 'categories', 'project_year', 'location', 'description'];
                 const hasAllFields = requiredFields.every(field => field in projectData);
 
                 if (hasAllFields) {
-                    if (!projectData.folder) {
-                        projectData.folder = folder;
-                    }
+                    projectData.folder = folder;
+                    const s3BaseUrl = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/projects/${encodeURIComponent(folder)}/images`;
 
-                    try {
-                        const imageFiles = await fs.readdir(path.join(projectsDir, folder, 'images'));
-                        const validImageFiles = imageFiles.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
-                        projectData.images = validImageFiles.map(file => `${s3BaseUrl}/${encodeURIComponent(file)}`);
-
-                        projectData.coverImage = validImageFiles.includes('cover.jpg')
-                            ? `${s3BaseUrl}/cover.jpg`
-                            : '/default-cover.jpg'; // Fallback if cover.jpg is not present
-                    } catch (err) {
-                        console.warn(`Images folder not found or empty for project: ${folder}`);
-                        projectData.images = [];
-                        projectData.coverImage = '/default-cover.jpg';
-                    }
+                    projectData.coverImage = `${s3BaseUrl}/cover.jpg`;
+                    projectData.images = [`${s3BaseUrl}/1.jpg`, `${s3BaseUrl}/2.jpg`];
+                    
+                    // Log URLs for images
+                    console.log(`Cover Image URL: ${projectData.coverImage}`);
+                    projectData.images.forEach((image, index) => {
+                        console.log(`Image ${index + 1} URL: ${image}`);
+                    });
 
                     projects.push(projectData);
                 } else {
@@ -55,11 +58,7 @@ export async function getServerSideProps() {
                     console.warn(`Project "${folder}" is missing required fields: ${missing.join(', ')}`);
                 }
             } catch (err) {
-                if (err.code === 'ENOENT') {
-                    console.warn(`project.json not found for project: ${folder}`);
-                } else {
-                    console.error(`Error processing project "${folder}":`, err);
-                }
+                console.warn(`Error processing project "${folder}":`, err);
             }
         }
 
@@ -70,7 +69,7 @@ export async function getServerSideProps() {
             },
         };
     } catch (err) {
-        console.error('Error reading projects directory:', err);
+        console.error('Error fetching project data from S3:', err);
         return {
             props: {
                 projects: [],
@@ -163,8 +162,6 @@ export default function Home({ projects = [] }) {
                             >
                                 <Link href={`/project/${project.id}`}>
                                     <div className={styles.projectLink}>
-
-  
                                         <Image
                                             src={project.coverImage}
                                             alt={`Cover image for project ${project.project_title}`}
@@ -175,7 +172,6 @@ export default function Home({ projects = [] }) {
                                             unoptimized
                                         />
 
-                                        
                                         <div className={styles.projectInfo}>
                                             <h2>{project.project_title}</h2>
                                             <p>{project.project_year} | {project.location}</p>
