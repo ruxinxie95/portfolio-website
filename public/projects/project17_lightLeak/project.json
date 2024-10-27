@@ -1,0 +1,33 @@
+{
+  "project_title": "Light Leak",
+  "project_year": "2020",
+  "categories": [
+    "Prototype",
+    "Lighting"
+  ],
+  "tool_box": "Rhino, Grasshopper, CircuitPython Programming \nWaterJet, Circuit Playground Bluefruit, Ender 3 Pro 3D Printer",
+  "material": "PETG",
+  "id": "17",
+  "location": "Ann Arbor, MI, USA",
+  "course": "ARCH 700 Practicum",
+  "affiliation": "Taubman College\nUniversity of Michigan",
+  "client": "",
+  "exhibition": "",
+  "status": "Built",
+  "description": "volume: 8 cm3 \nmaterial usage: 100% (no extra structure needed)\nBy developing a certain interlocking way of the PETG stripes, this project is able to use up 98.00%(double check this number) of 2 sheets of PETG. (indicate the material usage)",
+  "designer": "Ruxin Xie",
+  "supervisor": "",
+  "lead_investigator": "",
+  "instructor": "Cathlyn Newell \nMark Meier",
+  "construction_assistant": "",
+  "researcher": "",
+  "student": "",
+  "structural_engineer": "",
+  "my_role": "",
+  "awards": [],
+  "publications": [],
+  "social_media": [],
+  "reference": "",
+  "dedication": "",
+  "folder": "project17_lightLeak"
+}
