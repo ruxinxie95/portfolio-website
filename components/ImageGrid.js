@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import Lightbox from './Lightbox';
 
-export default function ImageGrid({ images, imageMetadata }) {
+
+export default function ImageGrid({ images, imageMetadata, description }) {  // Add description here
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -77,6 +78,25 @@ export default function ImageGrid({ images, imageMetadata }) {
                         <p className="artist-name">© {imageMetadata[coverImage]?.artist || 'Unknown Artist'}</p>
                     </div>
                 )}
+                
+                {/* Project Description */}
+                {description && <p className="project-description">{description}</p>}
+
+                {Object.keys(gridGroups).map((key, idx) => (
+                    <div key={`grid-${key}`} className={`grid-container grid-${key}`}>
+                        {gridGroups[key].map((image, imageIndex) => (
+                            <div key={imageIndex} className="grid-image-2">
+                                <img
+                                    src={image}
+                                    alt={`Grid ${key} Image ${imageIndex + 1}`}
+                                    className="grid-image"
+                                    onClick={() => openLightbox(idx + imageIndex)}
+                                />
+                                <p className="artist-name">© {imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                            </div>
+                        ))}
+                    </div>
+                ))}
 
                 {gridGroups['1'] && (
                     <div key="grid-1" className="grid-container grid-1">
