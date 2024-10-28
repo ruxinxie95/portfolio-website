@@ -104,7 +104,7 @@ export default function ImageGrid({ images, imageMetadata, description, videos }
                                     className="grid-image"
                                     onClick={() => openLightbox(idx + imageIndex)}
                                 />
-                                <p className="artist-name">© {imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                                
                             </div>
                         ))}
                     </div>

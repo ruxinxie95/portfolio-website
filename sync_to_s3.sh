@@ -4,41 +4,22 @@
 LOCAL_PATH="/Users/ruxinxie/Website/portfolio-website/public/projects"
 S3_BUCKET_PATH="s3://aws-storage-projects/projects"
 
-# Function to upload a single file with metadata
-upload_with_metadata() {
-    local file_path="$1"
-    local s3_key="$2"
+# Sync all files with --exact-timestamps for unchanged files, excluding .DS_Store files
+aws s3 sync "$LOCAL_PATH" "$S3_BUCKET_PATH" --delete --exclude ".DS_Store" --exclude "**/.DS_Store" --exclude "*.gsheet" --exact-timestamps
 
-    # Extract the artist name using ExifTool
-    artist=$(exiftool -Artist "$file_path" | awk -F ': ' '{print $2}')
-
-    # Fallback to 'Unknown Artist' if no artist metadata is found
-    if [ -z "$artist" ]; then
-        artist="Unknown Artist"
-    fi
-
-    # Upload the file with custom metadata
-    aws s3 cp "$file_path" "$S3_BUCKET_PATH/$s3_key" \
-        --metadata "artist=$artist" \
-        --exclude ".DS_Store" \
-        --exclude "*.gsheet"
-    
-    echo "Uploaded $s3_key with artist metadata: $artist"
-}
-
-export -f upload_with_metadata
-export LOCAL_PATH
-export S3_BUCKET_PATH
-
-# Find all image and video files
-find "$LOCAL_PATH" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.mp4" \) | while read -r file; do
+# Add metadata to new or updated image and video files, excluding .DS_Store
+find "$LOCAL_PATH" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.mp4" \) -not -name ".DS_Store" | while read -r file; do
     # Determine the S3 key by removing the local path prefix
     s3_key="${file#$LOCAL_PATH/}"
-    upload_with_metadata "$file" "$s3_key"
+
+    # Check if metadata needs to be updated by fetching artist information
+    artist=$(exiftool -Artist "$file" | awk -F ': ' '{print $2}')
+    [ -z "$artist" ] && artist="Unknown Artist"
+
+    # Update metadata on S3
+    aws s3 cp "$file" "$S3_BUCKET_PATH/$s3_key" --metadata "artist=$artist" --metadata-directive REPLACE --exclude ".DS_Store" --exclude "**/.DS_Store" --exclude "*.gsheet"
+    echo "Updated metadata for $s3_key with artist: $artist"
 done
 
-# Optionally, handle other non-image and non-video files with standard sync
-aws s3 sync "$LOCAL_PATH" "$S3_BUCKET_PATH" --delete --exclude ".DS_Store" --exclude "*.gsheet" --exclude "*.jpg" --exclude "*.jpeg" --exclude "*.png" --exclude "*.mp4"
-
-# Print completion message
-echo "Sync complete. Your S3 bucket is now up-to-date with the local 'projects' folder, excluding .DS_Store, .gsheet, image, and video files."
+# Completion message
+echo "Sync complete. Your S3 bucket is up-to-date with all files and updated metadata, excluding .DS_Store files."
