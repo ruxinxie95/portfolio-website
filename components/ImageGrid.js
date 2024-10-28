@@ -1,9 +1,8 @@
-// components/ImageGrid.js
+//components/ImageGrid.js
 import { useState } from 'react';
 import Lightbox from './Lightbox';
 
-
-export default function ImageGrid({ images, imageMetadata, description }) {  // Add description here
+export default function ImageGrid({ images, imageMetadata, description, videos }) {  // Add videos as a prop
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -79,9 +78,22 @@ export default function ImageGrid({ images, imageMetadata, description }) {  // 
                     </div>
                 )}
                 
+                {/* Video Section - Added here */}
+                {videos && videos.length > 0 && (
+                    <div className="video-section">
+                        {videos.map((videoUrl, index) => (
+                            <video key={index} controls width="100%" style={{ marginBottom: '20px' }}>
+                                <source src={videoUrl} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        ))}
+                    </div>
+                )}
+
                 {/* Project Description */}
                 {description && <p className="project-description">{description}</p>}
 
+                {/* Grid Images Rendering */}
                 {Object.keys(gridGroups).map((key, idx) => (
                     <div key={`grid-${key}`} className={`grid-container grid-${key}`}>
                         {gridGroups[key].map((image, imageIndex) => (
@@ -98,79 +110,8 @@ export default function ImageGrid({ images, imageMetadata, description }) {  // 
                     </div>
                 ))}
 
-                {gridGroups['1'] && (
-                    <div key="grid-1" className="grid-container grid-1">
-                        {gridGroups['1'].map((image, imageIndex) => (
-                            <div key={imageIndex} className="grid-image-2">
-                                <img
-                                    src={image}
-                                    alt={`Grid 1 Image ${imageIndex + 1}`}
-                                    className="grid-image"
-                                    onClick={() => openLightbox(grid1Index + imageIndex)}
-                                />
-                                <p className="artist-name">© {imageMetadata[image]?.artist || 'Unknown Artist'}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {remainingNonGridImages[0] && (
-                    <div className="project-image-wrapper">
-                        <img
-                            src={remainingNonGridImages[0]}
-                            alt="Project Image 1"
-                            className="project-image"
-                            onClick={() => openLightbox(firstImageIndex)}
-                        />
-                        <p className="artist-name">© {imageMetadata[remainingNonGridImages[0]]?.artist || 'Unknown Artist'}</p>
-                    </div>
-                )}
-
-                {gridGroups['2'] && (
-                    <div key="grid-2" className="grid-container grid-2">
-                        {gridGroups['2'].map((image, imageIndex) => (
-                            <div key={imageIndex} className="grid-image-2">
-                                <img
-                                    src={image}
-                                    alt={`Grid 2 Image ${imageIndex + 1}`}
-                                    className="grid-image"
-                                    onClick={() => openLightbox(grid2Index + imageIndex)}
-                                />
-                                <p className="artist-name">© {imageMetadata[image]?.artist || 'Unknown Artist'}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {remainingNonGridImages[1] && (
-                    <div className="project-image-wrapper">
-                        <img
-                            src={remainingNonGridImages[1]}
-                            alt="Project Image 2"
-                            className="project-image"
-                            onClick={() => openLightbox(secondImageIndex)}
-                        />
-                        <p className="artist-name">© {imageMetadata[remainingNonGridImages[1]]?.artist || 'Unknown Artist'}</p>
-                    </div>
-                )}
-
-                {gridGroups['3'] && (
-                    <div key="grid-3" className="grid-container grid-3">
-                        {gridGroups['3'].map((image, imageIndex) => (
-                            <div key={imageIndex} className="grid-image-2">
-                                <img
-                                    src={image}
-                                    alt={`Grid 3 Image ${imageIndex + 1}`}
-                                    className="grid-image"
-                                    onClick={() => openLightbox(grid3Index + imageIndex)}
-                                />
-                                <p className="artist-name">© {imageMetadata[image]?.artist || 'Unknown Artist'}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {remainingNonGridImages.slice(2).map((image, index) => {
+                {/* Other images */}
+                {remainingNonGridImages.map((image, index) => {
                     const globalIndex = remainingImagesStartIndex + index;
                     return (
                         <div key={index} className="project-image-wrapper">
@@ -186,6 +127,7 @@ export default function ImageGrid({ images, imageMetadata, description }) {  // 
                 })}
             </div>
 
+            {/* Lightbox */}
             {isLightboxOpen && (
                 <Lightbox
                     images={allImages}

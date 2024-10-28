@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define local and S3 paths
-LOCAL_PATH="/Users/ruxinxie/Website/portfolio-website/public/projects/project01_timbrelyn"
-S3_BUCKET_PATH="s3://aws-storage-projects/projects/project01_timbrelyn"
+LOCAL_PATH="/Users/ruxinxie/Website/portfolio-website/public/projects"
+S3_BUCKET_PATH="s3://aws-storage-projects/projects"
 
 # Function to upload a single file with metadata
 upload_with_metadata() {
@@ -30,15 +30,15 @@ export -f upload_with_metadata
 export LOCAL_PATH
 export S3_BUCKET_PATH
 
-# Find all image files (adjust file types as needed)
-find "$LOCAL_PATH" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read -r file; do
+# Find all image and video files
+find "$LOCAL_PATH" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.mp4" \) | while read -r file; do
     # Determine the S3 key by removing the local path prefix
     s3_key="${file#$LOCAL_PATH/}"
     upload_with_metadata "$file" "$s3_key"
 done
 
-# Optionally, handle other non-image files with standard sync
-aws s3 sync "$LOCAL_PATH" "$S3_BUCKET_PATH" --delete --exclude ".DS_Store" --exclude "*.gsheet" --exclude "*.jpg" --exclude "*.jpeg" --exclude "*.png"
+# Optionally, handle other non-image and non-video files with standard sync
+aws s3 sync "$LOCAL_PATH" "$S3_BUCKET_PATH" --delete --exclude ".DS_Store" --exclude "*.gsheet" --exclude "*.jpg" --exclude "*.jpeg" --exclude "*.png" --exclude "*.mp4"
 
 # Print completion message
-echo "Sync complete. Your S3 bucket is now up-to-date with the local 'projects' folder, excluding .DS_Store and .gsheet files."
+echo "Sync complete. Your S3 bucket is now up-to-date with the local 'projects' folder, excluding .DS_Store, .gsheet, image, and video files."

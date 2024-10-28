@@ -59,8 +59,12 @@ export default function ProjectPage({ project }) {
             <div className="container">
                 <div className="project-content">
                     <ProjectInfo project={project} infoFields={infoFields} />
-                    <ImageGrid images={project.images} imageMetadata={project.imageMetadata} description={project.description} />
-
+                    <ImageGrid
+                        images={project.images}
+                        imageMetadata={project.imageMetadata}
+                        description={project.description}
+                        videos={project.videos}  // Pass videos here
+                    />
                 </div>
             </div>
             <Footer />

@@ -206,7 +206,7 @@ body.dark-mode .project-info {
 body.dark-mode .project-description {
     color: #ffffff; /* White text in dark mode */
     white-space: pre-line;
-}
+}   
 
 /* Grid container that takes up 100% of the page width with gutters */
 .grid-container {
@@ -224,10 +224,10 @@ body.dark-mode .project-description {
 .grid-image-4,
 .grid-image-5,
 .grid-image-6 {
-    position: relative;
-    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
-    overflow: hidden; /* Hide any overflow */
-    flex: 1 1 calc(50% - 10px); /* Default flex-basis */
+    flex: 1 1 auto; /* Allow images to take their natural width and height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Specific width classes with adjustments for gutters */
