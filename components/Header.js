@@ -33,11 +33,13 @@ const Header = () => {
             setMessage("Really?");
         } else if (clickCount === 5) {
             setMessage(`
-                ruxinx.design@gmail.com | 734-882-8500 | 
-                <a href="your-cv-link" target="_blank" aria-label="View CV">CV</a> | 
+                ruxin.xie@princeton.edu | 734-882-8500 | 
+                <a href="/Ruxin_Xie_Curriculum_vitae.pdf" target="_blank" aria-label="View CV">CV</a> | 
                 <a href="https://www.linkedin.com/in/ruxin-xie/" target="_blank" aria-label="Visit LinkedIn Profile">LinkedIn</a>
             `);
         }
+       
+        
         sessionStorage.setItem('clickCount', clickCount); // Persist the click count
     }, [clickCount]);
 
