@@ -1,0 +1,33 @@
+{
+  "project_title": "Hoursteel",
+  "project_year": "2020",
+  "categories": [
+    "Computational Design",
+    "Lighting"
+  ],
+  "tool_box": "Rhino, Grasshopper, CircuitPython Programming \nWaterJet, Circuit Playground Bluefruit",
+  "material": "24G mild steel",
+  "id": "21",
+  "location": "Ann Arbor, MI, USA",
+  "course": "ARCH 700 Practicum",
+  "affiliation": "Taubman College\nUniversity of Michigan",
+  "client": "",
+  "exhibition": "",
+  "status": "Built",
+  "description": "Hourstell is an exciting exploration into waterjet cutting and the properties of soft gauge metal. This project focuses on studying various materials, including their color, bendability, and fabrication efficiency. Through this research, I developed a unique workflow that integrates machine cutting with hand crafting.\n\nStarting with an array of metal strips, I manually twisted them into intricate patterns, carefully constrained by geometry to ensure a cohesive form that aligns with my initial design vision. To enhance the project, I added in playful lighting elements, creating an engaging interplay of light and material that brings the installation to life.",
+  "designer": "Ruxin Xie",
+  "supervisor": "",
+  "lead_investigator": "",
+  "instructor": "Cathlyn Newell \nMark Meier",
+  "construction_assistant": "",
+  "researcher": "",
+  "student": "",
+  "structural_engineer": "",
+  "my_role": "",
+  "awards": [],
+  "publications": [],
+  "social_media": [],
+  "reference": "",
+  "dedication": "",
+  "folder": "project21_hoursteel"
+}

@@ -1,0 +1,33 @@
+{
+  "project_title": "Exquisite Lamp",
+  "project_year": "2019",
+  "categories": [
+    "Prototype",
+    "Lighting"
+  ],
+  "tool_box": "Rhino, Grasshopper \nZünd Cutting",
+  "material": "PETG",
+  "id": "08",
+  "location": "Ann Arbor, MI, USA",
+  "course": "ARCH 537 Fabrication",
+  "affiliation": "Taubman College\nUniversity of Michigan",
+  "client": "",
+  "exhibition": "",
+  "status": "Built",
+  "description": "Using an exquisite corpse compositional strategy, this Fabrication section introduces three distinct making strategies and detailing logics, each resulting in a triad of utilitarian objects. Independently, these strategies yield objects functioning as desk lamps, coat racks, and stools. Alternatively, they can be assembled to form the anatomical components of a floor lamp: the desk lamp as the head, the coat rack as the stem, and the stool as the base.\n\nFabrication tools employed include a 3-Axis CNC Router, Rhinoceros 5 with Mastercam 2017, a woodshop, laser cutter, Zünd cutter, water jet, metal brake, spot welder, and various metalworking hand tools.",
+  "designer": "",
+  "supervisor": "",
+  "lead_investigator": "",
+  "instructor": "Mick Kennedy \nCarlos Pompeo",
+  "construction_assistant": "",
+  "researcher": "",
+  "student": "Anjelica Perez \nAnh-Thu Vuong \nRuxin Xie",
+  "structural_engineer": "",
+  "my_role": "Designed the lamp section with a focus on maximizing material properties, including producing detailed shop drawings, managing Zund cutting, and overseeing the final assembly. \nAnalyzed efficient assembly sequences to enhance the furniture assembly process.\nCollaborated closely with the team to ensure that the furniture assembly met standards of composition, structural integrity, and functionality.",
+  "awards": [],
+  "publications": [],
+  "social_media": [],
+  "reference": "",
+  "dedication": "",
+  "folder": "project08_exquisiteLamp"
+}

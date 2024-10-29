@@ -1,0 +1,33 @@
+{
+  "project_title": "Light Leak",
+  "project_year": "2020",
+  "categories": [
+    "Prototype",
+    "Lighting"
+  ],
+  "tool_box": "Rhino, Grasshopper, CircuitPython Programming \nWaterJet, Circuit Playground Bluefruit, Ender 3 Pro 3D Printer",
+  "material": "PETG",
+  "id": "16",
+  "location": "Ann Arbor, MI, USA",
+  "course": "ARCH 700 Practicum",
+  "affiliation": "Taubman College\nUniversity of Michigan",
+  "client": "",
+  "exhibition": "",
+  "status": "Built",
+  "description": "How much material can we save by working smartly with PETG sheets? This personal project set out to answer that question. By creating an innovative interlocking system, I achieved 98% efficiency from two sheets, minimizing waste while keeping the design compact at just 8 cm³ with no extra structure required. To add an interactive element, I incorporated circuit board scripting to adjust lighting based on gravity and acceleration. The project even inspired my lecturer, Mark, who has since continued to develop it, transforming this technique into beautiful, responsive lighting installations. Check out his amazing creation https://www.instagram.com/p/CcYlBzZuNSp/?hl=en&img_index=1",
+  "designer": "Ruxin Xie",
+  "supervisor": "",
+  "lead_investigator": "",
+  "instructor": "Cathlyn Newell \nMark Meier",
+  "construction_assistant": "",
+  "researcher": "",
+  "student": "",
+  "structural_engineer": "",
+  "my_role": "",
+  "awards": [],
+  "publications": [],
+  "social_media": [],
+  "reference": "",
+  "dedication": "",
+  "folder": "project16_lightLeak"
+}

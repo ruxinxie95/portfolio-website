@@ -1,0 +1,33 @@
+{
+  "project_title": "Engage",
+  "project_year": "2020",
+  "categories": [
+    "Prototype",
+    "Lightweight Textile"
+  ],
+  "tool_box": "SpringFORM1 \nSewing Machine",
+  "material": "Nylastic",
+  "id": "11",
+  "location": "Ann Arbor, MI, USA",
+  "course": "ARCH 509 Engage",
+  "affiliation": "Taubman College\nUniversity of Michigan",
+  "client": "",
+  "exhibition": "",
+  "status": "Built",
+  "description": "This group project focuses on designing tactile interfaces and environments, incorporating multisensory elements like visual, auditory, resistive, and haptic feedback to address movement and social challenges for children with Autism Spectrum Disorder (ASD).\n\nFor individuals with ASD, sensory experiences are often heightened, making environmental factors either significant barriers or valuable supports. Our design and testing process explored how sensorially-responsive, textile-based prototypes could act as physical \"interventions\" to help children navigate and mitigate sensory sensitivities.\n\nIn collaboration with Ann Arbor Haisley Elementary School and Science Central, we tested these prototypes in events tailored for children with ASD.\n\nOur initial design aimed to create a \"journey-through\" space, encouraging exploration. We built an \"inside\" environment, utilizing a large projection surface as an interaction hub. Two cylindrical structures were introduced for children to explore, connected to a mesh frame that defined the enclosed \"inner world.\" After the first model, we added additional anchor points to reinforce the textile, preventing tearing. The mesh structure also enabled secure anchor points on the ground, enhancing stability and durability.",
+  "designer": "",
+  "supervisor": "",
+  "lead_investigator": "",
+  "instructor": "Sean Ahlquist",
+  "construction_assistant": "",
+  "researcher": "",
+  "student": "Interactive design: Gowri Saini Balasubramaniam \nAllison Booth \nPatrick Mark Brautigan \n \nAntonia Deller \nMarco Nieto\nStructure design: Carl Uwe Eppinger \nMalcolm Brom\nTextile design: Amlin Iqbal Eshita \nNatalie Leonard \nHaley Mayes \nKaran Nashine \nJiayue Qin \nRachel Skof \nAdithi Vellimana \nRyan Wang \nRuxin Xie \nLe Yang \nRenqing Yang \nYaxin Zheng",
+  "structural_engineer": "",
+  "my_role": "Prototype / programming using springFORM 2 the textile , final assembly",
+  "awards": [],
+  "publications": [],
+  "social_media": [],
+  "reference": "1 Textile programming: springFORM developed by Prof. Sean Ahlquist",
+  "dedication": "",
+  "folder": "project11_engage"
+}

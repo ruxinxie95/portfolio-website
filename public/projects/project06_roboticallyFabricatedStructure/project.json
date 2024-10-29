@@ -24,8 +24,13 @@
   "researcher": "Ben Lawson \nRyan Craney \nSarah Nail \nGabrielle Clune \nAndrew Hoover \nJuliette Zidek",
   "student": "Ruxin Xie \nDaniel Ruan \nXinran Li \nJingwen Song \nMehdi Shirvani \nMackenzie Bruce \nChris Humphrey",
   "structural_engineer": "Robert Silman Associates Structural Engineers \n(Nat Oppenheimer \nOmid Oliyan \nJustin Den Herder \nPaul Evans)",
-  "my_role": "computational designer work with designers and fabricators. \n brings a napkin sketch to programed digital definition",
-  "awards": [],
+  "my_role": "As the lead computational designer, collaborated with designers to transform initial napkin sketches into fully programmed digital definitions.\nWorked closely with fabricators to integrate robotic constraints, establishing a feedback-informed design system.",
+  "awards": [
+    {
+      "text": "Longlisted in the small building category of Dezeen Awards 2022",
+      "url": "https://www.dezeen.com/awards/2022/longlists/robotically-fabricated-structure/"
+    }
+  ],
   "publications": [],
   "social_media": [
     {

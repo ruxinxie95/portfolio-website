@@ -1,0 +1,32 @@
+{
+  "project_title": "Architecture {AI}",
+  "project_year": "2018",
+  "categories": [
+    "Architecture"
+  ],
+  "tool_box": "ZBrush, Model Making",
+  "material": "",
+  "id": "24",
+  "location": "Ann Arbor, MI, USA",
+  "course": "Arch 662 Thesis",
+  "affiliation": "",
+  "client": "",
+  "exhibition": "",
+  "status": "Concept",
+  "description": "This thesis project explores the impact of Artificial Intelligence (AI) on the architectural profession under the guidance of Matias del Campo and Sandra Manninger. It examines how AI challenges traditional architectural practices and whether it can foster unique creative sensibilities.\n\nDrawing on Leon Battista Alberti’s paradigm, which positions the architect as the sole author through standard orthographic drawings, this project critiques the notion of architectural agency in light of emerging digital technologies. By integrating AI applications, it seeks to redefine how architects convey their intentions through visual abstraction and prototype reconstruction.\n\nThe selected AI technique, neural style transfer, merges content and style images to create new 2D outputs that maintain the original content while adopting artistic styles. This process allows for a collaboration between the designer's sensibilities and the AI's capabilities. The project uses a painting by Croatian artist Ivan Generalić to explore volumetric geometry and branching patterns, reflecting architectural influences throughout history.\n\nThe main software tools include ZBrush and its ShadowBox feature, which reconstructs 3D forms based on shadow projections. Users can create complex branching patterns through a masking technique, where black areas represent voids and white areas remain solid. This approach enables the generation of a new style-transferred 3D building while preserving original design intentions. After testing various styles, a specific branching pattern was chosen for its application to the building development in Xiong'an City, utilizing diagrammatic building drawings as the final input.",
+  "designer": "",
+  "supervisor": "",
+  "lead_investigator": "",
+  "instructor": "Matias del Campo \nSandra Manninger",
+  "construction_assistant": "",
+  "researcher": "",
+  "student": "Roberto Corpus \nTianci Liang \nRuxin Xie",
+  "structural_engineer": "",
+  "my_role": "",
+  "awards": [],
+  "publications": [],
+  "social_media": [],
+  "reference": "",
+  "dedication": "",
+  "folder": "project24_architecture{AI}"
+}
