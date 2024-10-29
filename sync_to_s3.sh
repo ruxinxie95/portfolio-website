@@ -13,8 +13,12 @@ find "$LOCAL_PATH" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png
     s3_key="${file#$LOCAL_PATH/}"
 
     # Check if metadata needs to be updated by fetching artist information
-    artist=$(exiftool -Artist "$file" | awk -F ': ' '{print $2}')
-    [ -z "$artist" ] && artist="Unknown Artist"
+
+
+    artist=$(exiftool -Artist -IPTC:By-line -IPTC:Creator "$file" | head -n 1 | awk -F ': ' '{print $2}')
+
+
+    [ -z "$artist" ] && artist="someone"
 
     # Update metadata on S3
     aws s3 cp "$file" "$S3_BUCKET_PATH/$s3_key" --metadata "artist=$artist" --metadata-directive REPLACE --exclude ".DS_Store" --exclude "**/.DS_Store" --exclude "*.gsheet"

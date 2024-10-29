@@ -43,7 +43,7 @@ export default function ProjectPage({ project }) {
         { label: 'Structural Engineers', key: 'structural_engineer' },
         { label: 'Construction Assistants', key: 'construction_assistant' },
         { label: 'Tool Box', key: 'tool_box' },
-        { label: 'Awards', key: 'awards' },
+        // { label: 'Awards', key: 'awards' },
         // { label: 'Reference', key: 'reference' },
     ];
 

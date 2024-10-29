@@ -133,51 +133,51 @@ body.dark-mode .project-info {
     text-decoration: underline; /* Add underline on hover */
 }
 
-/* Specific Styles for Publications and Social Media */
+/* Specific Styles for Publications, Social Media, and Awards */
 .project-publications ul,
-.project-social-media ul {
+.project-social-media ul,
+.project-awards ul {
     padding-left: 20px; /* Indent list items */
     margin: 0; /* Remove default margins */
     list-style-type: disc; /* Use disc bullets */
 }
 
 .project-publications li,
-.project-social-media li {
+.project-social-media li,
+.project-awards li {
     word-wrap: break-word; /* Allow long words or URLs to wrap */
     overflow-wrap: break-word; /* Fallback for better browser support */
 }
 
-/* Style Links in Publications and Social Media */
+/* Style Links in Publications, Social Media, and Awards */
 .project-publications a,
-.project-social-media a {
-    color: #333; /* Same as p text in light mode */
-    text-decoration: underline; /* Underline to indicate clickable */
-    font-size: 0.9em; /* Match the font size of other text */
+.project-social-media a,
+.project-awards a {
+    color: #333; /* Match link color with other text in light mode */
+    text-decoration: underline; /* Underline to indicate clickable links */
+    font-size: 0.9em; /* Match font size of other text */
     transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
 /* Hover effect to change link color to red */
-.project-reference a:hover,
+.project-publications a:hover,
 .project-social-media a:hover,
-.project-publications a:hover {
-    color: #ff6f61!important; /* Ensure color changes to red on hover */
+.project-awards a:hover {
+    color: #ff6f61; /* Ensure color changes to red on hover */
     text-decoration: underline; /* Keep underline on hover */
 }
-/* Remove bullet points for Reference items */
-.project-reference ul {
-    list-style-type: none; /* Remove bullet points */
-    padding-left: 0; /* Remove any default padding */
-    margin: 0; /* Remove default margins */
+
+/* Dark mode styling for awards section */
+body.dark-mode .project-awards,
+body.dark-mode .project-awards a {
+    color: #ffffff; /* White text for better readability in dark mode */
+}
+
+body.dark-mode .project-awards a:hover {
+    color: #ff886f; /* Lighter accent color on hover in dark mode */
 }
 
 
-/* Remove any strike-through effect on hover for links in reference, social media, and publications */
-.project-reference a:hover::after,
-.project-social-media a:hover::after,
-.project-publications a:hover::after {
-    width: 0; /* Disable the strikethrough effect */
-    
-}
 /* Remove any global hover strike-throughs */
 .project-info a:hover {
     text-decoration-line: underline; /* Ensure only underline is applied */

@@ -13,14 +13,19 @@ const ProjectInfo = ({ project, infoFields }) => {
                     <ul>
                         {value.map((item, index) => (
                             <li key={index}>
-                                {item.includes('|') ? (
-                                    // Split text and URL by '|'
+                                {typeof item === 'string' && item.includes('|') ? (
+                                    // Handle strings with '|' as separator
                                     <a href={item.split('|')[1]} target="_blank" rel="noopener noreferrer">
                                         {item.split('|')[0]}
                                     </a>
+                                ) : typeof item === 'object' && item.url ? (
+                                    // Handle object with text and url fields
+                                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                                        {item.text}
+                                    </a>
                                 ) : (
-                                    // Display text only if there's no URL
-                                    <span>{item}</span>
+                                    // Display text if there's no URL or it's not an object
+                                    <span>{typeof item === 'string' ? item : item.text || ''}</span>
                                 )}
                             </li>
                         ))}
@@ -89,13 +94,29 @@ const ProjectInfo = ({ project, infoFields }) => {
                     <ul>
                         {(Array.isArray(project.reference) ? project.reference : [project.reference]).map((ref, index) => (
                             <li key={index}>
-                                {ref.includes('|') ? (
+                                {typeof ref === 'string' && ref.includes('|') ? (
                                     <a href={ref.split('|')[1]} target="_blank" rel="noopener noreferrer">
                                         {ref.split('|')[0]}
                                     </a>
                                 ) : (
                                     <span>{ref}</span>
                                 )}
+                            </li>
+                        ))}
+                    </ul>
+                    <hr />
+                </div>
+            )}
+
+            {project.awards && Array.isArray(project.awards) && project.awards.length > 0 && (
+                <div className="project-info-item project-awards">
+                    <strong>Awards:</strong>
+                    <ul>
+                        {project.awards.map((award, index) => (
+                            <li key={index}>
+                                <a href={award.url} target="_blank" rel="noopener noreferrer">
+                                    {award.text}
+                                </a>
                             </li>
                         ))}
                     </ul>
