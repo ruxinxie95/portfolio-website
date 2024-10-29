@@ -65,6 +65,12 @@
     width: 100%; /* Ensure items take the full width */
 }
 
+/* Dark mode styling for project title */
+body.dark-mode .project-title {
+    color: #ffffff; /* White color for better readability in dark mode */
+}
+
+
 .back-button{
     width: 100%; /* Ensure items take the full width */
 }
@@ -150,12 +156,28 @@ body.dark-mode .project-info {
     transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
-.project-publications a:hover,
-.project-social-media a:hover {
-    color: #ff6f61; /* Accent color on hover */
+/* Hover effect to change link color to red */
+.project-reference a:hover,
+.project-social-media a:hover,
+.project-publications a:hover {
+    color: #ff6f61!important; /* Ensure color changes to red on hover */
     text-decoration: underline; /* Keep underline on hover */
 }
+/* Remove bullet points for Reference items */
+.project-reference ul {
+    list-style-type: none; /* Remove bullet points */
+    padding-left: 0; /* Remove any default padding */
+    margin: 0; /* Remove default margins */
+}
 
+
+/* Remove any strike-through effect on hover for links in reference, social media, and publications */
+.project-reference a:hover::after,
+.project-social-media a:hover::after,
+.project-publications a:hover::after {
+    width: 0; /* Disable the strikethrough effect */
+    
+}
 /* Remove any global hover strike-throughs */
 .project-info a:hover {
     text-decoration-line: underline; /* Ensure only underline is applied */
@@ -394,4 +416,22 @@ body.dark-mode .project-description {
 
 .lightbox-close:hover {
     color: #bbb;
+}
+
+
+/* Dark mode styles for project-publications and project-social-media */
+body.dark-mode .project-publications,
+body.dark-mode .project-social-media {
+    color: #ffffff; /* White text in dark mode */
+}
+
+body.dark-mode .project-publications a,
+body.dark-mode .project-social-media a {
+    color: #ffffff; /* Adjust link color for better visibility in dark mode */
+    text-decoration: underline;
+}
+
+body.dark-mode .project-publications a:hover,
+body.dark-mode .project-social-media a:hover {
+    color: #ffffff; /* Darker accent color on hover in dark mode */
 }

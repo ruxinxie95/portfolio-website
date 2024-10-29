@@ -44,7 +44,7 @@ export default function ProjectPage({ project }) {
         { label: 'Construction Assistants', key: 'construction_assistant' },
         { label: 'Tool Box', key: 'tool_box' },
         { label: 'Awards', key: 'awards' },
-        { label: 'Reference', key: 'reference' },
+        // { label: 'Reference', key: 'reference' },
     ];
 
     return (
