@@ -1,0 +1,24 @@
+[
+    {
+        "authors": "Mozaffari, S., Bruce, M., Clune, G., Xie, R., McGee, W., and Adel, A.",
+        "year": 2023,
+        "title": "Digital Design and Fabrication of Clay Formwork for Concrete Casting",
+        "publication": "Automation in Construction",
+        "doi": "https://doi.org/10.1016/j.autcon.2023.104969"
+    },
+    {
+        "authors": "Bruce, M.*, Clune, G.*, Xie, R.*, Mozaffari, S., and Adel, A.",
+        "year": 2022,
+        "title": "Cocoon: 3D Printed Clay Formwork for Concrete Casting",
+        "publication": "ACADIA Conference Proceedings",
+        "details": "Realignments: Toward Critical Computation, 400–409",
+        "platform": "CumInCAD"
+    },
+    {
+        "authors": "Velikov, K., del Campo, M., Denit, L., Hasan, K. N., Xie, R., and Boyce, B.",
+        "year": 2022,
+        "title": "Design Engine: Generative Multi-Objective Performance Design Scenarios",
+        "publication": "ACADIA Conference Papers",
+        "details": "122–133"
+    }
+]
