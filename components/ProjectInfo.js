@@ -68,18 +68,19 @@ const ProjectInfo = memo(({ project, infoFields }) => {
             {project.publications?.length > 0 && (
                 <div className="project-info-item project-publications">
                     <strong>Publications:</strong>
-                    <ul>
+                    <div>
                         {project.publications.map((pub, index) => (
-                            <li key={index}>
+                            <div key={index} className="publication-item">
                                 <a href={pub.url} target="_blank" rel="noopener noreferrer">
                                     {pub.text}
                                 </a>
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                     <hr />
                 </div>
             )}
+
 
             {/* Social Media */}
             {project.social_media?.length > 0 && (
@@ -102,9 +103,9 @@ const ProjectInfo = memo(({ project, infoFields }) => {
             {project.reference && (
                 <div className="project-info-item project-reference">
                     <strong>Reference</strong>
-                    <ul>
+                    <div>
                         {(Array.isArray(project.reference) ? project.reference : [project.reference]).map((ref, index) => (
-                            <li key={index}>
+                            <div key={index} className="reference-item">
                                 {typeof ref === 'string' && ref.includes('|') ? (
                                     <a href={ref.split('|')[1]} target="_blank" rel="noopener noreferrer">
                                         {ref.split('|')[0]}
@@ -112,12 +113,13 @@ const ProjectInfo = memo(({ project, infoFields }) => {
                                 ) : (
                                     <span>{ref}</span>
                                 )}
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                     <hr />
                 </div>
             )}
+
 
             {/* Awards */}
             {project.awards?.length > 0 && (
