@@ -1,7 +1,11 @@
-// components/ProjectInfo.js
 import Link from 'next/link';
+import { memo, useMemo } from 'react';
 
-const ProjectInfo = ({ project, infoFields }) => {
+const ProjectInfo = memo(({ project, infoFields }) => {
+    /**
+     * Renders a single piece of project information.
+     * Handles various data types, including arrays and strings with separators.
+     */
     const displayInfo = (label, value, keyProp) => {
         if (!value) return null;
 
@@ -14,17 +18,14 @@ const ProjectInfo = ({ project, infoFields }) => {
                         {value.map((item, index) => (
                             <li key={index}>
                                 {typeof item === 'string' && item.includes('|') ? (
-                                    // Handle strings with '|' as separator
                                     <a href={item.split('|')[1]} target="_blank" rel="noopener noreferrer">
                                         {item.split('|')[0]}
                                     </a>
                                 ) : typeof item === 'object' && item.url ? (
-                                    // Handle object with text and url fields
                                     <a href={item.url} target="_blank" rel="noopener noreferrer">
                                         {item.text}
                                     </a>
                                 ) : (
-                                    // Display text if there's no URL or it's not an object
                                     <span>{typeof item === 'string' ? item : item.text || ''}</span>
                                 )}
                             </li>
@@ -46,17 +47,25 @@ const ProjectInfo = ({ project, infoFields }) => {
         );
     };
 
+    const memoizedInfoFields = useMemo(() => {
+        return infoFields.map(({ label, key }) => displayInfo(label, project[key], key));
+    }, [infoFields, project]);
+
     return (
         <div className="project-info">
+            {/* Back Link */}
             <Link href="/" className="back-button">
                 ← Back to Projects
             </Link>
 
+            {/* Project Title */}
             <h2 className="project-title">{project.project_title}</h2>
 
-            {infoFields.map(({ label, key }) => displayInfo(label, project[key], key))}
+            {/* Dynamic Info Fields */}
+            {memoizedInfoFields}
 
-            {project.publications && Array.isArray(project.publications) && project.publications.length > 0 && (
+            {/* Publications */}
+            {project.publications?.length > 0 && (
                 <div className="project-info-item project-publications">
                     <strong>Publications:</strong>
                     <ul>
@@ -72,7 +81,8 @@ const ProjectInfo = ({ project, infoFields }) => {
                 </div>
             )}
 
-            {project.social_media && Array.isArray(project.social_media) && project.social_media.length > 0 && (
+            {/* Social Media */}
+            {project.social_media?.length > 0 && (
                 <div className="project-info-item project-social-media">
                     <strong>Social Media:</strong>
                     <ul>
@@ -88,6 +98,7 @@ const ProjectInfo = ({ project, infoFields }) => {
                 </div>
             )}
 
+            {/* References */}
             {project.reference && (
                 <div className="project-info-item project-reference">
                     <strong>Reference</strong>
@@ -108,7 +119,8 @@ const ProjectInfo = ({ project, infoFields }) => {
                 </div>
             )}
 
-            {project.awards && Array.isArray(project.awards) && project.awards.length > 0 && (
+            {/* Awards */}
+            {project.awards?.length > 0 && (
                 <div className="project-info-item project-awards">
                     <strong>Awards:</strong>
                     <ul>
@@ -124,7 +136,8 @@ const ProjectInfo = ({ project, infoFields }) => {
                 </div>
             )}
 
-            {project.dedication && project.dedication.trim() !== '' && (
+            {/* Dedication */}
+            {project.dedication?.trim() && (
                 <div className="project-info-item project-dedication">
                     <strong>Dedication:</strong>
                     <p>{project.dedication}</p>
@@ -133,6 +146,6 @@ const ProjectInfo = ({ project, infoFields }) => {
             )}
         </div>
     );
-};
+});
 
 export default ProjectInfo;

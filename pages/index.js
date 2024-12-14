@@ -8,6 +8,7 @@ import Masonry from 'react-masonry-css';
 import { useEffect, useState } from 'react';
 import styles from '../components/Project.module.css';
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
+import dynamic from 'next/dynamic';
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
 

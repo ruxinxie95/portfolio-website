@@ -1,28 +1,39 @@
-// pages/project/[id].js
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import dynamic from 'next/dynamic'; // For dynamic imports
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import ProjectInfo from '../../components/ProjectInfo';
-import ImageGrid from '../../components/ImageGrid';
 import { fetchProjectData } from '../../lib/dataUtils';
 
+// Dynamically import heavy components
+const ProjectInfo = dynamic(() => import('../../components/ProjectInfo'), { ssr: false });
+const ImageGrid = dynamic(() => import('../../components/ImageGrid'), { ssr: false });
+
+/**
+ * Fetch project data for the given ID at build time.
+ */
 export async function getServerSideProps(context) {
     const { id } = context.params;
 
     try {
-        const { projectData } = await fetchProjectData(id);
-        return { props: { project: projectData } };
+        const { projectData } = await fetchProjectData(id); // Get project data
+        return { props: { project: projectData } }; // Pass data as props
     } catch (error) {
-        console.error(error);
-        return { notFound: true };
+        console.error('Error fetching project data:', error);
+        return { notFound: true }; // Fallback for not found projects
     }
 }
 
+/**
+ * Project Page Component
+ */
 export default function ProjectPage({ project }) {
     const router = useRouter();
+
+    // Handle fallback state
     if (router.isFallback) return <div>Loading...</div>;
 
+    // Information fields for the project
     const infoFields = [
         { label: 'Year', key: 'project_year' },
         { label: 'Location', key: 'location' },
@@ -43,8 +54,6 @@ export default function ProjectPage({ project }) {
         { label: 'Structural Engineers', key: 'structural_engineer' },
         { label: 'Construction Assistants', key: 'construction_assistant' },
         { label: 'Tool Box', key: 'tool_box' },
-        // { label: 'Awards', key: 'awards' },
-        // { label: 'Reference', key: 'reference' },
     ];
 
     return (
@@ -56,17 +65,22 @@ export default function ProjectPage({ project }) {
             </Head>
 
             <Header />
-            <div className="container">
+
+            <main className="container">
                 <div className="project-content">
+                    {/* Render Project Info */}
                     <ProjectInfo project={project} infoFields={infoFields} />
+
+                    {/* Render Image Grid */}
                     <ImageGrid
                         images={project.images}
                         imageMetadata={project.imageMetadata}
                         description={project.description}
-                        videos={project.videos}  // Pass videos here
+                        videos={project.videos} // Pass videos to the component
                     />
                 </div>
-            </div>
+            </main>
+
             <Footer />
         </>
     );
