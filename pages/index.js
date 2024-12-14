@@ -1,3 +1,4 @@
+//pages/index.js
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -26,7 +27,7 @@ export async function getServerSideProps() {
 
         for (const folder of projectFolders) {
             const projectJsonUrl = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/projects/${encodeURIComponent(folder)}/project.json`;
-            console.log(`Fetching JSON from: ${projectJsonUrl}`); // Log the URL to validate
+            //console.log(`Fetching JSON from: ${projectJsonUrl}`); // Log the URL to validate
 
             try {
                 const response = await fetch(projectJsonUrl);
@@ -47,9 +48,9 @@ export async function getServerSideProps() {
                     projectData.images = [`${s3BaseUrl}/1.jpg`, `${s3BaseUrl}/2.jpg`];
                     
                     // Log URLs for images
-                    console.log(`Cover Image URL: ${projectData.coverImage}`);
+                    //console.log(`Cover Image URL: ${projectData.coverImage}`);
                     projectData.images.forEach((image, index) => {
-                        console.log(`Image ${index + 1} URL: ${image}`);
+                        //console.log(`Image ${index + 1} URL: ${image}`);
                     });
 
                     projects.push(projectData);

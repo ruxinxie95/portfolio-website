@@ -1,6 +1,6 @@
 {
   "project_title": "Engage",
-  "project_year": "2020",
+  "project_year": "2018",
   "categories": [
     "Prototype",
     "Lightweight Textile"
@@ -14,14 +14,14 @@
   "client": "",
   "exhibition": "",
   "status": "Built",
-  "description": "This group project focuses on designing tactile interfaces and environments, incorporating multisensory elements like visual, auditory, resistive, and haptic feedback to address movement and social challenges for children with Autism Spectrum Disorder (ASD).\n\nFor individuals with ASD, sensory experiences are often heightened, making environmental factors either significant barriers or valuable supports. Our design and testing process explored how sensorially-responsive, textile-based prototypes could act as physical \"interventions\" to help children navigate and mitigate sensory sensitivities.\n\nIn collaboration with Ann Arbor Haisley Elementary School and Science Central, we tested these prototypes in events tailored for children with ASD.\n\nOur initial design aimed to create a \"journey-through\" space, encouraging exploration. We built an \"inside\" environment, utilizing a large projection surface as an interaction hub. Two cylindrical structures were introduced for children to explore, connected to a mesh frame that defined the enclosed \"inner world.\" After the first model, we added additional anchor points to reinforce the textile, preventing tearing. The mesh structure also enabled secure anchor points on the ground, enhancing stability and durability.",
+  "description": "Engage is a course project focused on creating tactile interfaces and environments that integrate multisensory elements, including visual, auditory, resistive, and haptic feedback. The project addresses movement and social challenges for children, including those with Autism Spectrum Disorder (ASD), while also benefiting individuals with a range of sensory needs.\nFor individuals with heightened sensory experiences, environmental factors can act as either barriers or supports. Our design and testing process examined how sensorially-responsive, textile-based prototypes could serve as physical “interventions,” helping users navigate and manage sensory sensitivities.\nIn partnership with Ann Arbor Haisley Elementary School and Science Central, we tested these prototypes during events designed for children with diverse sensory needs.\nIn Course 509, we used springFORM to design the form of our first fabric-related project. The goal was to make a “journey-through” space that let users explore and engage. We also worked to design a “canvas” so the interactivity team could project animations for kids to poke and interact with.\rThe design had an enclosed “inner world” with a large projection surface as the central interactive hub. Two cylindrical structures came from this hub and connected to a flexible mesh frame. After we developed the initial model, we added anchor points to make the textile stronger, stop tearing, and keep the mesh on the ground. These changes made the structure more stable and durable while meeting its visual and functional goals.",
   "designer": "",
   "supervisor": "",
   "lead_investigator": "",
   "instructor": "Sean Ahlquist",
   "construction_assistant": "",
   "researcher": "",
-  "student": "Interactive design: Gowri Saini Balasubramaniam \nAllison Booth \nPatrick Mark Brautigan \n \nAntonia Deller \nMarco Nieto\nStructure design: Carl Uwe Eppinger \nMalcolm Brom\nTextile design: Amlin Iqbal Eshita \nNatalie Leonard \nHaley Mayes \nKaran Nashine \nJiayue Qin \nRachel Skof \nAdithi Vellimana \nRyan Wang \nRuxin Xie \nLe Yang \nRenqing Yang \nYaxin Zheng",
+  "student": "Gowri Saini Balasubramaniam \nAllison Booth \nPatrick Mark Brautigan \n \nAntonia Deller \nMarco Nieto\nCarl Uwe Eppinger \nMalcolm Brom\nAmlin Iqbal Eshita \nNatalie Leonard \nHaley Mayes \nKaran Nashine \nJiayue Qin \nRachel Skof \nAdithi Vellimana \nRyan Wang \nRuxin Xie \nLe Yang \nRenqing Yang \nYaxin Zheng",
   "structural_engineer": "",
   "my_role": "Prototype / programming using springFORM 2 the textile , final assembly",
   "awards": [],
