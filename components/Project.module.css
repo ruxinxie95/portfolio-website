@@ -119,4 +119,23 @@
     color: #555;
 }
 
-/* ... Rest of your existing styles ... */
+.publications {
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin-left: 10px; /* Add margin to the left */
+    margin-right: 10px; /* Add margin to the right */
+}
+
+.publications p {
+    margin-bottom: 1.5rem; /* Space between paragraphs */
+}
+.doiLink {
+    color: #1a73e8 !important; /* Blue color for links */
+    text-decoration: underline; /* Underline to indicate clickable */
+    margin-left: 5px; /* Space before the link */
+    font-style: normal; /* Ensure the DOI link is not italicized */
+}
+
+.doiLink:hover {
+    color: #0c4da2; /* Darker blue on hover */
+}

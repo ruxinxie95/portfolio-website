@@ -1,4 +1,3 @@
-//pages/index.js
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,8 +6,8 @@ import Link from 'next/link';
 import Masonry from 'react-masonry-css';
 import { useEffect, useState } from 'react';
 import styles from '../components/Project.module.css';
+import Publications from '../components/Publications'; // Import the new component
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
-import dynamic from 'next/dynamic';
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
 
@@ -96,7 +95,7 @@ export default function Home({ projects = [] }) {
     useEffect(() => {
         if (activeFilter === '*') {
             setFilteredProjects(projects);
-        } else {
+        } else if (activeFilter !== 'publications') {
             const filterClass = activeFilter.startsWith('.') ? activeFilter.substring(1) : activeFilter;
             setFilteredProjects(
                 projects.filter(project =>
@@ -149,9 +148,19 @@ export default function Home({ projects = [] }) {
                             </button>
                         );
                     })}
+                    <button
+                        data-filter="publications"
+                        className={`${styles.filterButton} ${activeFilter === 'publications' ? styles.active : ''}`}
+                        onClick={() => setActiveFilter('publications')}
+                        aria-pressed={activeFilter === 'publications' ? 'true' : 'false'}
+                    >
+                        Publications
+                    </button>
                 </div>
 
-                {filteredProjects.length > 0 ? (
+                {activeFilter === 'publications' ? (
+                    <Publications />
+                ) : filteredProjects.length > 0 ? (
                     <Masonry
                         breakpointCols={breakpointColumnsObj}
                         className={styles.myMasonryGrid}
