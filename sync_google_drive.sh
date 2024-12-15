@@ -10,3 +10,8 @@ DEST="/Users/ruxinxie/Website/portfolio-website/public/projects"
 rsync -avz --delete --exclude '*/not selected' --exclude '.DS_Store' "$SRC" "$DEST/"
 
 echo "Sync complete! 'not selected' folder and '.DS_Store' files have been excluded."
+
+# Run the metadata extraction and JSON generation Python script
+python3 generate_image_metadata.py "$DEST"
+
+echo "JSON metadata files have been generated for each image folder."

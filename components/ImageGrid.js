@@ -1,4 +1,4 @@
-// components/ImageGrid.js
+//components/ImageGrid.js
 import { useState } from 'react';
 import Lightbox from './Lightbox';
 
@@ -61,11 +61,13 @@ export default function ImageGrid({ images, imageMetadata, description, videos }
                             className="cover-image"
                             onClick={() => openLightbox(allImages.indexOf(coverImage))}
                         />
-                        <p className="artist-name">© {imageMetadata[coverImage]?.artist || 'Unknown Artist'}</p>
+                        {/* Log the artist metadata for the cover image */}
+                        <p className="artist-name">
+                            © {imageMetadata[coverImage]?.artist || 'R'}
+                        </p>
                     </div>
                 )}
-                
-                {/* Video Section */}
+
                 {videos && videos.length > 0 && (
                     <div className="video-section">
                         {videos.map((videoUrl, index) => (
@@ -77,10 +79,8 @@ export default function ImageGrid({ images, imageMetadata, description, videos }
                     </div>
                 )}
 
-                {/* Project Description */}
                 {description && <p className="project-description">{description}</p>}
 
-                {/* Grid Images Rendering */}
                 {Object.keys(gridGroups).map((key) => (
                     <div key={`grid-${key}`} className={`grid-container grid-${key}`}>
                         {gridGroups[key].map((image, imageIndex) => (
@@ -96,7 +96,6 @@ export default function ImageGrid({ images, imageMetadata, description, videos }
                     </div>
                 ))}
 
-                {/* Other images */}
                 {remainingNonGridImages.map((image, index) => (
                     <div key={index} className="project-image-wrapper">
                         <img
@@ -105,12 +104,14 @@ export default function ImageGrid({ images, imageMetadata, description, videos }
                             className="project-image"
                             onClick={() => openLightbox(allImages.indexOf(image))}
                         />
-                        <p className="artist-name">© {imageMetadata[image]?.artist || 'Unknown Artist'}</p>
+                        {/* Log the artist metadata for non-grid images */}
+                        <p className="artist-name">
+                            © {imageMetadata[image]?.artist || 'Ruxin'}
+                        </p>
                     </div>
                 ))}
             </div>
 
-            {/* Lightbox */}
             {isLightboxOpen && (
                 <Lightbox
                     images={allImages}

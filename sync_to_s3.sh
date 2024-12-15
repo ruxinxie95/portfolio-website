@@ -4,26 +4,34 @@
 LOCAL_PATH="/Users/ruxinxie/Website/portfolio-website/public/projects"
 S3_BUCKET_PATH="s3://aws-storage-projects/projects"
 
-# Sync all files with --exact-timestamps for unchanged files, excluding .DS_Store files
-aws s3 sync "$LOCAL_PATH" "$S3_BUCKET_PATH" --delete --exclude ".DS_Store" --exclude "**/.DS_Store" --exclude "*.gsheet" --exact-timestamps
+# Log debug information
+log_debug() {
+    echo "DEBUG: $1"
+}
 
-# Add metadata to new or updated image and video files, excluding .DS_Store
-find "$LOCAL_PATH" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.mp4" \) -not -name ".DS_Store" | while read -r file; do
-    # Determine the S3 key by removing the local path prefix
-    s3_key="${file#$LOCAL_PATH/}"
+# Purge all existing files in the S3 bucket
+log_debug "Purging all files in S3 bucket: $S3_BUCKET_PATH..."
+aws s3 rm "$S3_BUCKET_PATH" --recursive
+if [[ $? -eq 0 ]]; then
+    log_debug "S3 bucket purge completed successfully."
+else
+    log_debug "Failed to purge S3 bucket."
+    exit 1
+fi
 
-    # Check if metadata needs to be updated by fetching artist information
+# Find and delete 'project (1).json' files locally
+log_debug "Cleaning up invalid files..."
+find "$LOCAL_PATH" -type f -name "project (1).json" -exec rm -v {} \;
 
-
-    artist=$(exiftool -Artist -IPTC:By-line -IPTC:Creator "$file" | head -n 1 | awk -F ': ' '{print $2}')
-
-
-    [ -z "$artist" ] && artist="someone"
-
-    # Update metadata on S3
-    aws s3 cp "$file" "$S3_BUCKET_PATH/$s3_key" --metadata "artist=$artist" --metadata-directive REPLACE --exclude ".DS_Store" --exclude "**/.DS_Store" --exclude "*.gsheet"
-    echo "Updated metadata for $s3_key with artist: $artist"
-done
+# Perform S3 sync, ensuring all images and videos are uploaded
+log_debug "Starting sync operation to S3..."
+aws s3 sync "$LOCAL_PATH" "$S3_BUCKET_PATH" --delete --exclude ".DS_Store" --exclude "**/.DS_Store" --exclude "*.gsheet" --exclude "project (1).json" --exact-timestamps
+if [[ $? -eq 0 ]]; then
+    log_debug "Sync operation completed successfully."
+else
+    log_debug "Sync operation failed."
+    exit 1
+fi
 
 # Completion message
-echo "Sync complete. Your S3 bucket is up-to-date with all files and updated metadata, excluding .DS_Store files."
+log_debug "All images and videos from $LOCAL_PATH have been uploaded to $S3_BUCKET_PATH, excluding invalid and unwanted files."

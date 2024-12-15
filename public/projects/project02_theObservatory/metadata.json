@@ -1,0 +1,22 @@
+[
+    {
+        "file_name": "01.jpg",
+        "artist": "Apple"
+    },
+    {
+        "file_name": "03.jpg",
+        "artist": "Apple"
+    },
+    {
+        "file_name": "02.jpg",
+        "artist": "Apple"
+    },
+    {
+        "file_name": "04.jpg",
+        "artist": "Apple"
+    },
+    {
+        "file_name": "cover.jpg",
+        "artist": "Apple"
+    }
+]
